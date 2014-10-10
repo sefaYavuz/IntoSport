@@ -14,6 +14,7 @@ namespace IntoSport.Controllers
         public ActionResult Index()
         {
             return View();
+            //comment
         }
 
         public ActionResult Login()
