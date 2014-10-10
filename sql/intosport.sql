@@ -31,7 +31,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `intosport`.`personeel` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `persoon_id` INT NULL,
-  `role` ENUM('0', '1', '2') NULL DEFAULT 0 COMMENT '0 = beheerder, 1 = manager, 2 = allebei',
+  `role` ENUM('0', '1', '2') NULL DEFAULT '0' COMMENT '0 = beheerder, 1 = manager, 2 = allebei',
   PRIMARY KEY (`id`),
   INDEX `persoon_id_idx` (`persoon_id` ASC),
   CONSTRAINT `persoon_id`
@@ -47,16 +47,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `intosport`.`klant` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `persoon_id` INT NULL,
+  `persoon2_id` INT NULL,
   `adres` VARCHAR(45) NULL,
   `postcode` VARCHAR(6) NULL,
   `plaats` VARCHAR(45) NULL,
   `tel` VARCHAR(45) NULL,
-  `goldmember` ENUM('0', '1') NULL DEFAULT 0,
+  `goldmember` ENUM('0', '1') NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  INDEX `persoon_id_idx` (`persoon_id` ASC),
-  CONSTRAINT `persoon_id`
-    FOREIGN KEY (`persoon_id`)
+  INDEX `persoon_id2_idx` (`persoon2_id` ASC),
+  CONSTRAINT `persoon2_id`
+    FOREIGN KEY (`persoon2_id`)
     REFERENCES `intosport`.`persoon` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -79,7 +79,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `intosport`.`bestelling` (
   `klant_id` INT NOT NULL,
   `orderregel_id` INT NOT NULL,
-  `status` ENUM('0', '1', '2', '3') NULL DEFAULT 0,
+  `status` ENUM('0', '1', '2', '3') NULL DEFAULT '0',
   PRIMARY KEY (`klant_id`, `orderregel_id`),
   INDEX `orderregel_id_idx` (`orderregel_id` ASC),
   CONSTRAINT `orderregel_id`
@@ -111,7 +111,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `intosport`.`product` (
   `id` INT NOT NULL,
-  `orderregel_id` INT NULL,
+  `orderregel2_id` INT NULL,
   `categorie_id` INT NULL,
   `naam` VARCHAR(45) NULL,
   `prijs` DOUBLE NULL,
@@ -122,10 +122,10 @@ CREATE TABLE IF NOT EXISTS `intosport`.`product` (
   `afbeelding` VARCHAR(45) NULL,
   `thumbnail` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
-  INDEX `orderregel_id_idx` (`orderregel_id` ASC),
+  INDEX `orderregel2_id_idx` (`orderregel2_id` ASC),
   INDEX `categorie_id_idx` (`categorie_id` ASC),
-  CONSTRAINT `orderregel_id`
-    FOREIGN KEY (`orderregel_id`)
+  CONSTRAINT `orderregel2_id`
+    FOREIGN KEY (`orderregel2_id`)
     REFERENCES `intosport`.`orderregel` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -140,3 +140,4 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
