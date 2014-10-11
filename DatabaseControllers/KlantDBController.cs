@@ -8,14 +8,14 @@ using IntoSport.Models;
 
 namespace IntoSport.DatabaseControllers
 {
-    public class KlantController : Controller
+    public class KlantDBController : Controller
     {
         //
         // GET: /Klant/
 
         public MySqlConnection conn;
 
-        public KlantController()
+        public KlantDBController()
         {
             conn = new MySqlConnection("Server=localhost;Database=intosport;Uid=admin;Pwd=admin;");
         }
@@ -52,6 +52,8 @@ namespace IntoSport.DatabaseControllers
             
             
         }
+
+
 
     }
 }

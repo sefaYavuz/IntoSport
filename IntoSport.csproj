@@ -115,6 +115,7 @@
     <Compile Include="Controllers\CmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DatabaseControllers\AuthDBController.cs" />
+    <Compile Include="DatabaseControllers\KlantController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Cms\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

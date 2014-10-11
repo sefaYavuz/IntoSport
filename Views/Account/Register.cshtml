@@ -5,13 +5,12 @@
 }
 
 <h2>Register</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Register", "AccountController"))
 {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend> User </legend>
+        <legend> Registreer </legend>
         @Html.AntiForgeryToken()
         @if (ViewBag.Message != null)
             {
