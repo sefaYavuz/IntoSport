@@ -1,0 +1,81 @@
+﻿@model IntoSport.Models.RegisterKlantModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend> User </legend>
+        @Html.AntiForgeryToken()
+        @if (ViewBag.Message != null)
+            {
+            @ViewBag.Message
+            }
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Email)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Password)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.ConfirmPassword)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Voornaam)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Voornaam)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Achternaam)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Achternaam)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Postcode)
+        </div>
+        <div class="editor-Field">
+            @Html.TextBoxFor(model => model.Postcode)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Plaats)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Plaats)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Adres)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Adres)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TelNr)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.TelNr)
+        </div>
+
+        <p>
+            <input type="submit" value="Registreer" />
+        </p>
+
+    </fieldset>
+}

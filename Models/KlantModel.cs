@@ -9,6 +9,8 @@ namespace IntoSport.Models
     public class KlantModel
     {
 
+        
+
 
     }
 
@@ -18,9 +20,32 @@ namespace IntoSport.Models
         [Required]
         [Display(Name = "Email adres")]
         [EmailAddress(ErrorMessage = " The email adres is not valid")]
-        public EmailAddressAttribute 
+        public string Email { get; set;}
 
         [Required]
-        public EmailAddressAttribute
+        public string Password { get; set;}
+
+        [Required]
+        public string ConfirmPassword { get; set;}
+
+        [Required]
+        public string Voornaam { get; set;}
+
+        [Required]
+        public string Achternaam { get; set;}
+
+        [Required]
+        public string Adres { get; set;}
+
+        [Required]
+        public string Postcode {get; set;}
+
+        [Required]
+        public string Plaats {get; set;}
+
+        [Required]
+        public string TelNr {get; set;}
+
+
     }
 }

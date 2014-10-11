@@ -9,6 +9,7 @@ namespace IntoSport.Models
     public class LogOnViewModel
     {
         [Required]
+        [EmailAddress(ErrorMessage = "Niet een geldig email adres")]
         public string Email { get; set; }
 
         [Required]
