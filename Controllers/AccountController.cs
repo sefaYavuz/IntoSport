@@ -59,6 +59,17 @@ namespace IntoSport.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult NieuweKlantMetValidatie(RegisterKlantModel RKM)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    
+                }
+            }
+        }
 
     }
 

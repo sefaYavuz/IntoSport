@@ -13,7 +13,7 @@ namespace IntoSport.DatabaseControllers
         
         public AuthDBController()
         {
-            conn = new MySqlConnection("Server=localhost;Database=intosport;Uid=root;Pwd=root;");
+            conn = new MySqlConnection("Server=localhost;Database=intosport;Uid=admin;Pwd=admin;");
         }
 
         public bool isAuthorized(string usernaam, string password)
