@@ -10,17 +10,29 @@ namespace IntoSport.Controllers
     {
         //
         // GET: /Cms/
+        [Authorize]
 
         public ActionResult Index()
         {
+            if (User.IsInRole("Beheerder"))
+            {
+                return RedirectToAction("Beheerder");
+            }
+            else if (User.IsInRole("Manager"))
+            {
+                return RedirectToAction("Manager");
+            }
+
             return View();
-            //comment
         }
 
-        public ActionResult Login()
+        [Authorize(Roles = "Beheerder")]
+        public ActionResult Beheerder()
         {
             return View();
         }
+
+
 
     }
 }

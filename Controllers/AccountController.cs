@@ -14,7 +14,7 @@ namespace IntoSport.Controllers
 
         private AuthDBController authDBController = new AuthDBController();
 
-        public ViewResult LogOn()
+        public ViewResult LogIn()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
@@ -23,9 +23,8 @@ namespace IntoSport.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostLogin(LogOnViewModel viewModel, String returnUrl)
+        public ActionResult LogIn(LogOnViewModel viewModel, String returnUrl)
         {
-          
             if (ModelState.IsValid)
             {
                 bool auth = authDBController.isAuthorized(viewModel.Email, viewModel.Password);
@@ -39,7 +38,9 @@ namespace IntoSport.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Login", "Cms");
+                        return RedirectToAction("Login", "Account");
+
+
                     }
                   
                 }
