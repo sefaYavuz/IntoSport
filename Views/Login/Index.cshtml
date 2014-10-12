@@ -1,0 +1,29 @@
+﻿@using IntoSport.Models;
+@model User
+
+@{Html.RenderPartial("AdminHead");}
+
+@Html.ValidationMessage("loginError")
+
+<div class="outer">
+    <div class="middle">
+        <div class="inner">
+
+            @using (Html.BeginForm())
+            {
+                <div class="formContainer">
+                    <div class="centerContainer">
+                        <div class="inputFields">
+                            <div class="label"><span>E-mailadres:</span></div><div class="input">@Html.TextBoxFor(model => model.email)</div>
+                        </div>
+                        <div class="inputFields">
+                            <div class="label"><span>Wachtwoord:</span></div><div class="input">@Html.PasswordFor(model => model.wachtwoord)</div>
+                        </div>
+                        <input type="submit" value="Login" class="submit" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@{Html.RenderPartial("AdminFooter");}
