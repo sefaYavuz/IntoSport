@@ -11,33 +11,28 @@ namespace IntoSport.Controllers
 {
     public class LoginController : MainController
     {
-        public ActionResult Index(string ReturnUrl = "")
+        public ActionResult Index()
         {
-            if (Request.IsAuthenticated)
+            if(Request.IsAuthenticated)
             {
-                if (ReturnUrl.Length > 0)
+                if (base.User.IsInRole("beheerder, manager"))
                 {
-                    return Redirect(ReturnUrl);
+                    return Redirect("admin");
                 }
-                return Redirect("Home");
             }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(Login user, string ReturnUrl = "")
+        public ActionResult Index(Login user)
         {
             if (ModelState.IsValid)
             {
                 if (user.IsValid())
                 {
                     FormsAuthentication.SetAuthCookie(user.email, true);
-                    if (ReturnUrl.Length > 0)
-                    {
-                        return Redirect(ReturnUrl);
-                    }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 else
                 {

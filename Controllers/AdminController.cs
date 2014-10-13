@@ -11,7 +11,7 @@ namespace IntoSport.Controllers
         //
         // GET: /Admin/
 
-        [Authorize(Roles = "beheerder, manager, allebei")]
+        [Authorize(Roles = "beheerder, manager")]
 
         public ActionResult Index()
         {
@@ -23,13 +23,13 @@ namespace IntoSport.Controllers
             return Redirect("admin/manager");
         }
 
-        [Authorize(Roles = "beheerder, allebei")]
+        [Authorize(Roles = "beheerder")]
         public ActionResult Beheerder() 
         {
             return View();
         }
 
-        [Authorize(Roles = "manager, allebei")]
+        [Authorize(Roles = "manager")]
         public ActionResult Manager()
         {
             return View();

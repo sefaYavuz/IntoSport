@@ -112,7 +112,7 @@ namespace IntoSport.Models
 
                 temp = null;
                 user[0].TryGetValue("goldmember", out temp);
-                obj.goldmember = (bool) ((int)temp == 0 ? false : true)  ;
+                obj.goldmember = (bool) temp;
 
             }
 
@@ -134,7 +134,6 @@ namespace IntoSport.Models
                 data.Add("email", this.email);
                 data.Add("wachtwoord", this.wachtwoord);
             }
-
 
             var query = new Query();
             return (query.Execute("user", data) > 0);
