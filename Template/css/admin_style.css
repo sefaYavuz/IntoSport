@@ -1,0 +1,18 @@
+﻿body, html, * {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto';
+}
+
+.formContainer { width: 595px; height: 250px; background: #72d572; }
+.centerContainer { margin: 0 auto; width: 350px; }
+.outer { display: table; position: absolute; height: 100%; width: 100%; }
+.middle { display: table-cell; vertical-align: middle; }
+.inner { margin-left: auto; margin-right: auto; width: 595px; }
+
+.formContainer .inputFields:first-child { padding-top: 60px; }
+.formContainer .inputFields { margin-bottom: 25px; }
+.formContainer .label { font-size: 14px; color: #FFF; text-transform: uppercase; float: left; width: 150px; }
+.formContainer .label span { vertical-align: -webkit-baseline-middle; }
+.formContainer input[type=text], input[type=password] { border: 0; width: 180px; height: 15px; padding: 10px; }
+.formContainer .submit { float: right; text-transform: uppercase;  width: 100px; height: 30px; background: #FFF; border: 0; color: #72d572; font-weight: 500; cursor: pointer; }
