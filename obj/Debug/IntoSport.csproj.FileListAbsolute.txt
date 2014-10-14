@@ -26,6 +26,7 @@ S:\School\Projecten\IntoSport\IntoSport\bin\System.Web.WebPages.Razor.xml
 S:\School\Projecten\IntoSport\IntoSport\obj\Debug\IntoSport.csprojResolveAssemblyReference.cache
 S:\School\Projecten\IntoSport\IntoSport\obj\Debug\IntoSport.dll
 S:\School\Projecten\IntoSport\IntoSport\obj\Debug\IntoSport.pdb
+<<<<<<< HEAD
 C:\Users\Denzyl\Source\Repos\IntoSport\obj\Debug\IntoSport.csprojResolveAssemblyReference.cache
 C:\Users\Denzyl\Source\Repos\IntoSport\obj\Debug\IntoSport.dll
 C:\Users\Denzyl\Source\Repos\IntoSport\obj\Debug\IntoSport.pdb
@@ -53,3 +54,33 @@ C:\Users\Denzyl\Source\Repos\IntoSport\bin\System.Web.Razor.xml
 C:\Users\Denzyl\Source\Repos\IntoSport\bin\System.Web.WebPages.xml
 C:\Users\Denzyl\Source\Repos\IntoSport\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Denzyl\Source\Repos\IntoSport\bin\System.Web.WebPages.Razor.xml
+=======
+S:\School\Projecten\IntoSport\bin\IntoSport.dll.config
+S:\School\Projecten\IntoSport\bin\IntoSport.dll
+S:\School\Projecten\IntoSport\bin\IntoSport.pdb
+S:\School\Projecten\IntoSport\bin\Microsoft.Web.Infrastructure.dll
+S:\School\Projecten\IntoSport\bin\MySql.Data.dll
+S:\School\Projecten\IntoSport\bin\Newtonsoft.Json.dll
+S:\School\Projecten\IntoSport\bin\System.Net.Http.Formatting.dll
+S:\School\Projecten\IntoSport\bin\System.Web.Helpers.dll
+S:\School\Projecten\IntoSport\bin\System.Web.Http.dll
+S:\School\Projecten\IntoSport\bin\System.Web.Http.WebHost.dll
+S:\School\Projecten\IntoSport\bin\System.Web.Mvc.dll
+S:\School\Projecten\IntoSport\bin\System.Web.Razor.dll
+S:\School\Projecten\IntoSport\bin\System.Web.WebPages.Deployment.dll
+S:\School\Projecten\IntoSport\bin\System.Web.WebPages.dll
+S:\School\Projecten\IntoSport\bin\System.Web.WebPages.Razor.dll
+S:\School\Projecten\IntoSport\bin\Microsoft.Web.Infrastructure.xml
+S:\School\Projecten\IntoSport\bin\System.Net.Http.Formatting.xml
+S:\School\Projecten\IntoSport\bin\System.Web.Helpers.xml
+S:\School\Projecten\IntoSport\bin\System.Web.Http.xml
+S:\School\Projecten\IntoSport\bin\System.Web.Http.WebHost.xml
+S:\School\Projecten\IntoSport\bin\System.Web.Mvc.xml
+S:\School\Projecten\IntoSport\bin\System.Web.Razor.xml
+S:\School\Projecten\IntoSport\bin\System.Web.WebPages.xml
+S:\School\Projecten\IntoSport\bin\System.Web.WebPages.Deployment.xml
+S:\School\Projecten\IntoSport\bin\System.Web.WebPages.Razor.xml
+S:\School\Projecten\IntoSport\obj\Debug\IntoSport.csprojResolveAssemblyReference.cache
+S:\School\Projecten\IntoSport\obj\Debug\IntoSport.dll
+S:\School\Projecten\IntoSport\obj\Debug\IntoSport.pdb
+>>>>>>> da5e90e0c70f82ddcc3d0787d7c099be5dd9f9d1
