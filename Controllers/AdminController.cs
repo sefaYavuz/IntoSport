@@ -33,7 +33,7 @@ namespace IntoSport.Controllers
                 return null;
             }
         }
-
+    
         [Authorize(Roles = "beheerder")]
         public ActionResult Beheerder() 
         {
