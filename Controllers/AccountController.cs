@@ -2,58 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.Mvc;
+using System.Web.Security;
 using IntoSport.Models;
-using IntoSport.DatabaseControllers;
 
 namespace IntoSport.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : MainController
     {
-
-        private AuthDBController authDBController = new AuthDBController();
-
-        public ViewResult LogOn()
+        [Authorize]
+        public ActionResult Index()
         {
-            FormsAuthentication.SignOut();
-            Session.Abandon();
-
-            return View();
+            User u = Models.User.GetUser(HttpUtility.HtmlEncode(User.Identity.Name));
+            //ViewData.Add("orders", u.getPlacedOrders());
+           // ViewData.Add("orderTotal", u.getTotalOrderAmount());
+            //ViewData.Add("config", Config.getConfig());
+            return View(u);
         }
-
+        /*
+        [Authorize]
         [HttpPost]
-        public ActionResult PostLogin(LogOnViewModel viewModel, String returnUrl)
+        public ActionResult Index(Account u)
         {
-          
-            if (ModelState.IsValid)
+            User user = Models.User.GetUser(HttpUtility.HtmlEncode(User.Identity.Name));
+            ViewData.Add("orders", user.getPlacedOrders());
+            ViewData.Add("orderTotal", user.getTotalOrderAmount());
+            ViewData.Add("config", Config.getConfig());
+            u.id = user.id;
+            u.email = HttpUtility.HtmlEncode(User.Identity.Name);
+            u.role = user.role;
+            if (ModelState.IsValid && u.Save())
             {
-                bool auth = authDBController.isAuthorized(viewModel.Email, viewModel.Password);
-
-                if (auth)
-                {
-                    FormsAuthentication.SetAuthCookie(viewModel.Email, false);
-                    if (returnUrl != null)
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Login", "Cms");
-                    }
-                  
-                }
-                else
-                {
-                    ModelState.AddModelError("loginfout", "Uw e-mailadres en wachtwoord combinatie zijn onjuist.");
-                    return View();
-                }
+                ViewData.Add("msg", "Uw gegevens zijn succesvol opgeslagen!");
             }
-            else
-            {
-                return View();
-            }
+            return View(user);
         }
 
+        [Authorize]
+        public ActionResult DeleteOrder(int OrderID)
+        {
+            User user = Models.User.GetUser(HttpUtility.HtmlEncode(User.Identity.Name));
+            Order.DeleteOrder(user, OrderID);
+            return RedirectToAction("index", "account");
+        }
+         */
     }
 }

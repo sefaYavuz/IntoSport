@@ -6,18 +6,12 @@ using System.Web.Mvc;
 
 namespace IntoSport.Controllers
 {
-    public class CmsController : Controller
+    public class ErrorController : Controller
     {
         //
-        // GET: /Cms/
+        // GET: /Error/
 
         public ActionResult Index()
-        {
-            return View();
-            //comment
-        }
-
-        public ActionResult Login()
         {
             return View();
         }
