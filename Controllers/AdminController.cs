@@ -9,6 +9,8 @@ namespace IntoSport.Controllers
 {
     public class AdminController : MainController
     {
+        ProductController productController = new ProductController();
+      
         //
         // GET: /Admin/
 
@@ -29,8 +31,8 @@ namespace IntoSport.Controllers
         {
             if(type == "meest verkochte")
             {
-                List<Product> producten = ProductController.MeestVerkochteProducten();
-             return View();
+                List<Product> producten = productController.MeestVerkochteProducten();
+             return View(producten);
             }else
             {
                 return null;
