@@ -1,0 +1,23 @@
+﻿@using System.Collections.Generic;
+@using IntoSport.Models;
+
+@model Category
+
+@{
+    Category cat = (Category)ViewData["categorie"];
+}
+                <h1>Categorie</h1>
+                @{
+                    if (ViewData["msg"] != null)
+                    {
+                        <p class="success">@ViewData["msg"]</p>
+                    }
+                }
+                @{
+                        <form action="/admin/category" method="POST">
+                            @Html.HiddenFor(model => model.id, new { Value = cat.id })
+                            <div class="label">Naam:</div><div class="input">@Html.TextBoxFor(model => model.naam, new { Value = @cat.naam }) @Html.ValidationMessageFor(model => model.naam)</div>
+                            <div class="label">Hoofd categorie:</div><div class="input">@Html.DropDownListFor(model => model.parent.id, Category.getCategoryList(cat))</div>
+                            <input type="submit" name="submit" value="Opslaan" />
+                        </form>
+                }

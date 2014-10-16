@@ -1,5 +1,5 @@
 ﻿@using IntoSport.Models;
-@model User
+@model Login
 
 @{Html.RenderPartial("AdminHead");}
 
@@ -13,11 +13,19 @@
             {
                 <div class="formContainer">
                     <div class="centerContainer">
+                            @Html.ValidationMessageFor(model => model.email) <br />
+                            @Html.ValidationMessageFor(model => model.wachtwoord)
                         <div class="inputFields">
-                            <div class="label"><span>E-mailadres:</span></div><div class="input">@Html.TextBoxFor(model => model.email)</div>
+                            <div class="label"><span>E-mailadres:</span></div>
+                            <div class="input">
+                                @Html.TextBoxFor(model => model.email)
+                            </div>
                         </div>
                         <div class="inputFields">
-                            <div class="label"><span>Wachtwoord:</span></div><div class="input">@Html.PasswordFor(model => model.wachtwoord)</div>
+                            <div class="label"><span>Wachtwoord:</span></div>
+                            <div class="input">
+                                @Html.PasswordFor(model => model.wachtwoord)
+                            </div>
                         </div>
                         <input type="submit" value="Login" class="submit" />
                     </div>

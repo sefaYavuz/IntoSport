@@ -1,0 +1,34 @@
+﻿@using IntoSport.Models
+
+<form action="/admin/categories" method="POST">
+    <a href="/admin/category" class="add-item">Categorie toevoegen &raquo;</a>
+    <h1>Categorieën</h1>
+    <div class="admin-search">
+        <input type="text" name="search" placeholder="Zoek een hoofd-categorie" value="@ViewData["search"]"><input type="submit" value="Zoeken">
+    </div>
+    <table class="admin-table">
+        <thead>
+        <tr>
+            <th width="5%">ID:</th>
+            <th>Naam:</th>
+            <th>Hoofd categorie:</th>
+            <th width="5%"></th>
+        </tr>
+        </thead>
+        @{
+            int count = 0;
+            foreach (Dictionary<string, object> category in (List<Dictionary<string, object>>)ViewData["categoriesp"])
+            {
+                count = Convert.ToInt32(category["count"]);
+                String parent = "-";
+                if (!DBNull.Value.Equals(category["parentname"])) { parent = (String)category["parentname"]; }
+                <tr>
+                    <td>@category["id"]</td>
+                    <td>@category["naam"]</td>
+                    <td>@parent</td>
+                    <td><a href="/admin/category?categoryID=@category["id"]">Wijzig</a></td>
+                </tr>
+            }
+        }
+    </table>
+</form>
