@@ -8,7 +8,7 @@ namespace IntoSport.Helpers
     public static class CartHelper
         //CartHelper class om de cart cookie makkelijker te veranderen.
     {
-        public string addItem(string cart, int id, int quantity){
+        public static string addItem(string cart, int id, int quantity){
 
             string newCart = "";
 
@@ -34,13 +34,13 @@ namespace IntoSport.Helpers
 
         }
 
-        public string addItem(int id, int quantity)
+        public static string addItem(int id, int quantity)
         {
             string newCart = id.ToString() + "," + quantity.ToString() + ".";
             return newCart;
         }
 
-        public string removeItem(string cart, int id)
+        public static string removeItem(string cart, int id)
         {
             string newCart = "";
 
@@ -59,7 +59,7 @@ namespace IntoSport.Helpers
             return newCart;
         }
 
-        public string makeQuantity(string cart, int id, int quantity)
+        public static string makeQuantity(string cart, int id, int quantity)
         {
             string newCart = "";
 
@@ -77,5 +77,12 @@ namespace IntoSport.Helpers
 
             return newCart;
         }
+
+        public static String[] getItems(string cart)
+        {
+            string[] items = cart.Split('.');
+            return items;
+        }
+        
     }
 }

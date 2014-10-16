@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IntoSport.Models;
+using IntoSport.Helpers;
 
 namespace IntoSport.Controllers
 {
@@ -16,15 +17,19 @@ namespace IntoSport.Controllers
         {
             return View();
         }
-
-
-        [HttpPost]
         public void addToCart(int ID, int Quantity)
         {
             if (Request.Cookies["cart"]== null)
             {
-                string cart = new HttpCookie();
+                HttpCookie cart = new HttpCookie();
+                cart.Value = CartHelper.addItem(ID, Quantity);
+                Response.Cookies.Add(cart);
 
+            }
+            else
+            {
+                Response.Cookies["cart"].Value = CartHelper.addItem(Request.Cookies["cart"].Value, ID, Quantity);
+                Response.Cookies["cart"].Expires = DateTime.Now.AddDays(1);
             }
         }
     }
