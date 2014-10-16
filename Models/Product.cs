@@ -9,16 +9,16 @@ namespace IntoSport.Models
     public class Product 
     {
         public int id{get; set;}
-        private int orderregel2_id{get; set;}
-        private int categorie_id{get; set;}
-        private string naam{get; set;}
-        private double prijs{get; set;}
-        private double prijs_oud{get; set;}
-        private double hoeveelheid{get; set;}
-        private string merk{get; set;}
-        private string maat{get; set;}
-        private string afbeelding{get; set;}
-        private string thumbnail{get; set;}
+        public int orderregel2_id { get; set; }
+        public int categorie_id { get; set; }
+        public string naam { get; set; }
+        public double prijs { get; set; }
+        public double prijs_oud { get; set; }
+        public double hoeveelheid { get; set; }
+        public string merk { get; set; }
+        public string maat { get; set; }
+        public string afbeelding { get; set; }
+        public string thumbnail { get; set; }
 
     }
 }
