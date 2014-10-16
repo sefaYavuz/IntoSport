@@ -9,15 +9,21 @@ namespace IntoSport.Helpers
     {
         public string addItem(string cart, int id, int quantity){
 
+            string newCart;
+
             string[] items = cart.Split('.');
             for(int i=0; i < items.Length; i++)
             {
                 string[] item = items[i].Split(',');
-                if (j == 0 && Int16.Parse(item[0]) == id)
+                if (Int32.Parse(item[0]) == id)
                 {
-                    
+                    item[1] = quantity.ToString();
+                    items[i] = item[0] + "." + item[1];
                 }
+                newCart = newCart + items[i] + ".";
             }
+
+            return newCart;
 
         }
 
