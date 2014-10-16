@@ -19,7 +19,7 @@ namespace IntoSport.Helpers
                 string[] item = items[i].Split(',');
                 if (Int32.Parse(item[0]) == id)
                 {
-                    item[1] = (quantity+1).ToString().ToString();
+                    item[1] = (Int32.Parse(item[1]) + quantity).ToString();
                     items[i] = item[0] + "," + item[1];
                     found = true;
                 }
