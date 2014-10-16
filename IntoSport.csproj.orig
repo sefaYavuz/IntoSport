@@ -117,7 +117,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -126,7 +125,6 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DatabaseConnector.cs" />
     <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\User.cs" />
@@ -207,6 +205,12 @@
     <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Content Include="Views\Admin\Categories.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\Category.cshtml" />
+=======
     <Content Include="Template\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Template\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Template\fonts\glyphicons-halflings-regular.woff" />
@@ -254,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Producten.cshtml" />
+>>>>>>> 6547b2b9592e95306b3f8fa9c27dc5ac375cfc1f
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

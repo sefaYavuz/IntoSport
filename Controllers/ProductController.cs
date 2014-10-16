@@ -16,7 +16,8 @@ namespace IntoSport.Controllers
             List<Product> producten = new List<Product>();
             string sql = " SELECT * FROM product";
             MySqlCommand command = new MySqlCommand();
-           
+
+            return producten;
         }
 
     }

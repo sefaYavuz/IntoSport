@@ -117,7 +117,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -126,7 +125,6 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DatabaseConnector.cs" />
     <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\User.cs" />
@@ -138,27 +136,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
     <Content Include="Template\css\admin_style.css" />
-    <Content Include="Template\css\bootstrap.css" />
-    <Content Include="Template\css\bootstrap.min.css" />
-    <Content Include="Template\font-awesome-4.1.0\css\font-awesome.css" />
-    <Content Include="Template\font-awesome-4.1.0\css\font-awesome.min.css" />
-    <Content Include="Template\font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
-    <Content Include="Template\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Template\js\bootstrap.js" />
-    <Content Include="Template\js\bootstrap.min.js" />
-    <Content Include="Template\js\jquery-1.11.0.js" />
-    <Content Include="Template\js\plugins\flot\excanvas.min.js" />
-    <Content Include="Template\js\plugins\flot\flot-data.js" />
-    <Content Include="Template\js\plugins\flot\jquery.flot.js" />
-    <Content Include="Template\js\plugins\flot\jquery.flot.pie.js" />
-    <Content Include="Template\js\plugins\flot\jquery.flot.resize.js" />
-    <Content Include="Template\js\plugins\flot\jquery.flot.tooltip.min.js" />
-    <Content Include="Template\js\plugins\morris\morris-data.js" />
-    <Content Include="Template\js\plugins\morris\morris.js" />
-    <Content Include="Template\js\plugins\morris\morris.min.js" />
-    <Content Include="Template\js\plugins\morris\raphael.min.js" />
-    <Content Include="Template\plugins\morris.css" />
-    <Content Include="Template\css\sb-admin.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -207,53 +184,10 @@
     <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Template\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Template\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Template\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Views\Admin\Categories.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Template\font-awesome-4.1.0\fonts\fontawesome-webfont.eot" />
-    <Content Include="Template\font-awesome-4.1.0\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Template\font-awesome-4.1.0\fonts\fontawesome-webfont.woff" />
-    <Content Include="Template\font-awesome-4.1.0\fonts\FontAwesome.otf" />
-    <Content Include="Template\font-awesome-4.1.0\less\bordered-pulled.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\core.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\fixed-width.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\font-awesome.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\icons.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\larger.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\list.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\mixins.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\path.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\rotated-flipped.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\spinning.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\stacked.less" />
-    <Content Include="Template\font-awesome-4.1.0\less\variables.less" />
-    <Content Include="Template\font-awesome-4.1.0\scss\font-awesome.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_bordered-pulled.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_core.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_fixed-width.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_icons.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_larger.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_list.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_mixins.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_path.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_rotated-flipped.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_spinning.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_stacked.scss" />
-    <Content Include="Template\font-awesome-4.1.0\scss\_variables.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\ManagerMenu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\ManagerFooter.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\ManagerHead.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\Producten.cshtml" />
+    <Content Include="Views\Admin\Category.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

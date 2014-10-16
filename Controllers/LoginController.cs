@@ -19,18 +19,20 @@ namespace IntoSport.Controllers
                 {
                     return Redirect("admin");
                 }
+
+                return Redirect("home");
             }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(Login user)
+        public ActionResult Index(Login login)
         {
             if (ModelState.IsValid)
             {
-                if (user.IsValid())
+                if (login.IsValid())
                 {
-                    FormsAuthentication.SetAuthCookie(user.email, true);
+                    FormsAuthentication.SetAuthCookie(login.email, true);
 
                     return RedirectToAction("Index", "Admin");
                 }
