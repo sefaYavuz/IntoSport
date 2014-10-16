@@ -15,7 +15,8 @@ namespace IntoSport.Controllers
 
         public ActionResult Index()
         {
-            
+            String[] cart = CartHelper.getItems(Request.Cookies["cart"].Values["cart"]);
+            ViewData["cart"] = cart;
             return View();
         }
 
