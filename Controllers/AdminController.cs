@@ -23,7 +23,18 @@ namespace IntoSport.Controllers
 
             return Redirect("admin/manager");
         }
-
+        [Authorize(Roles = "manager")]
+        public ActionResult Producten(String type)
+        {
+            if(type == "meest verkochte")
+            {
+            return View();
+            }else
+            {
+                return null;
+            }
+        }
+    
         [Authorize(Roles = "beheerder")]
         public ActionResult Beheerder() 
         {
