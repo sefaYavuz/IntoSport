@@ -12,20 +12,25 @@ namespace IntoSport.Controllers
     {
       
         
-        public List<Product> MeestVerkochteProducten()
+        public List<Omzet> MeestVerkochteProducten()
         {
             conn.Open();
-            List<Product> producten = new List<Product>();
-            string sql = " SELECT * FROM product";
+            List<Omzet> omzets = new List<Omzet>();
+            string sql = " SELECT naam, count(*) as aantal_verkochte, (prijs * count(*)) as omzet FROM product Group By product.id";
             MySqlCommand command = new MySqlCommand(sql,conn);
             MySqlDataReader reader = command.ExecuteReader();
             while(reader.Read() != false)
             {
 
-                Product product = new Product { id = reader.GetInt32("id"), naam = reader.GetString("naam") };
-                producten.Add(product);
+                omzets.Add(
+                    new Omzet(
+                        reader.GetString("naam"),
+                        reader.GetInt32("aantal_verkochte"), 
+                        reader.GetDouble("omzet")
+                        )
+                       );
             }
-            return producten;
+            return omzets;
         }
 
     }

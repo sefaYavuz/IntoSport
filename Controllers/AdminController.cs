@@ -26,13 +26,13 @@ namespace IntoSport.Controllers
             return Redirect("admin/manager");
         }
         [Authorize(Roles = "manager")]
-        //GET admin/producten
-        public ActionResult Producten(String type)
+        //GET admin/omzet
+        public ActionResult Omzet(String type)
         {
             if(type == "meest verkochte")
             {
-                List<Product> producten = productController.MeestVerkochteProducten();
-             return View(producten);
+                List<Omzet> Omzet = productController.MeestVerkochteProducten();
+             return View(Omzet);
             }else
             {
                 return null;
