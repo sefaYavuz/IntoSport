@@ -127,6 +127,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DatabaseConnector.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Omzet.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Register.cs" />
@@ -254,7 +255,7 @@
     <Content Include="Views\Shared\ManagerHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\Producten.cshtml" />
+    <Content Include="Views\Admin\Omzet.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
