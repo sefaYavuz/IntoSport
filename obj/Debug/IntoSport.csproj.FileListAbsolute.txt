@@ -84,3 +84,31 @@ S:\School\Projecten\IntoSport\obj\Debug\IntoSport.csprojResolveAssemblyReference
 S:\School\Projecten\IntoSport\obj\Debug\IntoSport.dll
 S:\School\Projecten\IntoSport\obj\Debug\IntoSport.pdb
 >>>>>>> da5e90e0c70f82ddcc3d0787d7c099be5dd9f9d1
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\IntoSport.dll.config
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\IntoSport.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\IntoSport.pdb
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\Newtonsoft.Json.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Net.Http.Formatting.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Helpers.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Http.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Http.WebHost.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Mvc.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Razor.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.WebPages.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.WebPages.Razor.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\Newtonsoft.Json.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Net.Http.Formatting.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Helpers.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Http.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Http.WebHost.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Mvc.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.Razor.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.WebPages.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\bin\System.Web.WebPages.Razor.xml
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\obj\Debug\IntoSport.csprojResolveAssemblyReference.cache
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\obj\Debug\IntoSport.dll
+C:\Users\Bart\Documents\Visual Studio 2013\Projects\IntoSport\IntoSport\obj\Debug\IntoSport.pdb
