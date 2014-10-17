@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("IntoSport")]
+[assembly: AssemblyTitle("IntoSport3")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("IntoSport")]
+[assembly: AssemblyProduct("IntoSport3")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("107071d5-e3b5-4b30-a3a7-e7e4ee0e5525")]
+[assembly: Guid("79a75cb6-c2f5-4e5c-9d8f-40d61466d013")]
 
 // Version information for an assembly consists of the following four values:
 //

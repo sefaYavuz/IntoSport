@@ -15,8 +15,11 @@ namespace IntoSport.Controllers
 
         public ActionResult Index()
         {
-            String[] cart = CartHelper.getItems(Request.Cookies["cart"].Values["cart"]);
-            ViewData["cart"] = cart;
+            if (Request.Cookies["cart"] != null)
+            {
+                String[] cart = CartHelper.getItems(Request.Cookies["cart"].Values["cart"]);
+                ViewData["cart"] = cart;
+            }
             return View();
         }
 
@@ -24,7 +27,7 @@ namespace IntoSport.Controllers
         {
             if (Request.Cookies["cart"]== null)
             {
-                HttpCookie cart = new HttpCookie();
+                HttpCookie cart = new HttpCookie("cart");
                 cart.Value = CartHelper.addItem(ID, Quantity);
                 Response.Cookies.Add(cart);
 
