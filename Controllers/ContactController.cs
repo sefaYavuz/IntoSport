@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using IntoSport3.Models;
 
 namespace IntoSport3.Controllers
 {
@@ -13,18 +14,22 @@ namespace IntoSport3.Controllers
 
         public ActionResult Index()
         {
-            return View("Account");
+            return View();
         }
 
-
-        public ActionResult NoAccount()
+        [HttpPost]
+        public ActionResult Index(Contact c)
         {
-            return View("NoAccount");
-        }
-
-        public ActionResult Account()
-        {
-            return View("Account");
+            if (ModelState.IsValid)
+            {
+                ViewBag.Message = "Verzonden";
+                return View();
+            }
+            else
+            {
+                ViewBag.Message = "Er was een fout";
+                return View();
+            }
         }
 
     }
