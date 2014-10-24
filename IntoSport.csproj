@@ -11,7 +11,7 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IntoSport3</RootNamespace>
+    <RootNamespace>IntoSport</RootNamespace>
     <AssemblyName>IntoSport3</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -143,6 +143,8 @@
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DatabaseConnector.cs" />
+    <Compile Include="Models\Detail.cs" />
+    <Compile Include="Models\DetailWaarde.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Omzet.cs" />
     <Compile Include="Models\Product.cs" />

@@ -1,6 +1,9 @@
 ﻿@using System.Collections.Generic;
 @using IntoSport.Models;
 
+@{Html.RenderPartial("ManagerHead");}
+@{Html.RenderPartial("ManagerMenu");}
+
 @model Category
 
 @{
@@ -16,8 +19,10 @@
                 @{
                         <form action="/admin/category" method="POST">
                             @Html.HiddenFor(model => model.id, new { Value = cat.id })
-                            <div class="label">Naam:</div><div class="input">@Html.TextBoxFor(model => model.naam, new { Value = @cat.naam }) @Html.ValidationMessageFor(model => model.naam)</div>
-                            <div class="label">Hoofd categorie:</div><div class="input">@Html.DropDownListFor(model => model.parent.id, Category.getCategoryList(cat))</div>
-                            <input type="submit" name="submit" value="Opslaan" />
+                            <div class="label">Naam:</div><div class="input" style="width: 200px;">@Html.TextBoxFor(model => model.naam, new { Value = @cat.naam, @class = "form-control" }) @Html.ValidationMessageFor(model => model.naam)</div>
+                            <div class="label">Hoofd categorie:</div><div class="input" style="width: 200px;">@Html.DropDownListFor(model => model.parent.id, Category.getCategoryList(cat), new { @class = "form-control" })</div>
+                            <br />
+                            <input type="submit" name="submit" value="Opslaan" class="btn btn-default" />
                         </form>
                 }
+@{Html.RenderPartial("ManagerFooter");}
