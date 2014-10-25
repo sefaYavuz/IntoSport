@@ -25,8 +25,8 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li @(Request.Url.ToString().Equals("/") ? "class=active" : "")><a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
-            <li @(Request.Url.ToString().Equals("/admin/products") ? "class=active" : "")><a href=""><i class="fa fa-empire"></i> Producten</a></li>
+            <li @(Request.RawUrl.ToString().Equals("/") ? "class=active" : "")><a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+            <li @(Request.RawUrl.ToString().Equals("/admin/products") ? "class=active" : "")><a href="/admin/products"><i class="fa fa-empire"></i> Producten</a></li>
             @if(User.IsInRole("beheerder"))
             {
                 <li @(Request.RawUrl.Equals("/admin/categories") || Request.RawUrl.Equals("/admin/category") ? "class=active" : "")><a href="/admin/categories"><i class="fa fa-empire"></i> Categorieen </a>

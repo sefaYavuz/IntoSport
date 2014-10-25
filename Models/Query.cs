@@ -170,8 +170,6 @@ namespace IntoSport.Models
             return result;
         }
 
-
-
         public int Execute(string table, Dictionary<string, Object> data, List<string> extras = null)
         {
             int rows = 0;

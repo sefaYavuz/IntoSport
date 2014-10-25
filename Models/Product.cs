@@ -17,5 +17,23 @@ namespace IntoSport.Models
         public string afbeelding { get; set; }
         public string thumbnail { get; set; }
 
+        public List<Category> categories { get; set; }
+
+        public List<Detail> details { get; set; }
+
+        public static List<Dictionary<string, object>> getAllProducts(string search = "")
+        {
+            Query query = new Query();
+            query.Select("id, naam, prijs");
+            query.From("product");
+
+            if(search.Length > 0)
+            {
+                query.Where("naam LIKE '%" + search + "%'");
+            }
+
+            return query.Execute();
+        }
+
     }
 }

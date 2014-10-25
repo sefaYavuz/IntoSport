@@ -25,6 +25,8 @@ namespace IntoSport.Controllers
 
             return Redirect("admin/manager");
         }
+
+
         [Authorize(Roles = "manager")]
         //GET admin/omzet
         public ActionResult Omzet(String type)
@@ -48,6 +50,23 @@ namespace IntoSport.Controllers
         [Authorize(Roles = "manager")]
         public ActionResult Manager()
         {
+            return View();
+        }
+
+        [Authorize(Roles = "beheerder")]
+        public ActionResult Products()
+        {
+            ViewData.Add("products", Models.Product.getAllProducts());
+            ViewData.Add("search", "");
+            return View();
+        }
+
+        [Authorize(Roles = "beheerder")]
+        [HttpPost]
+        public ActionResult Products(string search = "")
+        {
+            ViewData.Add("products", Models.Product.getAllProducts(search));
+            ViewData.Add("search", search);
             return View();
         }
 
