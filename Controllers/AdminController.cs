@@ -18,13 +18,10 @@ namespace IntoSport.Controllers
 
         public ActionResult Index()
         {
-            if(base.User.IsInRole("beheerder"))
-            {
-                return Redirect("admin/beheerder");
-            }
-
-            return Redirect("admin/manager");
+            return View();
         }
+
+
         [Authorize(Roles = "manager")]
         //GET admin/omzet
         public ActionResult Omzet(String type)
@@ -38,18 +35,48 @@ namespace IntoSport.Controllers
                 return null;
             }
         }
-    
+
+        /* PRODUCTEN START*/
+
         [Authorize(Roles = "beheerder")]
-        public ActionResult Beheerder() 
+        public ActionResult Products()
         {
+            ViewData.Add("products", Models.Product.getAllProducts());
+            ViewData.Add("search", "");
             return View();
         }
 
-        [Authorize(Roles = "manager")]
-        public ActionResult Manager()
+        [Authorize(Roles = "beheerder")]
+        [HttpPost]
+        public ActionResult Products(string search = "")
         {
+            ViewData.Add("products", Models.Product.getAllProducts(search));
+            ViewData.Add("search", search);
             return View();
         }
+
+        [Authorize(Roles = "beheerder")]
+        public ActionResult Product(int productID = 0)
+        {
+            Product product = new Product(productID);
+            ViewData.Add("product", product);
+            return View();
+        }
+
+        [Authorize(Roles = "beheerder")]
+        [HttpPost]
+        public ActionResult Product(FormCollection collection)
+        {
+            Models.Product.Insert(collection);
+         
+            ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
+
+            return View();
+        }
+
+        /* PRODUCTEN END */
+
+        /* CATEGORIEËN START */
 
         [Authorize(Roles = "beheerder")]
         public ActionResult Categories()
@@ -112,5 +139,7 @@ namespace IntoSport.Controllers
             }
             return View("categorie?categoryID=" + collection["id"] + "&failed=1");
         }
+
+        /* CATEGORIEËN END */
     }
 }

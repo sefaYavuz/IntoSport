@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace IntoSport3
+namespace IntoSport
 {
     public static class WebApiConfig
     {

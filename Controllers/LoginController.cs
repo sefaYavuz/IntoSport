@@ -51,7 +51,7 @@ namespace IntoSport.Controllers
             {
                 return Redirect(ReturnUrl);
             }
-            return RedirectToAction("Index", "home");
+            return RedirectToAction("Index", "Login");
         }
     }
 }

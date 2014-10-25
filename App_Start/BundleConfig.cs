@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace IntoSport3
+namespace IntoSport
 {
     public class BundleConfig
     {
