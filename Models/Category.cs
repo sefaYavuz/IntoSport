@@ -18,6 +18,7 @@ namespace IntoSport.Models
             this.naam = "";
             this.id = 0;
         }
+
         public Category(int id)
         {
             Query q = new Query();
@@ -39,6 +40,7 @@ namespace IntoSport.Models
 
             }
         }
+
         public bool Update()
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
