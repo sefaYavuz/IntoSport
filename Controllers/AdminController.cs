@@ -18,12 +18,7 @@ namespace IntoSport.Controllers
 
         public ActionResult Index()
         {
-            if(base.User.IsInRole("beheerder"))
-            {
-                return Redirect("admin/beheerder");
-            }
-
-            return Redirect("admin/manager");
+            return View();
         }
 
 
@@ -40,18 +35,8 @@ namespace IntoSport.Controllers
                 return null;
             }
         }
-    
-        [Authorize(Roles = "beheerder")]
-        public ActionResult Beheerder() 
-        {
-            return View();
-        }
 
-        [Authorize(Roles = "manager")]
-        public ActionResult Manager()
-        {
-            return View();
-        }
+        /* PRODUCTEN START*/
 
         [Authorize(Roles = "beheerder")]
         public ActionResult Products()
@@ -69,6 +54,29 @@ namespace IntoSport.Controllers
             ViewData.Add("search", search);
             return View();
         }
+
+        [Authorize(Roles = "beheerder")]
+        public ActionResult Product(int productID = 0)
+        {
+            Product product = new Product(productID);
+            ViewData.Add("product", product);
+            return View();
+        }
+
+        [Authorize(Roles = "beheerder")]
+        [HttpPost]
+        public ActionResult Product(FormCollection collection)
+        {
+            Models.Product.Insert(collection);
+         
+            ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
+
+            return View();
+        }
+
+        /* PRODUCTEN END */
+
+        /* CATEGORIEËN START */
 
         [Authorize(Roles = "beheerder")]
         public ActionResult Categories()
@@ -131,5 +139,7 @@ namespace IntoSport.Controllers
             }
             return View("categorie?categoryID=" + collection["id"] + "&failed=1");
         }
+
+        /* CATEGORIEËN END */
     }
 }
