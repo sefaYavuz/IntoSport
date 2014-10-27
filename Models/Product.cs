@@ -26,9 +26,7 @@ namespace IntoSport.Models
 
         [Required(ErrorMessage = "Dit is een verplicht veld")]      
         public int voorraad { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
         public string afbeelding { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
         public string thumbnail { get; set; }
 
         public Product(int productID)
@@ -122,8 +120,8 @@ namespace IntoSport.Models
             data.Add("prijs", collection["prijs"]);
             data.Add("korting", collection["korting"]);
             data.Add("voorraad", collection["voorraad"]);
-            data.Add("afbeelding", collection["afbeelding"]);
-            data.Add("thumbnail", collection["thumbnail"]);
+            //data.Add("afbeelding", collection["afbeelding"]);
+            //data.Add("thumbnail", collection["thumbnail"]);
 
             var query = new Query();
             return query.Execute("product", data);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IntoSport.Models;
+using System.IO;
 
 namespace IntoSport.Controllers
 {
@@ -70,6 +71,7 @@ namespace IntoSport.Controllers
             Models.Product.Insert(collection);
             Models.Product.InsertCategorie(collection);
 
+
             ViewData.Add("getCategories", Models.Category.getAllCategories());
             ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
 
@@ -119,7 +121,7 @@ namespace IntoSport.Controllers
         [HttpPost]
         public ActionResult Category(FormCollection collection)
         {
-            if (!collection["naam"].Equals(""))
+            if (ModelState.IsValid)
             {
                 Category c = new Category();
                 c.id = int.Parse(collection["id"]);
@@ -139,7 +141,8 @@ namespace IntoSport.Controllers
                 ViewData.Add("categorie", category);
                 return View("Category");
             }
-            return View("categorie?categoryID=" + collection["id"] + "&failed=1");
+
+            return View();
         }
 
         /* CATEGORIEËN END */

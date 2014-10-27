@@ -14,12 +14,12 @@
 @{
     if (ViewData["msg"] != null)
     {
-        <p class="success">@ViewData["msg"]</p>
+        <p class="alert alert-success">@ViewData["msg"]</p>
     }
 }
 
-<form action="/admin/product" method="post">
-    @Html.HiddenFor(model => model.id, new { Value = @product.id })
+<form action="/admin/product" method="post" enctype="multipart/form-data">
+    @Html.HiddenFor(model => model.id)
 
     <label>Selecteer een categorie:</label>
     <select name="categories" class="form-control">
@@ -36,13 +36,13 @@
     <br />
 
     <label>Naam:</label> 
-    @Html.TextBoxFor(model => model.naam, new { Value = product.naam, @class = "form-control" }) 
+    @Html.TextBoxFor(model => model.naam, new { @class = "form-control" }) 
     @Html.ValidationMessageFor(model => model.naam)
 
     <br />
 
     <label>Beschrijving:</label> 
-    @Html.TextAreaFor(model => model.beschrijving, new { Value = product.beschrijving, @class = "form-control"})
+    @Html.TextAreaFor(model => model.beschrijving, new { @class = "form-control"})
 
     <br />
 
@@ -62,16 +62,17 @@
     @Html.ValidationMessageFor(model => model.voorraad)
 
     <br /><br />
-
-    <label>Afbeelding:</label> 
-    @Html.TextBoxFor(model => model.afbeelding, new { @class = "form-control"}) 
-    @Html.ValidationMessageFor(model => model.afbeelding)
+    <!--
+    <label>Thumbnail:</label>
+    <input type="file" name="thumbnail" class="form-control" />
+    Html.ValidationMessageFor(model => model.thumbnail)
 
     <br />
 
-    <label>Thumbnail:</label> 
-    @Html.TextBoxFor(model => model.thumbnail, new { @class = "form-control"}) 
-    @Html.ValidationMessageFor(model => model.thumbnail)
+    <label>Afbeelding:</label> 
+    <input type="file" name="afbeelding" class="form-control" />
+    Html.ValidationMessageFor(model => model.afbeelding)
+        -->
     <br />
     <input type="submit" name="submit" value="Opslaan" class="btn btn-default" />
 </form>
