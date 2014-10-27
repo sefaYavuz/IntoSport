@@ -1,0 +1,40 @@
+﻿@using IntoSport.Models;
+
+@{Html.RenderPartial("ManagerHead");}
+@{Html.RenderPartial("ManagerMenu");}
+
+@model Detail
+
+<h1>Detailsoverizcht</h1>
+<p>Hier krijgt u een overzicht te zien met alle details.</p>
+<br /><br />
+
+@using (Html.BeginForm())
+{
+
+    <input type="text" name="search" placeholder="Zoek een detail;..," value="@ViewData["search"]" class="form-control" style="width: 300px; float: left; margin-right: 15px;" />
+    <input type="submit" value="Zoeken" class="btn btn-default" />
+
+    <br /><br />
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <td>Naam</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+    foreach (Dictionary<string, object> detail in (List<Dictionary<string, object>>)ViewData["details"])
+    {
+        <tr>
+            <td>@detail["naam"]</td>
+            <td><a href="/admin/detail?detailID=@detail["id"]">Wijzig</a></td>
+        </tr>
+    }
+            }
+        </tbody>
+    </table>
+}
+@{Html.RenderPartial("ManagerFooter");}

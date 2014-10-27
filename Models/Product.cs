@@ -129,25 +129,24 @@ namespace IntoSport.Models
 
         public static int InsertCategorie(FormCollection collection)
         {
-            int productID = 0;
-
-            Query query = new Query();
-            query.Select("MAX(id) AS id");
-            query.From("product");
-            query.Limit("1");
-
-            foreach(Dictionary<string, object> product in query.Execute())
-            {
-                productID = (int)product["id"];
-            }
-
             Dictionary<string, object> data = new Dictionary<string, object>();
 
             data.Add("categorie_id", collection["categories"]);
-            data.Add("product_id", productID);
+            data.Add("product_id", GetLastProductID());
 
-            var query2 = new Query();
-            return query2.Execute("product_categorie", data);
+            var query = new Query();
+            return query.Execute("product_categorie", data);
+        }
+
+        public static int InsertDetail(FormCollection collection)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+
+            data.Add("categorie_id", collection["details"]);
+            data.Add("product_id", GetLastProductID());
+
+            var query = new Query();
+            return query.Execute("detail_product", data);
         }
 
         public void Update()
@@ -169,6 +168,22 @@ namespace IntoSport.Models
             return query.Execute();
         }
 
+        public static int GetLastProductID()
+        {
+            int productID = 0;
+
+            Query query = new Query();
+            query.Select("MAX(id) AS id");
+            query.From("product");
+            query.Limit("1");
+
+            foreach (Dictionary<string, object> product in query.Execute())
+            {
+                productID = (int)product["id"];
+            }
+
+            return productID;
+        }
 
     }
 }

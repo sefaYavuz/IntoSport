@@ -36,6 +36,28 @@ namespace IntoSport.Controllers
             }
         }
 
+
+        /* DETAILS START */
+
+        [Authorize(Roles = "beheerder")]
+        public ActionResult Details()
+        {
+            ViewData.Add("details", Models.Detail.getAllDetails());
+            ViewData.Add("search", "");
+            return View();
+        }
+
+        [Authorize(Roles = "beheerder")]
+        [HttpPost]
+        public ActionResult Details(string search = "")
+        {
+            ViewData.Add("details", Models.Detail.getAllDetails(search));
+            ViewData.Add("search", search);
+            return View();
+        }
+
+        /* DETAILS END */
+
         /* PRODUCTEN START*/
 
         [Authorize(Roles = "beheerder")]
