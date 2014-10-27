@@ -37,7 +37,6 @@ namespace IntoSport.Models
                 {
                     this.parent = new Category();
                 }
-
             }
         }
 

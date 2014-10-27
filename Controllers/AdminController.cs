@@ -21,7 +21,6 @@ namespace IntoSport.Controllers
             return View();
         }
 
-
         [Authorize(Roles = "manager")]
         //GET admin/omzet
         public ActionResult Omzet(String type)
@@ -29,7 +28,7 @@ namespace IntoSport.Controllers
             if(type == "meest verkochte")
             {
                 List<Omzet> Omzet = productController.MeestVerkochteProducten();
-             return View(Omzet);
+                return View(Omzet);
             }else
             {
                 return null;
@@ -60,7 +59,8 @@ namespace IntoSport.Controllers
         {
             Product product = new Product(productID);
             ViewData.Add("product", product);
-            return View();
+            ViewData.Add("getCategories", Models.Category.getAllCategories());
+            return View("Product");
         }
 
         [Authorize(Roles = "beheerder")]
@@ -68,7 +68,9 @@ namespace IntoSport.Controllers
         public ActionResult Product(FormCollection collection)
         {
             Models.Product.Insert(collection);
-         
+            Models.Product.InsertCategorie(collection);
+
+            ViewData.Add("getCategories", Models.Category.getAllCategories());
             ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
 
             return View();

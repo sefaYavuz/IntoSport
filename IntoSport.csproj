@@ -249,7 +249,7 @@
     <Content Include="Template\js\plugins\morris\morris.min.js" />
     <Content Include="Template\js\plugins\morris\raphael.min.js" />
     <Content Include="Template\plugins\morris.css" />
-    <Content Include="Views\Admin\index.html" />
+    <Content Include="Views\Admin\index2.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

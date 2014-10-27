@@ -19,15 +19,59 @@
 }
 
 <form action="/admin/product" method="post">
-    @Html.HiddenFor(model => model.id)
-    <label>Naam:</label> @Html.TextBoxFor(model => model.naam, new { @class = "form-control" }) @Html.ValidationMessageFor(model => model.naam)
-    <label>Beschrijving:</label> @Html.TextAreaFor(model => model.beschrijving, new { @class = "form-control"})
-    <label>Prijs:</label> @Html.TextBoxFor(model => model.prijs, new { @class = "form-control"}) @Html.ValidationMessageFor(model => model.prijs)
-    <label>Korting (%):</label> @Html.TextBoxFor(model => model.korting, new { @class = "form-control"})
-    <label>Voorraad:</label> @Html.TextBoxFor(model => model.voorraad, new  { @class = "form-control"}) @Html.ValidationMessageFor(model => model.voorraad)
+    @Html.HiddenFor(model => model.id, new { Value = @product.id })
+
+    <label>Selecteer een categorie:</label>
+    <select name="categories" class="form-control">
+        @{
+            foreach(Dictionary<string, object> categorie in (List<Dictionary<string, object>>)ViewData["getCategories"])
+            {
+                
+                <option value="@categorie["id"]">@categorie["naam"]</option>
+            }
+        }
+    </select>
+    @Html.ValidationMessageFor(model => model.categorie_id)
+
+    <br />
+
+    <label>Naam:</label> 
+    @Html.TextBoxFor(model => model.naam, new { Value = product.naam, @class = "form-control" }) 
+    @Html.ValidationMessageFor(model => model.naam)
+
+    <br />
+
+    <label>Beschrijving:</label> 
+    @Html.TextAreaFor(model => model.beschrijving, new { Value = product.beschrijving, @class = "form-control"})
+
+    <br />
+
+    <label>Prijs:</label> 
+    @Html.TextBoxFor(model => model.prijs, new { @class = "form-control"}) 
+    @Html.ValidationMessageFor(model => model.prijs)
+
+    <br />
+
+    <label>Korting (%):</label> 
+    @Html.TextBoxFor(model => model.korting, new { @class = "form-control"})
+
+    <br />
+
+    <label>Voorraad:</label> 
+    @Html.TextBoxFor(model => model.voorraad, new  { @class = "form-control"}) 
+    @Html.ValidationMessageFor(model => model.voorraad)
+
     <br /><br />
-    <label>Afbeelding:</label> @Html.TextBoxFor(model => model.afbeelding, new { @class = "form-control"}) @Html.ValidationMessageFor(model => model.afbeelding)
-    <label>Thumbnail:</label> @Html.TextBoxFor(model => model.thumbnail, new { @class = "form-control"}) @Html.ValidationMessageFor(model => model.thumbnail)
+
+    <label>Afbeelding:</label> 
+    @Html.TextBoxFor(model => model.afbeelding, new { @class = "form-control"}) 
+    @Html.ValidationMessageFor(model => model.afbeelding)
+
+    <br />
+
+    <label>Thumbnail:</label> 
+    @Html.TextBoxFor(model => model.thumbnail, new { @class = "form-control"}) 
+    @Html.ValidationMessageFor(model => model.thumbnail)
     <br />
     <input type="submit" name="submit" value="Opslaan" class="btn btn-default" />
 </form>

@@ -16,6 +16,7 @@ namespace IntoSport.Models
         private string select;
         private string delete;
         private string from;
+        private string limit;
         private List<string> where;
         private Hashtable join;
         private List<string> group;
@@ -44,6 +45,11 @@ namespace IntoSport.Models
             this.from = s;
         }
 
+        public void Limit(string s)
+        {
+            this.limit = s;
+        }
+
         public void Where(string s)
         {
             this.where.Add(s);
@@ -63,6 +69,7 @@ namespace IntoSport.Models
         {
             this.order.Add(s);
         }
+
 
         public string getQuery()
         {
@@ -132,6 +139,11 @@ namespace IntoSport.Models
                         queryString += ", " + @s + " ";
                     }
                 }
+            }
+
+            if(limit != null)
+            {
+                queryString += "LIMIT " + @limit + " ";
             }
 
             return queryString;
