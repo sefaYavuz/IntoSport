@@ -108,7 +108,7 @@ namespace IntoSport.Models
             return p;
         }*/
 
-        public static int Insert(FormCollection collection)
+        public static int Insert(FormCollection collection, string thumb, string img)
         {
             Dictionary<string, object> data = new Dictionary<string,object>();
             data.Add("naam", collection["naam"]);
@@ -116,8 +116,8 @@ namespace IntoSport.Models
             data.Add("prijs", collection["prijs"]);
             data.Add("korting", collection["korting"]);
             data.Add("voorraad", collection["voorraad"]);
-            //data.Add("afbeelding", collection["afbeelding"]);
-            //data.Add("thumbnail", collection["thumbnail"]);
+            data.Add("afbeelding", img);
+            data.Add("thumbnail", thumb);
 
             var query = new Query();
             return query.Execute("product", data);

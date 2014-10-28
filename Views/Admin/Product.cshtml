@@ -62,17 +62,17 @@
     @Html.ValidationMessageFor(model => model.voorraad)
 
     <br /><br />
-    <!--
+    
     <label>Thumbnail:</label>
     <input type="file" name="thumbnail" class="form-control" />
-    Html.ValidationMessageFor(model => model.thumbnail)
-
+    @Html.ValidationMessageFor(model => model.thumbnail)
+        
     <br />
 
     <label>Afbeelding:</label> 
     <input type="file" name="afbeelding" class="form-control" />
-    Html.ValidationMessageFor(model => model.afbeelding)
-        -->
+    @Html.ValidationMessageFor(model => model.afbeelding)
+       
     <br />
     <input type="submit" name="submit" value="Opslaan" class="btn btn-default" />
 </form>

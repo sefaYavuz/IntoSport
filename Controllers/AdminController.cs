@@ -112,14 +112,30 @@ namespace IntoSport.Controllers
 
         [Authorize(Roles = "beheerder")]
         [HttpPost]
-        public ActionResult Product(FormCollection collection)
+        public ActionResult Product(FormCollection collection, HttpPostedFileBase thumbnail, HttpPostedFileBase afbeelding)
         {
-            Models.Product.Insert(collection);
-            Models.Product.InsertCategorie(collection);
+            if ((thumbnail != null && thumbnail.ContentLength > 0) && (afbeelding != null && afbeelding.ContentLength > 0))
+            {
+                //Pak de naam van het bestand
+                var thumbName = Path.GetFileName(thumbnail.FileName);
+                var imgName = Path.GetFileName(afbeelding.FileName);
 
+                //Unieke map aanmaken om producten te scheiden
+                Directory.CreateDirectory("S:/School/Projecten/IntoSport/Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail/");
 
-            ViewData.Add("getCategories", Models.Category.getAllCategories());
-            ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
+                // Afbeeldingen opslaan in de bijbehorende folders
+                var thumbPath = Path.Combine(Server.MapPath("~/Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail"), thumbName);
+                var imgPath = Path.Combine(Server.MapPath("~/Template/images/products/" + Models.Product.GetLastProductID()), imgName);
+
+                thumbnail.SaveAs(thumbPath);
+                afbeelding.SaveAs(imgPath);
+
+                Models.Product.Insert(collection, (string)thumbName, (string)imgName);
+                Models.Product.InsertCategorie(collection);
+
+                ViewData.Add("getCategories", Models.Category.getAllCategories());
+                ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
+            }
 
             return View();
         }
