@@ -1,0 +1,40 @@
+﻿@using IntoSport.Models;
+
+@{Html.RenderPartial("ManagerHead");}
+@{Html.RenderPartial("ManagerMenu");}
+
+@model Order
+
+<h1>Bestellingsoverzicht</h1>
+<p>Hier krijgt u een overzicht te zien met alle bestellingen.</p>
+<br /><br />
+
+<form action="/admin/orders" method="post">
+
+    <!--<input type="text" name="search" placeholder="Zoek een bestelling..," value="ViewData["search"]" class="form-control" style="width: 300px; float: left; margin-right: 15px;" />
+    <input type="submit" value="Zoeken" class="btn btn-default" />
+        -->
+    <br /><br />
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (Dictionary<string, object> order in (List<Dictionary<string, object>>)ViewData["orders"])
+                {
+                    <tr>
+                        <td>@order["id"]</td>
+                        <td>@order["status"]</td>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</form>
+@{Html.RenderPartial("ManagerFooter");}

@@ -10,23 +10,19 @@ namespace IntoSport.Models
     public class Product 
     {
         public int id{ get; set; }
-
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
         public int categorie_id { get; set; }
         public int detail_id { get; set; }
-
         [Required(ErrorMessage = "Dit is een verplicht veld")]
         public string naam { get; set; }
-
         public string beschrijving { get; set; }
-
         [Required(ErrorMessage = "Dit is een verplicht veld")]
         public double prijs { get; set; }
         public int korting { get; set; }
-
         [Required(ErrorMessage = "Dit is een verplicht veld")]      
         public int voorraad { get; set; }
+        [Required(ErrorMessage = "Dit is een verplicht veld")]
         public string afbeelding { get; set; }
+        [Required(ErrorMessage = "Dit is een verplicht veld")]
         public string thumbnail { get; set; }
 
         public Product(int productID)

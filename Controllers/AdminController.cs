@@ -37,6 +37,30 @@ namespace IntoSport.Controllers
         }
 
 
+        /* ORDERS START */
+
+        [Authorize(Roles = "beheerder")]
+        public ActionResult Orders()
+        {
+            ViewData.Add("orders", Models.Order.GetAllOrders());
+            ViewData.Add("search", "");
+            return View();
+        }
+
+        [Authorize(Roles = "beheerder")]
+        [HttpPost]
+        public ActionResult Orders(string search = "")
+        {
+            ViewData.Add("orders", Models.Order.GetAllOrders());
+            ViewData.Add("search", search);
+
+            return View();
+        }
+
+
+
+        /* ORDERS END */
+
         /* DETAILS START */
 
         [Authorize(Roles = "beheerder")]
