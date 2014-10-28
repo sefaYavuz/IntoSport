@@ -102,40 +102,76 @@ namespace IntoSport.Controllers
         }
 
         [Authorize(Roles = "beheerder")]
-        public ActionResult Product(int productID = 0)
+        public ActionResult Product(int ProductID = 0)
         {
-            Product product = new Product(productID);
+            Product product = new Product(ProductID);
             ViewData.Add("product", product);
+
             ViewData.Add("getCategories", Models.Category.getAllCategories());
             return View("Product");
         }
 
         [Authorize(Roles = "beheerder")]
         [HttpPost]
-        public ActionResult Product(FormCollection collection, HttpPostedFileBase thumbnail, HttpPostedFileBase afbeelding)
+        public ActionResult Product(Product product, FormCollection collection, HttpPostedFileBase thumbnail, HttpPostedFileBase afbeelding)
         {
-            if ((thumbnail != null && thumbnail.ContentLength > 0) && (afbeelding != null && afbeelding.ContentLength > 0))
+
+            Product p = new Product();
+
+            if (ModelState.IsValid)
             {
-                //Pak de naam van het bestand
-                var thumbName = Path.GetFileName(thumbnail.FileName);
-                var imgName = Path.GetFileName(afbeelding.FileName);
+                if ((thumbnail != null && thumbnail.ContentLength > 0) && (afbeelding != null && afbeelding.ContentLength > 0))
+                {
+                    //Pak de naam van het bestand
+                    var thumbName = Path.GetFileName(thumbnail.FileName);
+                    var imgName = Path.GetFileName(afbeelding.FileName);
 
-                //Unieke map aanmaken om producten te scheiden
-                Directory.CreateDirectory("S:/School/Projecten/IntoSport/Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail/");
+                    //Unieke map aanmaken om producten te scheiden
+                    Directory.CreateDirectory("S:/School/Projecten/IntoSport/Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail/");
 
-                // Afbeeldingen opslaan in de bijbehorende folders
-                var thumbPath = Path.Combine(Server.MapPath("~/Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail"), thumbName);
-                var imgPath = Path.Combine(Server.MapPath("~/Template/images/products/" + Models.Product.GetLastProductID()), imgName);
+                    // Afbeeldingen opslaan in de bijbehorende folders
+                    var thumbPath = Path.Combine(Server.MapPath("~/Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail"), thumbName);
+                    var imgPath = Path.Combine(Server.MapPath("~/Template/images/products/" + Models.Product.GetLastProductID()), imgName);
 
-                thumbnail.SaveAs(thumbPath);
-                afbeelding.SaveAs(imgPath);
+                    thumbnail.SaveAs(thumbPath);
+                    afbeelding.SaveAs(imgPath);
 
-                Models.Product.Insert(collection, (string)thumbName, (string)imgName);
-                Models.Product.InsertCategorie(collection);
+                    p.id = int.Parse(collection["id"]);
+                    p.categorie_id = int.Parse(collection["categories"]);
+                    p.naam = collection["naam"];
+                    p.beschrijving = collection["beschrijving"];
+                    p.prijs = double.Parse(collection["prijs"]);
+                    p.korting = (collection["korting"] != null ? int.Parse(collection["korting"]) : 0);
+                    p.voorraad = (collection["voorraad"] != null ? int.Parse(collection["voorraad"]) : 0);
+                    p.afbeelding = "Template/images/products/" + Models.Product.GetLastProductID() + "/" + imgName;
+                    p.thumbnail = "Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail/" + thumbName;
 
-                ViewData.Add("getCategories", Models.Category.getAllCategories());
-                ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
+                    if(p.id != 0)
+                    {
+                        p.Update();
+                        //p.UpdateCategorie();
+                    }
+                    else 
+                    {
+                        p.id = p.Insert();
+                        p.InsertCategorie();
+                    }
+
+
+                    ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
+
+                    Product p2 = new Product(p.id);
+                    ViewData.Add("product", p2);
+
+                    ViewData.Add("getCategories", Models.Category.getAllCategories());
+                    return View("Product");
+                }
+
             }
+
+
+            ViewData.Add("product", p);
+            ViewData.Add("getCategories", Models.Category.getAllCategories());
 
             return View();
         }
@@ -183,7 +219,7 @@ namespace IntoSport.Controllers
         [HttpPost]
         public ActionResult Category(FormCollection collection)
         {
-            if (ModelState.IsValid)
+            if (ViewData.ModelState.IsValid)
             {
                 Category c = new Category();
                 c.id = int.Parse(collection["id"]);
@@ -203,7 +239,6 @@ namespace IntoSport.Controllers
                 ViewData.Add("categorie", category);
                 return View("Category");
             }
-
             return View();
         }
 

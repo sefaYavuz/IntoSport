@@ -12,18 +12,30 @@ namespace IntoSport.Models
         public int id{ get; set; }
         public int categorie_id { get; set; }
         public int detail_id { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Naam")]
         public string naam { get; set; }
         public string beschrijving { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Prijs")]
         public double prijs { get; set; }
         public int korting { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]      
+        [Required(ErrorMessage = "Voorraad")]      
         public int voorraad { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
         public string afbeelding { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
         public string thumbnail { get; set; }
+
+        public Product()
+        {
+            this.id = 0;
+            this.categorie_id = 0;
+            this.detail_id = 0;
+            this.naam = "";
+            this.beschrijving = "";
+            this.prijs = 0;
+            this.korting = 0;
+            this.voorraad = 0;
+            this.afbeelding = "";
+            this.thumbnail = "";
+        }
 
         public Product(int productID)
         {
@@ -31,8 +43,7 @@ namespace IntoSport.Models
             query.Select("*");
             query.From("product");
             query.Join("INNER", "product_categorie AS pc ON product.id = pc.product_id");
-            query.Join("LEFT OUTER", "detail_product AS dp ON product.id = dp.product_id");
-            query.Where("id = " + productID);
+            query.Where("product.id = " + productID);
 
             foreach(Dictionary<string, object> product in query.Execute())
             {
@@ -47,107 +58,69 @@ namespace IntoSport.Models
                 this.thumbnail = (string)product["thumbnail"];
             }
         }
-        /*
-        public static Product GetProduct(int productID)
-        {
-            var p = new Product();
-            var query = new Query();
-            Object temp;
 
-            query.Select("*");
-            query.From("product");
-            query.Join("INNER", "product_categorie AS pc ON product.id = pc.product_id");
-            query.Join("LEFT OUTER", "detail_product AS dp ON product.id = dp.product_id");
-            query.Where("id = " + productID);
-            string queryString = query.getQuery();
-            var product = query.Execute();
-
-            if(product.Count > 0)
-            {
-                product[0].TryGetValue("id", out temp);
-                p.id = (int)temp;
-
-                temp = null;
-                product[0].TryGetValue("categorie_id", out temp);
-                p.categorie_id = (int)temp;
-
-                temp = null;
-                product[0].TryGetValue("detail_id", out temp);
-                p.detail_id = (int)temp;
-
-                temp = null;
-                product[0].TryGetValue("naam", out temp);
-                p.naam = (string)temp;
-
-                temp = null;
-                product[0].TryGetValue("beschrijving", out temp);
-                p.beschrijving = (string)temp;
-
-                temp = null;
-                product[0].TryGetValue("prijs", out temp);
-                p.prijs = (double)temp;
-
-                temp = null;
-                product[0].TryGetValue("korting", out temp);
-                p.korting = (int)temp;
-
-                temp = null;
-                product[0].TryGetValue("voorraad", out temp);
-                p.voorraad = (int)temp;
-
-                temp = null;
-                product[0].TryGetValue("afbeelding", out temp);
-                p.afbeelding = (string)temp;
-
-                temp = null;
-                product[0].TryGetValue("thumbnail", out temp);
-                p.thumbnail = (string)temp;
-            }
-
-
-            return p;
-        }*/
-
-        public static int Insert(FormCollection collection, string thumb, string img)
+        public int Insert()
         {
             Dictionary<string, object> data = new Dictionary<string,object>();
-            data.Add("naam", collection["naam"]);
-            data.Add("beschrijving", collection["beschrijving"]);
-            data.Add("prijs", collection["prijs"]);
-            data.Add("korting", collection["korting"]);
-            data.Add("voorraad", collection["voorraad"]);
-            data.Add("afbeelding", img);
-            data.Add("thumbnail", thumb);
+            data.Add("naam", this.naam);
+            data.Add("beschrijving", this.beschrijving);
+            data.Add("prijs", this.prijs);
+            data.Add("korting", this.korting);
+            data.Add("voorraad", this.voorraad);
+            data.Add("afbeelding", this.afbeelding);
+            data.Add("thumbnail", this.thumbnail);
 
             var query = new Query();
             return query.Execute("product", data);
         }
 
-        public static int InsertCategorie(FormCollection collection)
+        public int InsertCategorie()
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
 
-            data.Add("categorie_id", collection["categories"]);
+            data.Add("categorie_id", this.categorie_id);
             data.Add("product_id", GetLastProductID());
 
             var query = new Query();
             return query.Execute("product_categorie", data);
         }
 
-        public static int InsertDetail(FormCollection collection)
+        public int InsertDetail()
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
 
-            data.Add("categorie_id", collection["details"]);
+            data.Add("categorie_id", this.detail_id);
             data.Add("product_id", GetLastProductID());
 
             var query = new Query();
             return query.Execute("detail_product", data);
         }
 
-        public void Update()
+        public bool Update()
         {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data.Add("naam", this.naam);
+            data.Add("beschrijving", this.beschrijving);
+            data.Add("prijs", this.prijs);
+            data.Add("korting", this.korting);
+            data.Add("voorraad", this.voorraad);
+            data.Add("afbeelding", this.afbeelding);
+            data.Add("thumbnail", this.thumbnail);
+            data.Add("id", this.id);
 
+            var query = new Query();
+            return query.Execute("product", data) > 0;
+        }
+
+        public int UpdateCategorie(int productID)
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+
+            data.Add("categorie_id", this.categorie_id);
+            data.Add("product_id", productID);
+
+            var query = new Query();
+            return query.Execute("product_categorie", data);
         }
 
         public static List<Dictionary<string, object>> getAllProducts(string search = "")
