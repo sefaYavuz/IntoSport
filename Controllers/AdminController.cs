@@ -16,9 +16,7 @@ namespace IntoSport.Controllers
       
         //
         // GET: /Admin/
-
         [Authorize(Roles = "beheerder, manager")]
-
         public ActionResult Index()
         {   
             return View();
@@ -39,7 +37,7 @@ namespace IntoSport.Controllers
                 List<Omzet> Omzet = omzetHelper.MinstVerkochteProducten();
                 return View(Omzet);
             }
-            else
+            else{
 
                 return View();
             }
@@ -62,12 +60,8 @@ namespace IntoSport.Controllers
         {
             ViewData.Add("orders", Models.Order.GetAllOrders());
             ViewData.Add("search", search);
-
             return View();
->>>>>>> 3eac7bf53bfe9a1148412fff01e6d4ecab66bb44
         }
-
-
 
         /* ORDERS END */
 
