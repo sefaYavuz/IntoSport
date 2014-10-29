@@ -21,7 +21,7 @@ namespace IntoSport.Controllers
         {
             return View();
         }
-
+        /*
         [Authorize(Roles = "manager")]
         //GET admin/omzet
         public ActionResult Omzet(String type)
@@ -34,7 +34,7 @@ namespace IntoSport.Controllers
             {
                 return null;
             }
-        }
+        }*/
 
 
         /* ORDERS START */

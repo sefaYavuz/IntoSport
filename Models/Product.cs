@@ -123,16 +123,22 @@ namespace IntoSport.Models
             return query.Execute("product_categorie", data);
         }
 
-        public static List<Dictionary<string, object>> getAllProducts(string search = "")
+        public static List<Dictionary<string, object>> getAllProducts(string search = "", string limit = "")
         {
             Query query = new Query();
-            query.Select("id, naam, prijs");
+            query.Select("*");
             query.From("product");
 
             if(search.Length > 0)
             {
                 query.Where("naam LIKE '%" + search + "%'");
             }
+            if (limit.Length > 0)
+            {
+                query.Limit(limit);
+            }
+
+            query.Order("id DESC");
 
             return query.Execute();
         }

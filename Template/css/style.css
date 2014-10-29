@@ -1,0 +1,105 @@
+﻿html, body, * { margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
+
+.wrapper { width: 960px; margin: 0 auto; }
+.wrapper p, a { font-size: 14px; }
+
+
+.header .topContainer { width: 100%; height: 110px;  }
+.header .topContainer .logo { float: left; margin-top: 50px;}
+.header .topContainer .userLinksContainer { float: right; margin-top: 93px; text-transform: uppercase; }
+.header .topContainer .userLinksContainer a { text-decoration: none; color: #42bd41; }
+.header .topContainer .userLinksContainer a:hover { text-decoration: underline; }
+
+.bottomContainer { background-color: #55c254; width:100%; height: 45px; margin-top: 40px; text-transform: uppercase;}
+.bottomContainer nav ul { list-style: none; height: 45px; }
+.bottomContainer nav ul li { float: left; border-right: 1px solid #FFF; padding: 10px; height: 25px;}
+.bottomContainer nav ul li:hover { background-color: #60d75e; cursor: pointer; }
+.bottomContainer nav ul li:last-child { border: none; }
+.bottomContainer nav ul li a { color: #FFF; text-decoration: none; }
+
+.bottomContainer nav ul ul { padding-top: 25px; width: 50%; display: none; position: absolute; margin-top: 14px; margin-left: -10px; background: #60d75e; height: 30%;}
+.bottomContainer nav ul ul li { float: left; position: relative; border: none; }
+.bottomContainer nav ul ul li:hover { background-color: #55c254; }
+.bottomContainer nav ul ul li a { padding: 15px 40px; }
+.bottomContainer nav ul li:hover > ul { display: block; }
+
+.content { margin-top: 50px; min-height: 500px;}
+
+footer { margin-top: 50px; height: 240px; background-color: #407d3f; font-size: 12px; color: #FFF; }
+footer h4 { text-transform: uppercase; font-weight: 500; margin-bottom: 25px; }
+
+footer .wrapper { padding-top: 60px; display: flex; } 
+footer .innerWrapper { margin: 0 auto; width: 815px; }
+footer .wrapper div { float: left; margin-right: 100px; }
+footer .wrapper div:last-child { margin-right: 0; }
+footer .wrapper div ul { list-style: none; }
+footer .wrapper div ul li { padding-bottom: 20px; }
+footer .wrapper div ul li a { color: #FFF; }
+footer .wrapper div ul li a:hover { text-decoration: none; }
+
+
+/* HOME */
+
+
+.content .featured { background: #55c254; height: 450px; }
+.content .divider { margin-top: 50px; height: 10px; background: #55c254; }
+.content .featuredProducts { margin-top: 50px; display: inline-block; }
+.content .featuredProducts .productsContainer .products { min-height: 250px; width: 210px; float: left; margin-right: 30px; margin-bottom: 60px; }
+.content .featuredProducts .productsContainer .products .productImg { height: 150px; }
+.content .featuredProducts .productsContainer .products .productDetails { font-weight: 300; text-transform: uppercase; text-align: center; }
+.content .featuredProducts .productsContainer .products .productDetails h3 { margin-top: 30px; font-weight: 300; }
+.content .featuredProducts .productsContainer .products .productDetails p { margin-top: 20px; }
+.content .featuredProducts .productsContainer .products .productDetails a { margin-top: 40px; display:block; color: #42bd41; font-weight: 500; text-decoration: none; }
+.content .featuredProducts .productsContainer .products .productDetails a:hover { text-decoration: underline; }
+.content .featuredProducts .productsContainer .products:nth-child(4) { margin-right: 0px; }
+
+/* PRODUCTEN OVERZICHT */
+
+.content h1 { color: #000; font-weight: 300; font-size: 16px; }
+.content .pagination { float: right;} 
+.content .pagination span { padding: 10px; } 
+.content .pagination a { text-decoration: none; color: #42bd41; font-weight: 500; padding: 5px; } 
+.content .pagination a:hover { text-decoration: underline; } 
+.content .pagination .active { text-decoration: underline; } 
+
+/* PRODUCT DETAIL */
+
+.content .productDetailContainerTop { margin-top: 50px; min-height: 350px; }
+.content .productDetailContainerTop .productDetailImg { float: left; width: 400px; height: 350px; background-color: #42bd41; }
+.content .productDetailContainerTop .productDetails { float: left; width: 510px; margin-left: 50px;}
+.content .productDetailContainerTop .productDetails h1 { text-transform: uppercase; text-align: center;  }
+.content .productDetailContainerTop .productDetails .divider { width: 100%; height: 3px;  margin: 0 auto; margin-top: 30px; }
+.content .productDetailContainerTop .productDetails ul { margin-left: 18px; list-style-type: circle; font-size: 14px; margin-top: 30px; min-height: 175px;}
+.content .productDetailContainerTop .productDetails ul li { padding: 15px 15px 15px 0; }
+.content .productDetailContainerTop .productDetails .bottomContainer { background: none; }
+.content .productDetailContainerTop .productDetails .bottomContainer .price { float: left; padding-top: 15px; }
+.content .productDetailContainerTop .productDetails .bottomContainer .price span { padding-left: 15px; }
+
+.content .productDetailContainerTop .productDetails .bottomContainer .rightContainer form label { float: right; margin-top: -50px; font-size: 14px; }
+.content .productDetailContainerTop .productDetails .bottomContainer .rightContainer form label input[type="text"] { width: 50px;  margin-left: 50px;}
+.content .productDetailContainerTop .productDetails .bottomContainer .rightContainer form .submit { border: none; float: right; padding: 15px; background: #42bd41; color: #FFF; text-decoration: none; cursor: pointer; }
+.content .productDetailContainerTop .productDetails .bottomContainer .rightContainer form .submit:hover { text-decoration: underline; }
+
+.content .productDetailContainerBottom { margin-top: 50px; }
+.content .productDetailContainerBottom .productDetailDesc p { padding-bottom: 20px; }
+
+/* WINKELWAGEN */
+
+.content .cartWrapper { margin:0 auto; width: 768px; }
+.content .cartWrapper table { table-layout: fixed; }
+.content .cartWrapper table thead { background-color: #42bd41; color: #FFF; }
+.content .cartWrapper table thead tr td { padding: 10px; width: 250px; }
+.content .cartWrapper table thead tr td:last-child { text-align: right; width: 200px;}
+.content .cartWrapper table tbody tr td { border-bottom: 3px solid #42bd41; padding: 15px; border-collapse: separate; vertical-align: top; }
+.content .cartWrapper table tbody tr td:last-child { text-align: right; }
+.content .cartWrapper table tbody tr td div { width: 150px; float: left; }
+.content .cartWrapper table tbody tr td a { color: #42bd41; }
+.content .cartWrapper table tbody tr td a:hover { text-decoration: none; }
+
+.content .cartWrapper .total { float: right; margin-top: 25px;}
+.content .cartWrapper .total tr td div { text-align: left; }
+
+.content .cartWrapper .cartButtons { float: left; width: 100%; margin-top: 25px; }
+.content .cartWrapper .cartButtons a { padding: 15px; background: #42bd41; color: #FFF; text-decoration: none; cursor: pointer; }
+.content .cartWrapper .cartButtons a:first-child { float: left; }
+.content .cartWrapper .cartButtons a:last-child { float: right; }

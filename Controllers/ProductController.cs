@@ -8,10 +8,19 @@ using System.Web.Mvc;
 
 namespace IntoSport.Controllers
 {
-    public class ProductController : DatabaseConnector
+    public class ProductController : Controller
     {
-      
+        public ActionResult Index()
+        {
+            return View();
+        }
         
+        public ActionResult Detail()
+        {
+            return View();
+        }
+
+        /*
         public List<Omzet> MeestVerkochteProducten()
         {
             conn.Open();
@@ -32,6 +41,6 @@ namespace IntoSport.Controllers
             }
             return omzets;
         }
-
+        */
     }
 }
