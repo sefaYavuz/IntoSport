@@ -17,7 +17,7 @@ namespace IntoSport.Controllers
         [Authorize(Roles = "beheerder, manager")]
 
         public ActionResult Index()
-        {
+        {   
             return View();
         }
 
@@ -30,10 +30,17 @@ namespace IntoSport.Controllers
             {
                 List<Omzet> Omzet = productController.MeestVerkochteProducten();
              return View(Omzet);
-            }else
-            {
-                return null;
             }
+            else if (type == "minst verkochte")
+            {
+                List<Omzet> Omzet = productController.MinstVerkochteProducten();
+                return View(Omzet);
+            }
+            else
+            {
+                return View();
+            }
+            
         }
 
         /* PRODUCTEN START*/

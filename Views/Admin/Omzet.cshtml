@@ -8,21 +8,23 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>3 Meest verkochte producten</h3>
+                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Omzet producten</h3>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>Merk/Naam</th>
+                                <th>Product</th>
                      
                                 <th>Aantal</th>
                                 <th>Omzet</th>
                             </tr>
                         </thead>
 <tbody>
-    @foreach (IntoSport.Models.Omzet omzet in Model )
+@if(Model != null)
+{ 
+    foreach (IntoSport.Models.Omzet omzet in Model )
                         {
 
         <tr>
@@ -32,13 +34,17 @@
             <td>$@omzet.omzet</td>
         </tr>
     }
-    @if(Model.Count == 0)
+    if(Model.Count == 0)
     {
         <tr>
             <td colspan="3">Er zijn geen producten verkocht.</td>
          </tr>
     }
-       
+}
+else
+{
+        
+}
                     </tbody>
                     </table>
                 </div>

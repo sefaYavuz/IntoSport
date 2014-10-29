@@ -1,4 +1,5 @@
-﻿  <!-- Navigation -->
+﻿
+<!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -14,7 +15,7 @@
     <ul class="nav navbar-right top-nav">
 
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Firstname Lastname <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="/login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
@@ -25,8 +26,10 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li @(Request.RawUrl.ToString().Equals("/admin") ? "class=active" : "")><a href="/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
-            <li @(Request.RawUrl.ToString().Equals("/admin/products") ? "class=active" : "")><a href="/admin/products"><i class="fa fa-empire"></i> Producten</a>
+            <li @(Request.RawUrl.ToString().Equals("/admin") || Request.RawUrl.ToString().Equals("/admin/omzet") ? "class=active" : "")><a href="/admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+        
+              <li @(Request.RawUrl.ToString().Equals("/admin/products") ? "class=active" : "")><a href="/admin/products"><i class="fa fa-empire"></i> Producten</a>
+         
             
             @if (User.IsInRole("beheerder"))
             {
@@ -44,7 +47,8 @@
                     </ul>
                 </li>
             }
-        </ul>
+           
+                </ul>
     </div>
     <!-- /.navbar-collapse -->
-</nav><div id="page-wrapper">
+</nav><div id="page-wrapper" style="clear:both">
