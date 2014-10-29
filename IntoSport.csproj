@@ -141,6 +141,7 @@
     <Compile Include="Helpers\AuthorizationHelper.cs" />
     <Compile Include="Helpers\CartHelper.cs" />
     <Compile Include="Helpers\OmzetHelper.cs" />
+    <Compile Include="Helpers\ProductHelper.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
