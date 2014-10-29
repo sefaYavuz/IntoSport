@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using IntoSport.Models;
 using System.IO;
+using IntoSport.Helpers;
 
 namespace IntoSport.Controllers
 {
     public class AdminController : MainController
     {
         ProductController productController = new ProductController();
+        OmzetHelper omzetHelper = new OmzetHelper();
       
         //
         // GET: /Admin/
@@ -21,34 +23,27 @@ namespace IntoSport.Controllers
         {   
             return View();
         }
-        /*
+        
         [Authorize(Roles = "manager")]
         //GET admin/omzet
         public ActionResult Omzet(String type)
         {
             if(type == "meest verkochte")
             {
-                List<Omzet> Omzet = productController.MeestVerkochteProducten();
-<<<<<<< HEAD
+                List<Omzet> Omzet = omzetHelper.MeestVerkochteProducten();
+
              return View(Omzet);
             }
             else if (type == "minst verkochte")
             {
-                List<Omzet> Omzet = productController.MinstVerkochteProducten();
+                List<Omzet> Omzet = omzetHelper.MinstVerkochteProducten();
                 return View(Omzet);
             }
             else
-=======
-                return View(Omzet);
-            }else
->>>>>>> 3eac7bf53bfe9a1148412fff01e6d4ecab66bb44
-            {
+
                 return View();
             }
-<<<<<<< HEAD
-            
-=======
-        }*/
+    }
 
 
         /* ORDERS START */

@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="Helpers\AuthorizationHelper.cs" />
     <Compile Include="Helpers\CartHelper.cs" />
+    <Compile Include="Helpers\OmzetHelper.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Views\Shared\BaseFooter.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Shared\BaseHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

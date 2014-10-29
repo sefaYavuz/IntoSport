@@ -1,5 +1,5 @@
 ﻿@using IntoSport.Models;
-
+@{Html.RenderPartial("BaseHead");}
 @model Register
 
 @{
@@ -11,58 +11,60 @@
 {
     <div class="grid-container">
         <div class="grid-6">
-            <div class="label">Voornaam:</div>
+            <div class="small">Voornaam:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.voornaam) 
+                @Html.TextBoxFor(model => model.voornaam, new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.voornaam)
             </div>
-            <div class="label">Achternaam:</div>
+            <div class="small">Achternaam:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.achternaam) 
+                @Html.TextBoxFor(model => model.achternaam, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.achternaam)
             </div>
-            <div class="label">Straat:</div>
+            <div class="small">Straat:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.straat) 
+                @Html.TextBoxFor(model => model.straat, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.straat)
             </div>
-            <div class="label">Huisnummer + Toevoeging:</div>
+            <div class="small">Huisnummer + Toevoeging:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.huisnr) 
+                @Html.TextBoxFor(model => model.huisnr, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.huisnr)
             </div>
-            <div class="label">Postcode:</div>
+            <div class="small">Postcode:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.postcode) 
+                @Html.TextBoxFor(model => model.postcode, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.postcode)
             </div>
-            <div class="label">Stad:</div>
+            <div class="small">Stad:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.plaats) 
+                @Html.TextBoxFor(model => model.plaats, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.plaats)</div>
-            <div class="label">Telefoonnummer:</div>
+            <div class="small">Telefoonnummer:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.tel) 
+                @Html.TextBoxFor(model => model.tel, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.tel)
             </div>
         </div>
         <div class="grid-6">
-            <div class="label">Emailadres:</div>
+            <div class="small">Emailadres:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.email, new { autocomplete = "off" }) 
+                @Html.TextBoxFor(model => model.email, new { autocomplete = "off", @class="form-control"  }) 
                 @Html.ValidationMessageFor(model => model.email)
             </div>
-            <div class="label">Wachtwoord:</div>
+            <div class="small">Wachtwoord:</div>
             <div class="input">
-                @Html.PasswordFor(model => model.wachtwoord, new { autocomplete = "off" }) 
+                @Html.PasswordFor(model => model.wachtwoord, new { autocomplete = "off", @class= "form-control" }) 
                 @Html.ValidationMessageFor(model => model.wachtwoord)
             </div>
-            <div class="label">Herhaal wachtwoord:</div>
+            <div class="small">Herhaal wachtwoord:</div>
             <div class="input">
-                @Html.PasswordFor(model => model.passwordrepeat) 
+                @Html.PasswordFor(model => model.passwordrepeat, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.passwordrepeat)
             </div>
         </div>
     </div>
-    <input type="submit" value="Registreer">
+    <br/>
+    <input type="submit" class="btn btn-lg btn-default" value="Registreer">
 }
+@{Html.RenderPartial("BaseFooter");}
