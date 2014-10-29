@@ -1,36 +1,53 @@
-﻿
-@{Html.RenderPartial("BaseHead");}
-    <h1>Categroie 1 &raquo; Sub-categorie 2 &raquo; Nike Schoenen</h1>
+﻿@{Html.RenderPartial("BaseHead");}
+@{
+    var product = ViewData["product"] as IntoSport.Models.Product;
+    var details = ViewData["details"] as List<KeyValuePair<string, string>>;
+    
+}
+    <h1>Categroie 1 &raquo; Sub-categorie 2 &raquo; @product.naam</h1>
 <div class="productDetailContainerTop">
     <div class="productDetailImg">
+        <img src="@product.afbeelding" style="width:100%" />
     </div>
     <div class="productDetails">
-        <h1>Nike Schoenen</h1>
+        <h1>@product.naam</h1>
         <div class="divider"></div>
         <ul>
-            <li>Detail 1</li>
-            <li>Detail 2</li>
-            <li>Detail 3</li>
+           @if (details != null)
+           {
+
+
+               foreach (KeyValuePair<string, string> detail in details)
+               {
+
+                <li>@detail.Key.ToString(): @detail.Value.ToString()</li>
+
+
+               }
+           }
         </ul>
         <div class="bottomContainer">
-            <p class="price">Prijs: <span>&euro;40,00</span><p>
-                <div class="rightContainer">
-                    <form action="" method="post">
-                        <label>Aantal: <input type="text" name="amount" value="1"></label>
-                        <input type="submit" value="Plaats in winkelwagen" name="submit" class="submit">
-                    </form>
-                </div>
-        </div>
+            
+                <p class="price">Prijs: <span >&euro;@product.prijs</span><p>
+                <p></p>
+                <i class="fa-3x"> -@((product.prijs/100)*product.korting)&euro;</i>
+            
+
+    <div class="rightContainer">
+        <form action="/cart" method="post">
+            <label>Aantal: <input type="text" name="amount" value="1" min="0"></label>
+            <input type="submit" value="Plaats in winkelwagen" name="submit" class="submit">
+        </form>
+    </div>
+</div>
     </div>
 </div>
 <div class="productDetailContainerBottom">
+    Beschrijving
+    <hr/>
     <div class="productDetailDesc">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae sagittis dolor. Donec pellentesque malesuada quam pharetra pretium. Proin diam leo, aliquam id faucibus vel, facilisis eu nunc. Mauris dapibus, nunc vitae aliquet varius, dolor lorem dictum purus, a ultricies enim metus id orci. Fusce ac sodales nibh, in cursus felis. Proin tristique est ac semper ullamcorper. Ut porttitor tincidunt orci vel euismod.
-        </p>
-        <p>
-            In pellentesque elit a libero sodales, at pretium enim laoreet. In ut nunc lectus. Ut efficitur a neque eu semper. In ultrices consectetur porta. Quisque sapien enim, cursus in magna quis, efficitur scelerisque velit. Maecenas non sapien consectetur, vulputate sapien et, feugiat ligula. Nulla eleifend, urna sed condimentum maximus, metus arcu faucibus urna, in congue eros lacus et tortor. Suspendisse sed porta justo. Duis non commodo dui, imperdiet accumsan ex. Curabitur in quam pulvinar, congue elit ac, aliquet erat. Ut commodo, elit ac vulputate blandit, magna ex egestas urna, et luctus arcu quam imperdiet odio. Morbi luctus vestibulum lacus aliquam venenatis.
-        </p>
+       <small>@product.beschrijving</small>
+       
     </div>
 </div>
 @{Html.RenderPartial("BaseFooter");}
