@@ -15,6 +15,7 @@
     <title>Sportzaak IntoSport | Klantvriendelijkheid, expertise en maatwerk</title>
     <link href="@Url.Content("Template/css/style.css")" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100,900' rel='stylesheet' type='text/css'>
+    <link href="@Url.Content("Template/font-awesome-4.1.0/css/font-awesome.min.css")" rel="stylesheet" type="text/css">
     <link href="@Url.Content("Template/css/bootstrap.min.css")" rel="stylesheet">
 </head>
 <body>
@@ -38,7 +39,7 @@
                         foreach (Dictionary<string, object> categorie in (List<Dictionary<string, object>>)ViewData["categories"])
                         {
                             <li>
-                                <a href="">@categorie["naam"]</a>
+                                <a href="/product/?categorie=@categorie["id"]">@categorie["naam"]</a>
                                 @{
                                     if((int)categorie["parent"] != 0)
                                     {
