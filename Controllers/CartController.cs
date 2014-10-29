@@ -20,6 +20,7 @@ namespace IntoSport.Controllers
                 String[] cart = CartHelper.getItems(Request.Cookies["cart"].Values["cart"]);
                 ViewData["cart"] = cart;
             }
+
             return View();
         }
 
@@ -38,7 +39,7 @@ namespace IntoSport.Controllers
                 Response.Cookies["cart"].Expires = DateTime.Now.AddDays(1);
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

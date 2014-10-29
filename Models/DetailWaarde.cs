@@ -8,6 +8,7 @@ namespace IntoSport.Models
     public class DetailWaarde
     {
         public int id { get; set; }
+        public int detail_id { get; set; }
         public string waarde { get; set; }
 
         public void Save(int did)
@@ -31,5 +32,7 @@ namespace IntoSport.Models
                 q.Execute("detail_waarde", dic);
             }
         }
+
+
     }
 }

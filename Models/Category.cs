@@ -8,7 +8,7 @@ namespace IntoSport.Models
 {
     public class Category
     {
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Naam")]
         public string naam { get; set; }
         public int id { get; set; }
         public Category parent { get; set; }
@@ -37,7 +37,6 @@ namespace IntoSport.Models
                 {
                     this.parent = new Category();
                 }
-
             }
         }
 

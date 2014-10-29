@@ -14,20 +14,83 @@
 @{
     if (ViewData["msg"] != null)
     {
-        <p class="success">@ViewData["msg"]</p>
+        <p class="alert alert-success">@ViewData["msg"]</p>
+    }
+
+    if (!ViewData.ModelState.IsValid)
+    { 
+        <p class="alert alert-danger">
+            De volgende velden zijn verplicht:<br /> <strong>
+                @Html.ValidationMessageFor(model => model.naam) <br />
+                @Html.ValidationMessageFor(model => model.prijs) <br />
+                @Html.ValidationMessageFor(model => model.voorraad) <br />
+                @Html.ValidationMessageFor(model => model.thumbnail) <br />
+                @Html.ValidationMessageFor(model => model.afbeelding) <br />
+            </strong>
+        </p>
     }
 }
 
-<form action="/admin/product" method="post">
-    @Html.HiddenFor(model => model.id)
-    <label>Naam:</label> @Html.TextBoxFor(model => model.naam, new { @class = "form-control" }) @Html.ValidationMessageFor(model => model.naam)
-    <label>Beschrijving:</label> @Html.TextAreaFor(model => model.beschrijving, new { @class = "form-control"})
-    <label>Prijs:</label> @Html.TextBoxFor(model => model.prijs, new { @class = "form-control"}) @Html.ValidationMessageFor(model => model.prijs)
-    <label>Korting (%):</label> @Html.TextBoxFor(model => model.korting, new { @class = "form-control"})
-    <label>Voorraad:</label> @Html.TextBoxFor(model => model.voorraad, new  { @class = "form-control"}) @Html.ValidationMessageFor(model => model.voorraad)
+
+
+<form action="@Request.RawUrl" method="post" enctype="multipart/form-data">
+    @Html.HiddenFor(model => model.id, new { Value = product.id })
+
+    <label>Selecteer een categorie:</label>
+    <select name="categories" class="form-control">
+        @{
+            foreach(Dictionary<string, object> categorie in (List<Dictionary<string, object>>)ViewData["getCategories"])
+            {
+                
+                <option value="@categorie["id"]">@categorie["naam"]</option>
+            }
+        }
+    </select>
+    @Html.ValidationMessageFor(model => model.categorie_id)
+
+    <br />
+
+    <label>Naam:</label> 
+    @Html.TextBoxFor(model => model.naam, new { Value = product.naam, @class = "form-control" }) 
+
+    <br />
+
+    <label>Beschrijving:</label> 
+    @Html.TextAreaFor(model => model.beschrijving, new { Value = product.beschrijving, @class = "form-control" })
+
+    <br />
+
+    <label>Prijs:</label> 
+    @Html.TextBoxFor(model => model.prijs, new { Value = product.prijs, @class = "form-control" }) 
+
+    <br />
+
+    <label>Korting (%):</label> 
+    @Html.TextBoxFor(model => model.korting, new { Value = product.korting, @class = "form-control" })
+
+    <br />
+
+    <label>Voorraad:</label> 
+    @Html.TextBoxFor(model => model.voorraad, new { Value = product.voorraad, @class = "form-control" }) 
+
     <br /><br />
-    <label>Afbeelding:</label> @Html.TextBoxFor(model => model.afbeelding, new { @class = "form-control"}) @Html.ValidationMessageFor(model => model.afbeelding)
-    <label>Thumbnail:</label> @Html.TextBoxFor(model => model.thumbnail, new { @class = "form-control"}) @Html.ValidationMessageFor(model => model.thumbnail)
+    
+    @{
+        if (!product.thumbnail.IsEmpty())
+        {
+            <img src="@product.thumbnail" width="150" />
+            <br /> <br />
+        }
+    }
+
+    <label>Thumbnail:</label>
+    <input type="file" name="thumbnail" class="form-control" />
+    
+    <br />
+
+    <label>Afbeelding:</label> 
+    <input type="file" name="afbeelding" class="form-control" />
+       
     <br />
     <input type="submit" name="submit" value="Opslaan" class="btn btn-default" />
 </form>

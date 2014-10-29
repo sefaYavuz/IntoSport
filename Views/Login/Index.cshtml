@@ -3,16 +3,15 @@
 
 @{Html.RenderPartial("AdminHead");}
 
-@Html.ValidationMessage("loginError")
 
 <div class="outer">
     <div class="middle">
         <div class="inner">
-
             @using (Html.BeginForm())
             {
                 <div class="formContainer">
                     <div class="centerContainer">
+                            @Html.ValidationMessage("loginError")
                             @Html.ValidationMessageFor(model => model.email) <br />
                             @Html.ValidationMessageFor(model => model.wachtwoord)
                         <div class="inputFields">

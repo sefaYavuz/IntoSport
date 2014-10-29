@@ -1,9 +1,38 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
+﻿@{Html.RenderPartial("BaseHead");}
 
-<h2>Cart</h2>
+<div class="cartWrapper">
+    <table>
+        <thead>
+            <tr>
+                <td>Producten</td>
+                <td>Details</td>
+                <td>Prijs</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Nike schoenen <br /><br /> 00001 <br /><br /> <a href="#">Verwijder</a></td>
+                <td><div>Prijs p/s:</div> &euro;40,00 <br /><br /> <div>Aantal:</div> 1</td>
+                <td>&euro;40,00</td>
+            </tr>
+            <tr>
+                <td>Nike schoenen <br /><br /> 00001 <br /><br /> <a href="#">Verwijder</a></td>
+                <td><div>Prijs p/s:</div> &euro;40,00 <br /><br /> <div>Aantal:</div> 1</td>
+                <td>&euro;40,00</td>
+            </tr>
+        </tbody>
+    </table>
 
-<div class="Product-Name"></div>
-<div class="Product-Price"></div>
-<div class="Product-Quantity"></div>
+    <table class="total">
+        <tr>
+            <td><div>Totaal (incl. BTW):</div> &euro; 40,00</td>
+        </tr>
+    </table>
+
+    <div class="cartButtons">
+        <a href="#">&laquo; Verder winkelen</a>
+        <a href="#">Bestellen &raquo;</a>
+    </div>
+</div>
+
+@{Html.RenderPartial("BaseFooter");}

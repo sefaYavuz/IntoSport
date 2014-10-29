@@ -1,0 +1,57 @@
+﻿@using IntoSport.Models;
+
+@model Category
+
+
+@{
+    ViewData.Add("categories", Category.getAllCategories());
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <base href="http://@Request.ServerVariables["HTTP_HOST"]/" />
+    <title>Sportzaak IntoSport | Klantvriendelijkheid, expertise en maatwerk</title>
+    <link href="@Url.Content("Template/css/style.css")" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100,900' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="topContainer">
+                <div class="logo">
+                    <a href="/home"><img src="/Template/Images/logo.png" alt="IntoSport"></a>
+                </div>
+                <div class="userLinksContainer">
+                    <a href="/login">Inloggen</a> / <a href="/cart">Winkelwagen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottomContainer">
+        <div class="wrapper">
+            <nav>
+                <ul>
+                    @{
+                        foreach (Dictionary<string, object> categorie in (List<Dictionary<string, object>>)ViewData["categories"])
+                        {
+                            <li>
+                                <a href="">@categorie["naam"]</a>
+                                @{
+                                    if((int)categorie["parent"] != 0)
+                                    {
+                                        <ul>
+                                            <li><a href="">@categorie["parentname"]</a></li>
+                                        </ul>
+                                    }
+                                }
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="content">
+        <div class="wrapper">
