@@ -60,12 +60,12 @@ namespace IntoSport.Controllers
         public ActionResult Orders(FormCollection collection)
         {
 
-            int id = int.Parse(collection["id"]);
-           string status =  collection["status"];
+           int id = int.Parse(collection["id"]);
+           string status = collection["status"];
 
-           Order order =new Order(id);
-            switch(status)
-            {
+           Order order = new Order(id);
+           switch(status)
+           {
                 case "in_behandeling":
                     order.inBehandeling();
                     break;
@@ -79,9 +79,10 @@ namespace IntoSport.Controllers
                     order.isVerstuurd();
                     break;
             }
-           order.UpdateStatus();
 
-           
+            order.UpdateStatus();
+
+            ViewData.Add("orders", Models.Order.GetAllOrders());           
             return View();
         }
 

@@ -46,7 +46,16 @@
                         <li @(Request.RawUrl.Equals("/admin/category") ? "class=active" : "")><a href="/admin/category">Categorie aanmaken</a></li>
                     </ul>
                 </li>
+                <li @(Request.RawUrl.Equals("/admin/orders") || Request.RawUrl.Equals("/admin/order") ? "class=active" : "")>
+                    <a href="/admin/orders"><i class="fa fa-empire"></i> Bestellingen </a>
+                    <!--
+                    <ul>
+                        <li (Request.RawUrl.Equals("/admin/order") ? "class=active" : "")><a href="/admin/order">Order aanmaken</a></li>
+                    </ul>
+                    -->
+                </li>
             }
+            
            
                 </ul>
     </div>

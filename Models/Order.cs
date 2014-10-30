@@ -1,4 +1,4 @@
-﻿;using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -48,16 +48,31 @@ namespace IntoSport.Models
             {
                 this.id = (int)order["id"];
                 this.user_id = (int)order["user_id"];
-                this.status = (Status)order["status"];
                 this.datum = (string)order["datum"];
                 this.korting = (int)order["korting"];
+
+                switch((string)order["status"])
+                {
+                    case "verstuurd":
+                        this.status = Status.verstuurd;
+                        break;
+                    case "vervallen":
+                        this.status = Status.vervallen;
+                        break;
+                    case "betaald":
+                        this.status = Status.betaald;
+                        break;
+                    default:
+                        this.status = Status.in_behandeling;
+                        break;
+                }
             }
         }
 
         public bool UpdateStatus()
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data.Add("status", this.status);
+            data.Add("status", this.status.ToString());
             data.Add("id", this.id);
 
             var query = new Query();
@@ -67,8 +82,9 @@ namespace IntoSport.Models
         public static List<Dictionary<string, object>> GetAllOrders(string search = "")
         {
             Query query = new Query();
-            query.Select("*");
+            query.Select("bestelling.*, user.voornaam, user.achternaam");
             query.From("bestelling");
+            query.Join("INNER", "user ON bestelling.user_id = user.id");
             
             if(search.Length > 0)
             {

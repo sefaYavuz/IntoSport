@@ -20,6 +20,7 @@
         <thead>
             <tr>
                 <td>ID</td>
+                <td>Klant</td>
                 <td>Status</td>
                 <td>Datum</td>
             </tr>
@@ -30,14 +31,15 @@
                 {
                     <tr>
                         <td>@order["id"]</td>
+                        <td>@order["voornaam"] @order["achternaam"]</td>
                         <td>
                             <form action="/admin/orders" method="post">
-                                <input type="hidden" value="@order["id"]" />
-                                <select name="status" class="form-control" style="width: 300px; float: left;">
-                                    <option value="in_behandeling">In behandeling</option>
-                                    <option value="vervallen">Vervallen</option>
-                                    <option value="betaald">Betaald</option>
-                                    <option value="verstuurd">Verstuurd</option>
+                                <input type="hidden" name="id" value="@order["id"]" />
+                                <select name="status" class="form-control" style="width: 200px; float: left;">
+                                    <option @(order["status"].Equals("in_behandeling") ? "selected=selected" : "") value="in_behandeling">In behandeling</option>
+                                    <option @(order["status"].Equals("vervallen") ? "selected=selected" : "") value="vervallen">Vervallen</option>
+                                    <option @(order["status"].Equals("betaald") ? "selected=selected" : "") value="betaald">Betaald</option>
+                                    <option @(order["status"].Equals("verstuurd") ? "selected=selected" : "") value="verstuurd">Verstuurd</option>
                                 </select> &nbsp; &nbsp;
                                 <input type="submit" value="Wijzig" class="btn btn-default" />
                             </form>
