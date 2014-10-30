@@ -29,8 +29,11 @@
     using (Html.BeginForm())
     {
         @Html.HiddenFor(model => model.id, new { Value = cat.id })
-        <div class="label">Naam:</div><div class="input" style="width: 200px;">@Html.TextBoxFor(model => model.naam, new { Value = @cat.naam, @class = "form-control" }) </div>
-        <div class="label">Hoofd categorie:</div><div class="input" style="width: 200px;">@Html.DropDownListFor(model => model.parent.id, Category.getCategoryList(cat), new { @class = "form-control" })</div>
+        <label for="Naam">Naam:</label> <br />
+        <div class="input" style="width: 200px;">@Html.TextBoxFor(model => model.naam, new { Value = @cat.naam, @class = "form-control" }) </div>
+        <br />
+        <label for="Categorie">Hoofd categorie: </label>
+        <br /><div class="input" style="width: 200px;">@Html.DropDownListFor(model => model.parent.id, Category.getCategoryList(cat), new { @class = "form-control" })</div>
         <br />
         <input type="submit" name="submit" value="Opslaan" class="btn btn-default" />
     }
