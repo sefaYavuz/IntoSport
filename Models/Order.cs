@@ -1,4 +1,4 @@
-﻿using System;
+﻿;using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,7 +20,23 @@ namespace IntoSport.Models
         public Status status { get; set; }
         public string datum { get; set; }
         public int korting { get; set; }
+          public void inBehandeling()
+          {
+           this.status = Status.in_behandeling;
+         }
+        public void isBetaald()
+        {
+            this.status = Status.verstuurd;
+        }
 
+        public void isVerstuurd()
+        {
+            this.status =   Status.verstuurd;
+        }
+        public void isVervallen()
+        {
+            this.status = Status.verstuurd;
+        }
         public Order(int orderID)
         {
             Query query = new Query();

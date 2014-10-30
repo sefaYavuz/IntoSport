@@ -53,13 +53,35 @@ namespace IntoSport.Controllers
             ViewData.Add("search", "");
             return View();
         }
+     
 
         [Authorize(Roles = "beheerder")]
         [HttpPost]
-        public ActionResult Orders(string search = "")
+        public ActionResult Orders(FormCollection collection)
         {
-            ViewData.Add("orders", Models.Order.GetAllOrders());
-            ViewData.Add("search", search);
+
+            int id = int.Parse(collection["id"]);
+           string status =  collection["status"];
+
+           Order order =new Order(id);
+            switch(status)
+            {
+                case "in_behandeling":
+                    order.inBehandeling();
+                    break;
+                case "betaald":
+                    order.isBetaald();
+                    break;
+                case "vervallen":
+                    order.isVervallen();
+                    break;
+                case "verstuurd":
+                    order.isVerstuurd();
+                    break;
+            }
+           order.UpdateStatus();
+
+           
             return View();
         }
 
