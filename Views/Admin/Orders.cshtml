@@ -21,6 +21,7 @@
             <tr>
                 <td>ID</td>
                 <td>Status</td>
+                <td>Datum</td>
             </tr>
         </thead>
         <tbody>
@@ -29,8 +30,20 @@
                 {
                     <tr>
                         <td>@order["id"]</td>
-                        <td>@order["status"]</td>
+                        <td>
+                            <form action="/admin/orders" method="post">
+                                <input type="hidden" value="@order["id"]" />
+                                <select name="status" class="form-control" style="width: 300px; float: left;">
+                                    <option value="in_behandeling">In behandeling</option>
+                                    <option value="vervallen">Vervallen</option>
+                                    <option value="betaald">Betaald</option>
+                                    <option value="verstuurd">Verstuurd</option>
+                                </select> &nbsp; &nbsp;
+                                <input type="submit" value="Wijzig" class="btn btn-default" />
+                            </form>
+
                         </td>
+                        <td>@order["datum"]</td>
                     </tr>
                 }
             }

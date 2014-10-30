@@ -38,11 +38,12 @@ namespace IntoSport.Models
             }
         }
 
-        public bool UpdateStatus(Status s)
+        public bool UpdateStatus()
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("status", this.status);
             data.Add("id", this.id);
+
             var query = new Query();
             return (query.Execute("bestelling", data) > 0);
         }
