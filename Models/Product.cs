@@ -123,7 +123,7 @@ namespace IntoSport.Models
             return query.Execute("product_categorie", data);
         }
 
-        public static List<Dictionary<string, object>> getAllProducts(string search = "", string limit = "")
+        public static List<Dictionary<string, object>> getAllProducts(string search = "", string limit = "", string joinType = "", string join = "")
         {
             Query query = new Query();
             query.Select("*");
@@ -132,6 +132,10 @@ namespace IntoSport.Models
             if(search.Length > 0)
             {
                 query.Where("naam LIKE '%" + search + "%'");
+            }
+            if(join.Length > 0)
+            {
+                query.Join(joinType, join);
             }
             if (limit.Length > 0)
             {

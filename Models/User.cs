@@ -15,7 +15,6 @@ namespace IntoSport.Models
             alles
         }
 
-
         public virtual int id { get; set; }
         public virtual string voornaam { get; set; }
         public virtual string achternaam { get; set; }
