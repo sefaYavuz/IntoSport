@@ -14,7 +14,7 @@ namespace IntoSport.Controllers
 
         public ActionResult Index()
         {
-            ViewData.Add("getAllProducts", Product.getAllProducts("", "8"));
+            ViewData.Add("getAllProducts", Product.getAllProducts("", "8", "INNER", "product_categorie AS pc ON product.id = pc.product_id"));
             return View();
         }
 

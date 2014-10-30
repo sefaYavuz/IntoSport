@@ -17,3 +17,5 @@
 .formContainer .input-validation-error { border: solid 2px #ed3030!important; }
 .formContainer input[type=text], input[type=password] { border: 0; width: 180px; height: 15px; padding: 10px; }
 .formContainer .submit { float: right; text-transform: uppercase;  width: 100px; height: 30px; background: #FFF; border: 0; color: #75CA75; font-weight: 500; cursor: pointer; }
+.formContainer a { color: #FFF; font-size: 14px; text-decoration: none; text-transform: uppercase; }
+.formContainer a:hover { text-decoration: underline; }

@@ -2,7 +2,6 @@
 
 @model Category
 
-
 @{
     ViewData.Add("categories", Category.getAllCategories());
 }
@@ -26,7 +25,19 @@
                     <a href="/home"><img src="/Template/Images/logo.png" alt="IntoSport"></a>
                 </div>
                 <div class="userLinksContainer">
-                    <a href="/login">Inloggen</a> / <a href="/cart">Winkelwagen</a>
+                        @if (User.IsInRole("beheerder") || User.IsInRole("manager"))
+                        {
+                            <a href="/admin">Ga naar de back-end &raquo;</a>
+                        }
+                        else if(User.IsInRole("klant"))
+                        {
+                                         
+                        }
+                        else
+                        {
+                            <a href="/login">Inloggen</a>    
+                        }
+                     / <a href="/cart">Winkelwagen</a>
                 </div>
             </div>
         </div>

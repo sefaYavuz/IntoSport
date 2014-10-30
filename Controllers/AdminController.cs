@@ -130,12 +130,9 @@ namespace IntoSport.Controllers
                     var thumbName = Path.GetFileName(thumbnail.FileName);
                     var imgName = Path.GetFileName(afbeelding.FileName);
 
-                    //Unieke map aanmaken om producten te scheiden
-                    Directory.CreateDirectory("S:/School/Projecten/IntoSport/Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail/");
-
                     // Afbeeldingen opslaan in de bijbehorende folders
-                    var thumbPath = Path.Combine(Server.MapPath("~/Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail"), thumbName);
-                    var imgPath = Path.Combine(Server.MapPath("~/Template/images/products/" + Models.Product.GetLastProductID()), imgName);
+                    var thumbPath = Path.Combine(Server.MapPath("~/Template/images/products/thumbnail"), "" + Models.Product.GetLastProductID() + ".png");
+                    var imgPath = Path.Combine(Server.MapPath("~/Template/images/products"), "" + Models.Product.GetLastProductID() + ".png");
 
                     thumbnail.SaveAs(thumbPath);
                     afbeelding.SaveAs(imgPath);
@@ -147,8 +144,8 @@ namespace IntoSport.Controllers
                     p.prijs = double.Parse(collection["prijs"]);
                     p.korting = (collection["korting"] != null ? int.Parse(collection["korting"]) : 0);
                     p.voorraad = (collection["voorraad"] != null ? int.Parse(collection["voorraad"]) : 0);
-                    p.afbeelding = "Template/images/products/" + Models.Product.GetLastProductID() + "/" + imgName;
-                    p.thumbnail = "Template/images/products/" + Models.Product.GetLastProductID() + "/thumbnail/" + thumbName;
+                    p.afbeelding = "Template/images/products/" + Models.Product.GetLastProductID() + ".png";
+                    p.thumbnail = "Template/images/products/thumbnail/" + Models.Product.GetLastProductID() + ".png";
 
                     if(p.id != 0)
                     {
