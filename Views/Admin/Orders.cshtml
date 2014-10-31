@@ -19,8 +19,9 @@
     <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
-                <td>ID</td>
-                <td>Klant</td>
+                <td>Ordernummer</td>
+                <td>Klantnummer</td>
+                <td>Bedrag</td>
                 <td>Status</td>
                 <td>Datum</td>
             </tr>
@@ -30,8 +31,9 @@
                 foreach (Dictionary<string, object> order in (List<Dictionary<string, object>>)ViewData["orders"])
                 {
                     <tr>
-                        <td>@order["id"]</td>
-                        <td>@order["voornaam"] @order["achternaam"]</td>
+                        <td>@order["ordernr"]</td>
+                        <td>@order["klantnr"]</td>
+                        <td>&euro; @order["bedrag"]</td>
                         <td>
                             <form action="/admin/orders" method="post">
                                 <input type="hidden" name="id" value="@order["id"]" />

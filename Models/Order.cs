@@ -82,9 +82,9 @@ namespace IntoSport.Models
         public static List<Dictionary<string, object>> GetAllOrders(string search = "")
         {
             Query query = new Query();
-            query.Select("bestelling.*, user.voornaam, user.achternaam");
-            query.From("bestelling");
-            query.Join("INNER", "user ON bestelling.user_id = user.id INNER JOIN order_regel AS or ON or");
+            query.Select("bestelling.id, bestelling.datum, bestelling.status, bestelling.id AS ordernr, user.id AS klantnr, SUM(order_regel.hoeveelheid * product.prijs) AS bedrag");
+            query.From("order_regel");
+            query.Join("INNER", "bestelling ON order_regel.bestelling_id = bestelling.id INNER JOIN user ON bestelling.user_id = user.id INNER JOIN product ON order_regel.product_id = product.id");
             
             if(search.Length > 0)
             {
