@@ -10,7 +10,6 @@ namespace IntoSport.Models
     public class Product 
     {
         public int id{ get; set; }
-        public int categorie_id { get; set; }
         public int detail_id { get; set; }
         [Required(ErrorMessage = "Naam")]
         public string naam { get; set; }
@@ -19,14 +18,13 @@ namespace IntoSport.Models
         public double prijs { get; set; }
         public int korting { get; set; }
         [Required(ErrorMessage = "Voorraad")]      
-        public int voorraad { get; set; }
+        public int voorraad { get; set; } 
         public string afbeelding { get; set; }
         public string thumbnail { get; set; }
 
         public Product()
         {
             this.id = 0;
-            this.categorie_id = 0;
             this.detail_id = 0;
             this.naam = "";
             this.beschrijving = "";
@@ -48,7 +46,6 @@ namespace IntoSport.Models
             foreach(Dictionary<string, object> product in query.Execute())
             {
                 this.id = (int)product["id"];
-                this.categorie_id = (int)product["categorie_id"];
                 this.naam = (string)product["naam"];
                 this.beschrijving = (string)product["beschrijving"];
                 this.prijs = (double)product["prijs"];
@@ -74,29 +71,23 @@ namespace IntoSport.Models
             return query.Execute("product", data);
         }
 
-        public int InsertCategorie()
+        public void InsertCategorie(string[] categories)
         {
-            Dictionary<string, object> data = new Dictionary<string, object>();
+            Query query = new Query();
+            if (categories.Length > 0)
+            {
+                Dictionary<string, object> data;
 
-            data.Add("categorie_id", this.categorie_id);
-            data.Add("product_id", GetLastProductID());
-
-            var query = new Query();
-            return query.Execute("product_categorie", data);
+                foreach (string categorie in categories)
+                {
+                    data = new Dictionary<string, object> { { "product_id", GetLastProductID()}, { "categorie_id", int.Parse(categorie) } };
+                    query.Execute("product_categorie", data);
+                }
+            }
+           
         }
 
-        public int InsertDetail()
-        {
-            Dictionary<string, object> data = new Dictionary<string, object>();
-
-            data.Add("categorie_id", this.detail_id);
-            data.Add("product_id", GetLastProductID());
-
-            var query = new Query();
-            return query.Execute("detail_product", data);
-        }
-
-        public bool Update()
+        public int Update()
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("naam", this.naam);
@@ -104,23 +95,36 @@ namespace IntoSport.Models
             data.Add("prijs", this.prijs);
             data.Add("korting", this.korting);
             data.Add("voorraad", this.voorraad);
-            data.Add("afbeelding", this.afbeelding);
-            data.Add("thumbnail", this.thumbnail);
+            if (this.afbeelding.Length > 0)
+            {
+                data.Add("afbeelding", this.afbeelding);
+            }
+            if (this.thumbnail.Length > 0)
+            {
+                data.Add("thumbnail", this.thumbnail);
+            }
             data.Add("id", this.id);
 
             var query = new Query();
-            return query.Execute("product", data) > 0;
+            return query.Execute("product", data);
         }
 
-        public int UpdateCategorie(int productID)
+        public void UpdateCategorie(string[] categories)
         {
-            Dictionary<string, object> data = new Dictionary<string, object>();
+            Query q = new Query();
+            q.Delete("product_categorie");
+            q.Where("product_id = " + this.id);
+            q.Execute();
 
-            data.Add("categorie_id", this.categorie_id);
-            data.Add("product_id", productID);
-
-            var query = new Query();
-            return query.Execute("product_categorie", data);
+            if(categories.Length > 0)
+            {
+                Dictionary<string, object> data;
+                foreach(string categorie in categories)
+                {
+                     data = new Dictionary<string, object> { { "product_id", this.id }, { "categorie_id", int.Parse(categorie) } };
+                    q.Execute("product_categorie", data);
+                }
+            }
         }
 
         public static List<Dictionary<string, object>> getAllProducts(string search = "", string limit = "", string joinType = "", string join = "")
@@ -162,6 +166,17 @@ namespace IntoSport.Models
             }
 
             return productID;
+        }
+
+        public static bool IsInCategorie(int product, int categorie)
+        {
+            Query query = new Query();
+            query.Select("*");
+            query.From("product_categorie");
+            query.Where("product_id = " + product);
+            query.Where("categorie_id = " + categorie);
+
+            return query.Execute().Count > 0;
         }
 
     }

@@ -26,7 +26,7 @@ namespace IntoSport.Models
          }
         public void isBetaald()
         {
-            this.status = Status.verstuurd;
+            this.status = Status.betaald;
         }
 
         public void isVerstuurd()
@@ -35,7 +35,7 @@ namespace IntoSport.Models
         }
         public void isVervallen()
         {
-            this.status = Status.verstuurd;
+            this.status = Status.vervallen;
         }
         public Order(int orderID)
         {
@@ -84,7 +84,7 @@ namespace IntoSport.Models
             Query query = new Query();
             query.Select("bestelling.*, user.voornaam, user.achternaam");
             query.From("bestelling");
-            query.Join("INNER", "user ON bestelling.user_id = user.id");
+            query.Join("INNER", "user ON bestelling.user_id = user.id INNER JOIN order_regel AS or ON or");
             
             if(search.Length > 0)
             {

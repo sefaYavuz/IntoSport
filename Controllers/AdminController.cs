@@ -160,36 +160,53 @@ namespace IntoSport.Controllers
                     thumbnail.SaveAs(thumbPath);
                     afbeelding.SaveAs(imgPath);
 
-                    p.id = int.Parse(collection["id"]);
-                    p.categorie_id = int.Parse(collection["categories"]);
-                    p.naam = collection["naam"];
-                    p.beschrijving = collection["beschrijving"];
-                    p.prijs = double.Parse(collection["prijs"]);
-                    p.korting = (collection["korting"] != null ? int.Parse(collection["korting"]) : 0);
-                    p.voorraad = (collection["voorraad"] != null ? int.Parse(collection["voorraad"]) : 0);
                     p.afbeelding = "Template/images/products/" + Models.Product.GetLastProductID() + ".png";
                     p.thumbnail = "Template/images/products/thumbnail/" + Models.Product.GetLastProductID() + ".png";
-
-                    if(p.id != 0)
-                    {
-                        p.Update();
-                        //p.UpdateCategorie();
-                    }
-                    else 
-                    {
-                        p.id = p.Insert();
-                        p.InsertCategorie();
-                    }
-
-
-                    ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
-
-                    Product p2 = new Product(p.id);
-                    ViewData.Add("product", p2);
-
-                    ViewData.Add("getCategories", Models.Category.getAllCategories());
-                    return View("Product");
                 }
+
+
+
+                string[] categories = new string[0];
+                if (collection.AllKeys.Contains("subcat"))
+                {
+                    categories = collection["subcat"].Split(',');
+                }
+
+                p.id = int.Parse(collection["id"]);
+                p.naam = collection["naam"];
+                p.beschrijving = collection["beschrijving"];
+                p.prijs = double.Parse(collection["prijs"]);
+                p.korting = (collection["korting"] != null ? int.Parse(collection["korting"]) : 0);
+                p.voorraad = (collection["voorraad"] != null ? int.Parse(collection["voorraad"]) : 0);
+                if (thumbnail == null)
+                {
+                    p.thumbnail = "";
+                }
+                if (afbeelding == null)
+                {
+                    p.afbeelding = "";
+                }
+
+                if(p.id != 0)
+                {
+                    p.Update();
+
+                    p.UpdateCategorie(categories);
+                }
+                else 
+                {
+                    p.id = p.Insert();
+
+                    p.InsertCategorie(categories);
+                }
+
+
+                ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
+
+                Product p2 = new Product(p.id);
+                ViewData.Add("product", p2);
+                ViewData.Add("getCategories", Models.Category.getAllCategories());
+                return View("Product");
 
             }
 
