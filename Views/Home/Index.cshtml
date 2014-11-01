@@ -8,20 +8,29 @@
 <div class="divider"></div>
 <div class="featuredProducts">
     <div class="productsContainer">
-    @{
-                   foreach (Dictionary<string, object> product in (List<Dictionary<string, object>>)ViewData["getAllProducts"])
+    @{  var limit = 0;
+        foreach (Dictionary<string, object> product in (List<Dictionary<string, object>>)ViewData["getAllProducts"])
         {
-            <div class="products">
-                <div class="productImg">
-                    <img src="@product["thumbnail"]" alt="@product["naam"]" />
+            limit++;
+            <a href="/product/detail?id=@product["id"]">
+                <div class="products well-sm">
+                    <div class="productImg">
+                        <img src="@product["thumbnail"]" class="img-thumbnail" />
+                    </div>
+                    <p></p>
+                    <div class="productDetails">
+                        <h3>@product["naam"]</h3>
+                        <p>&euro;@product["prijs"]</p>
+                        <a href="/cart/addToCart?ID=@product["id"]&Quantity=1" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-shopping-cart"></span> winkelwagen</a>
+
+
+                    </div>
                 </div>
-                <div class="productDetails">
-                    <h3>@product["naam"]</h3>
-                    <p>&euro;@product["prijs"]</p>
-                    <a href="/product/detail?id=@product["id"]">Bekijk het product</a>
-                    <a href="/cart/addToCart?ID=@product["id"]&Quantity=1">Plaats in winkelwagen &raquo;</a>
-                </div>
-            </div>
+            </a>
+        if(limit ==4)
+        {
+            break;
+        }
         }
     }
     </div>

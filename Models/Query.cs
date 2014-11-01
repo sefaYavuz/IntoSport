@@ -210,6 +210,7 @@ namespace IntoSport.Models
                 query = query.Substring(0, query.Length - 1);
 
                 query = isUpdate ? query += " WHERE id=@id" : query;
+                
 
                 if (extras != null)
                 {

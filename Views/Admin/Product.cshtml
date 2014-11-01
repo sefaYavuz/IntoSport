@@ -7,10 +7,15 @@
 @model Product
 
 @{
+    var categoriesList = Category.getCategoryList();
     Product product = (Product)ViewData["product"];
 }
 
 <h1>Product</h1>
+
+<br />
+<br />
+
 @{
     if (ViewData["msg"] != null)
     {
@@ -31,24 +36,28 @@
     }
 }
 
-
+@ViewData["id"]
 
 <form action="@Request.RawUrl" method="post" enctype="multipart/form-data">
     @Html.HiddenFor(model => model.id, new { Value = product.id })
 
-    <label>Selecteer een categorie:</label>
-    <select name="categories" class="form-control">
-        @{
-            foreach(Dictionary<string, object> categorie in (List<Dictionary<string, object>>)ViewData["getCategories"])
+    <label>(De)selecteer een categorie:</label><br />
+    @{
+        foreach(Category cat in categoriesList)
+        {
+            @cat.naam 
+            if (Product.IsInCategorie(product.id, cat.id))
             {
-                
-                <option value="@categorie["id"]">@categorie["naam"]</option>
+                <input type="checkbox" name="subcat" value="@cat.id" checked style="margin-right: 15px; " />
+            }
+            else
+            {
+                <input type="checkbox" name="subcat" value="@cat.id" style="margin-right: 15px; " />
             }
         }
-    </select>
-    @Html.ValidationMessageFor(model => model.categorie_id)
+}
 
-    <br />
+    <br /><br />
 
     <label>Naam:</label> 
     @Html.TextBoxFor(model => model.naam, new { Value = product.naam, @class = "form-control" }) 
