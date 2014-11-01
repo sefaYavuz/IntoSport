@@ -80,6 +80,7 @@ namespace IntoSport.Helpers
 
         public static String[] getItems(string cart)
         {
+            
             string[] items = cart.Split('.');
             return items;
         }

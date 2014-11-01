@@ -18,7 +18,37 @@ namespace IntoSport.Controllers
         {
             if (Request.Cookies["cart"] != null)
             {
-                String[] cart = CartHelper.getItems(Request.Cookies["cart"].Values["cart"]);
+                String[] cart = CartHelper.getItems(Request.Cookies["cart"].Value);
+                List<Dictionary<string,Product>> IDlist = new List<Dictionary<string,Product>>();
+                List<Dictionary<string,int>> QAList = new List<Dictionary<string,int>>();
+                for (int i = 0; i < CartHelper.getItems(Request.Cookies["cart"].Value).Length-1; i++)
+                {
+                    /*Dictionary<string, object> data = new Dictionary<string, object>();
+                    string productID = CartHelper.getItems(Request.Cookies["cart"].Value)[i].Split(',')[0];
+                    int productIDInt = Int32.Parse(productID);
+                    Product product = new Product(Int32.Parse(productID));
+                    data.Add("product", product);
+                    int quantity = Int32.Parse(CartHelper.getItems(Request.Cookies["cart"].Value)[i].Split(',')[1]);
+                    data.Add("quantity", quantity);
+                    list.Add(data);
+                     * */
+
+                    Dictionary<string, Product> productData = new Dictionary<string, Product>();
+                    string productID = CartHelper.getItems(Request.Cookies["cart"].Value)[i].Split(',')[0];
+                    int productIDInt = Int32.Parse(productID);
+                    Product product = new Product(Int32.Parse(productID));
+                    productData.Add("product", product);
+                    IDlist.Add(productData);
+
+                    Dictionary<string, int> quantityData = new Dictionary<string, int>();
+                    int quantity = Int32.Parse(CartHelper.getItems(Request.Cookies["cart"].Value)[i].Split(',')[1]);
+                    quantityData.Add("id", quantity);
+                    QAList.Add(quantityData);
+                    
+                }
+                ViewData["Productlist"] = IDlist;
+                ViewData["QAList"] = QAList;
+
                 return View();
             }
             else
@@ -28,7 +58,7 @@ namespace IntoSport.Controllers
             }
         }
 
-        [HttpPost]
+        
         public ActionResult Bestel()
         {
             if (Request.Cookies[FormsAuthentication.FormsCookieName] != null)
@@ -37,11 +67,15 @@ namespace IntoSport.Controllers
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 string id = authTicket.Name;
                 OrderDBController ODBC = new OrderDBController();
+                HttpCookie myCookie = new HttpCookie("UserSettings");
+                myCookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(myCookie);
                 return RedirectToAction("Success");
+
             }
             else
             {
-                return Redirect("Register");
+                return Redirect("/Login");
             }
         }
 
@@ -62,6 +96,11 @@ namespace IntoSport.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        /*public ActionResult remove(int ID, int Quantity)
+        {
+            
+        }*/
 
         public ActionResult Success()
         {

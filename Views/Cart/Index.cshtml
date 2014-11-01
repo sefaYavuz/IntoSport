@@ -1,4 +1,9 @@
-﻿@{Html.RenderPartial("BaseHead");}
+﻿@using IntoSport.Models;
+@{Html.RenderPartial("BaseHead");}
+
+@{
+    Product product;
+}
 
 <div class="cartWrapper">
     <table>
@@ -9,18 +14,19 @@
                 <td>Prijs</td>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Nike schoenen <br /><br /> 00001 <br /><br /> <a href="#">Verwijder</a></td>
-                <td><div>Prijs p/s:</div> &euro;40,00 <br /><br /> <div>Aantal:</div> 1</td>
-                <td>&euro;40,00</td>
-            </tr>
-            <tr>
-                <td>Nike schoenen <br /><br /> 00001 <br /><br /> <a href="#">Verwijder</a></td>
-                <td><div>Prijs p/s:</div> &euro;40,00 <br /><br /> <div>Aantal:</div> 1</td>
-                <td>&euro;40,00</td>
-            </tr>
-        </tbody>
+        @{if (Request.Cookies["cart"].Value != null) { }
+            foreach (Dictionary<string, Product> productTuple in (List<Dictionary<string, Product>>)ViewData["Productlist"])
+            {
+                product = productTuple["product"];
+            <tbody>
+                <tr>
+                    <td>@product.naam <br /><br /> @product.id <br /><br /> <a href="/product/@product.id">Verwijder</a></td>
+                    <td><div>Prijs p/s:</div> &euro;@product.prijs <br /><br /> <div>Aantal:</div> 1</td>
+                    <td>&euro;40,00</td> 
+                </tr>
+            </tbody>   
+            }}
+        }
     </table>
 
     <table class="total">
@@ -31,7 +37,7 @@
 
     <div class="cartButtons">
         <a href="#">&laquo; Verder winkelen</a>
-        <a href="#">Bestellen &raquo;</a>
+        <a href="/Cart/Bestel">Bestellen &raquo;</a>
     </div>
 </div>
 
