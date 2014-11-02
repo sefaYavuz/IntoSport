@@ -17,7 +17,7 @@ namespace IntoSport.Models
         [Required(ErrorMessage = "Dit is een verplicht veld")]
         public override string achternaam { get; set; }
         [Required(ErrorMessage = "Dit is een verplicht veld")]
-        public override string straat { get; set; }
+        public override string adres { get; set; }
         [Required(ErrorMessage = "Dit is een verplicht veld")]
 
         public override string huisnr { get; set; }
@@ -34,17 +34,31 @@ namespace IntoSport.Models
         [Required(ErrorMessage = "Dit is een verplicht veld")]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "Het wachtwoord moet minimaal 6 characters lang zijn")]
         public override string wachtwoord { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
-        public string passwordrepeat { get; set; }
+
+        public bool IsEmailAvailable()
+        {
+            Query query = new Query();
+            query.Select("*");
+            query.From("user");
+            query.Where("email = '" + this.email + "'");
+
+            if (query.Execute().Count > 0)
+            {
+                return false;
+            }
+            return true;
+
+        }
 
         public bool createAccount()
         {
-            if (Insert())
+            if (Insert() && IsEmailAvailable())
             {
                 return true;
             }
             return false;
         }
+
 
     }
 }

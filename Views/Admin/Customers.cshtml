@@ -1,0 +1,56 @@
+﻿@using IntoSport.Models;
+
+@{Html.RenderPartial("ManagerHead");}
+@{Html.RenderPartial("ManagerMenu");}
+
+
+@model User
+
+<h1>Detailsoverizcht</h1>
+<p>Hier krijgt u een overzicht te zien met alle details.</p>
+<br /><br />
+
+@using (Html.BeginForm())
+{
+
+    <input type="text" name="search" placeholder="Zoek op achternaam..." value="@ViewData["search"]" class="form-control" style="width: 300px; float: left; margin-right: 15px;" />
+    <input type="submit" value="Zoeken" class="btn btn-default" />
+
+    <br /><br />
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <td>Voornaam</td>
+                <td>Achternaam</td>
+                <td>Adres</td>
+                <td>Huisnummer + toevoeging</td>
+                <td>Postcode</td>
+                <td>Plaats</td>
+                <td>Tel.</td>
+                <td>E-mailadres</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (Dictionary<string, object> customer in (List<Dictionary<string, object>>)ViewData["customers"])
+                {
+                    <tr>
+                        <td>@customer["voornaam"]</td>
+                        <td>@customer["achternaam"]</td>
+                        <td>@customer["adres"]</td>
+                        <td>@customer["huisnr"]</td>
+                        <td>@customer["postcode"]</td>
+                        <td>@customer["plaats"]</td>
+                        <td>@customer["tel"]</td>
+                        <td>@customer["email"]</td>
+                        <td><a href="/admin/customer?customerID=@customer["id"]">Wijzig</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+@{Html.RenderPartial("ManagerFooter");}

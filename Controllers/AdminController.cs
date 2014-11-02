@@ -41,7 +41,8 @@ namespace IntoSport.Controllers
 
                 return View();
             }
-    }
+        }
+
 
 
         /* ORDERS START */
@@ -88,26 +89,26 @@ namespace IntoSport.Controllers
 
         /* ORDERS END */
 
-        /* DETAILS START */
+        /* KLANT START */
 
         [Authorize(Roles = "beheerder")]
-        public ActionResult Details()
+        public ActionResult Customers()
         {
-            ViewData.Add("details", Models.Detail.getAllDetails());
+            ViewData.Add("customers", Models.User.GetAllCustomers());
             ViewData.Add("search", "");
             return View();
         }
 
         [Authorize(Roles = "beheerder")]
         [HttpPost]
-        public ActionResult Details(string search = "")
+        public ActionResult Customers(string search = "")
         {
-            ViewData.Add("details", Models.Detail.getAllDetails(search));
+            ViewData.Add("customers", Models.User.GetAllCustomers(search));
             ViewData.Add("search", search);
             return View();
         }
 
-        /* DETAILS END */
+        /* KLANT END */
 
         /* PRODUCTEN START*/
 

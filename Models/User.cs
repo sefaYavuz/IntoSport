@@ -18,7 +18,7 @@ namespace IntoSport.Models
         public virtual int id { get; set; }
         public virtual string voornaam { get; set; }
         public virtual string achternaam { get; set; }
-        public virtual string straat { get; set; }
+        public virtual string adres { get; set; }
         public virtual string huisnr { get; set; }
         public virtual string postcode { get; set; }
         public virtual string plaats { get; set; }
@@ -78,8 +78,8 @@ namespace IntoSport.Models
                 obj.achternaam = (string)temp;
 
                 temp = null;
-                user[0].TryGetValue("straat", out temp);
-                obj.straat = (string)temp;
+                user[0].TryGetValue("adres", out temp);
+                obj.adres = (string)temp;
 
                 temp = null;
                 user[0].TryGetValue("huisnr", out temp);
@@ -122,7 +122,7 @@ namespace IntoSport.Models
         {
             data.Add("voornaam", this.voornaam);
             data.Add("achternaam", this.achternaam);
-            data.Add("straat", this.straat);
+            data.Add("adres", this.adres);
             data.Add("huisnr", this.huisnr);
             data.Add("postcode", this.postcode);
             data.Add("plaats", this.plaats);
@@ -142,6 +142,21 @@ namespace IntoSport.Models
         {
             var data = new Dictionary<string, object>();
             return Insert(data);
+        }
+
+        public static List<Dictionary<string, object>> GetAllCustomers(string search = "")
+        {
+            Query query = new Query();
+            query.Select("*");
+            query.From("user");
+            query.Where("role = 'klant'");
+
+            if(search.Length > 0)
+            {
+                query.Where("achternaam LIKE '%" + search + "%'");
+            }
+
+            return query.Execute();
         }
 
     }

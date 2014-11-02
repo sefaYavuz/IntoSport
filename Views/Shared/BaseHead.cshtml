@@ -1,7 +1,5 @@
 ﻿@using IntoSport.Models;
 
-@model Category
-
 @{
     ViewData.Add("categories", Category.getAllCategories());
 }
@@ -35,7 +33,7 @@
                         }
                         else
                         {
-                            <a href="/login">Inloggen</a>    
+                            <a href="/register">Account aanmaken</a> <span>/</span> <a href="/login">Inloggen</a>    
                         }
                   
                        <a href="/cart" class="fa-5x"><span class="glyphicon glyphicon-shopping-cart"></span> Winkelwagen</a>

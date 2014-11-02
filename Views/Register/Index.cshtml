@@ -1,10 +1,8 @@
 ﻿@using IntoSport.Models;
-@{Html.RenderPartial("BaseHead");}
-@model Register
 
-@{
-    ViewBag.Title = "Index";
-}
+@{Html.RenderPartial("BaseHead");}
+
+@model Register
 
 <h2>Meld je nu aan!</h2>
 @using (Html.BeginForm())
@@ -21,10 +19,10 @@
                 @Html.TextBoxFor(model => model.achternaam, new { @class = "form-control" }) 
                 @Html.ValidationMessageFor(model => model.achternaam)
             </div>
-            <div class="small">Straat:</div>
+            <div class="small">Adres:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.straat, new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.straat)
+                @Html.TextBoxFor(model => model.adres, new { @class = "form-control" }) 
+                @Html.ValidationMessageFor(model => model.adres)
             </div>
             <div class="small">Huisnummer + Toevoeging:</div>
             <div class="input">
@@ -57,11 +55,7 @@
                 @Html.PasswordFor(model => model.wachtwoord, new { autocomplete = "off", @class= "form-control" }) 
                 @Html.ValidationMessageFor(model => model.wachtwoord)
             </div>
-            <div class="small">Herhaal wachtwoord:</div>
-            <div class="input">
-                @Html.PasswordFor(model => model.passwordrepeat, new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.passwordrepeat)
-            </div>
+                  
         </div>
     </div>
     <br/>

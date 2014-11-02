@@ -39,21 +39,7 @@ namespace IntoSport.Controllers
             return View("index", u);
         }
 
-        [HttpPost]
-        public JsonResult IsEmailAvailable(string email)
-        {
-            Query query = new Query();
-            query.Select("*");
-            query.From("user");
-            query.Where("email = '" + email + "'");
-
-            if (query.Execute().Count > 0)
-            {
-                return Json(false, JsonRequestBehavior.AllowGet);
-            }
-            return Json(true, JsonRequestBehavior.AllowGet);
-
-        }
+        
 
     }
 }
