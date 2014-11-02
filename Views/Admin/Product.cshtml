@@ -36,8 +36,6 @@
     }
 }
 
-@ViewData["id"]
-
 <form action="@Request.RawUrl" method="post" enctype="multipart/form-data">
     @Html.HiddenFor(model => model.id, new { Value = product.id })
 
@@ -80,7 +78,7 @@
     <br />
 
     <label>Voorraad:</label> 
-    @Html.TextBoxFor(model => model.voorraad, new { Value = product.voorraad, @class = "form-control" }) 
+    @Html.TextBoxFor(model => model.voorraad, new { Value = product.voorraad, @class = "form-control" })  <small>0 = Out of stock</small>
 
     <br /><br />
     
@@ -91,6 +89,10 @@
             <br /> <br />
         }
     }
+
+    <h3>Details</h3>
+
+    <br /><br />
 
     <label>Thumbnail:</label>
     <input type="file" name="thumbnail" class="form-control" />

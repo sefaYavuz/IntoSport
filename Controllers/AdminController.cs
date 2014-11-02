@@ -108,6 +108,24 @@ namespace IntoSport.Controllers
             return View();
         }
 
+        [Authorize(Roles = "beheerder")]
+        public ActionResult Customer(int customerID)
+        {
+            ViewData.Add("customer", Models.User.GetUser("", customerID));
+            return View("Category");
+        }
+
+        [Authorize(Roles = "beheerder")]
+        [HttpPost]
+        public ActionResult Customer(FormCollection collection)
+        {
+            if (ViewData.ModelState.IsValid)
+            {
+
+            }
+            return View();
+        }
+
         /* KLANT END */
 
         /* PRODUCTEN START*/

@@ -54,6 +54,9 @@
                     </ul>
                     -->
                 </li>
+                <li @(Request.RawUrl.Equals("/admin/customer") || Request.RawUrl.Contains("/admin/customer") ? "class=active" : "")>
+                    <a href="/admin/customers"><i class="fa fa-empire"></i> Klanten </a>
+                </li>
             }
             
            
