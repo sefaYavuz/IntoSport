@@ -1,0 +1,32 @@
+﻿@{Html.RenderPartial("baseHead");}
+@{
+    ViewBag.Title = "Bestellingen";
+}
+@model List<IntoSport.Models.Bestelling>
+
+
+<h2>Bestellingen</h2>
+<div class="row" >
+
+    <table class="table table-bordered" >
+
+        <thead>
+            <tr class="active"><td>Datum</td><td>Producten</td><td>Status</td></tr>
+        </thead>
+        <tbody>
+       @{
+           if(Model !=  null)
+           {
+               foreach (IntoSport.Models.Bestelling besteling in Model)
+               {
+                <tr><td>@besteling.datum</td><td>@besteling.Aantal_producten</td><td>@besteling.status</td></tr>   
+               }
+           }
+       }
+            </tbody>
+    </table>
+
+
+</div>
+
+@{Html.RenderPartial("baseFooter");}

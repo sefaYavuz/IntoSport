@@ -137,7 +137,30 @@ namespace IntoSport.Models
             var query = new Query();
             return (query.Execute("user", data) > 0);
         }
+        private bool Update(Dictionary<string, object> data)
+        {
+            data.Add("voornaam", this.voornaam);
+            data.Add("achternaam", this.achternaam);
+            data.Add("adres", this.adres);
+            data.Add("huisnr", this.huisnr);
+            data.Add("postcode", this.postcode);
+            data.Add("plaats", this.plaats);
+            data.Add("tel", this.tel);
+            data.Add("role", this.role.ToString());
+            if (id == 0)
+            {
+                data.Add("email", this.email);
+                data.Add("wachtwoord", this.wachtwoord);
+            }
 
+            var query = new Query();
+            return (query.Execute("user", data) > 0);
+        }
+        public bool Update()
+        {
+            var data = new Dictionary<string, object>();
+            return Update(data);
+        }
         public bool Insert()
         {
             var data = new Dictionary<string, object>();

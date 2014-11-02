@@ -131,6 +131,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KlantController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -139,9 +140,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AuthorizationHelper.cs" />
+    <Compile Include="Helpers\BestellingHelper.cs" />
     <Compile Include="Helpers\CartHelper.cs" />
     <Compile Include="Helpers\OmzetHelper.cs" />
     <Compile Include="Helpers\ProductHelper.cs" />
+    <Compile Include="Models\Bestelling.cs" />
+    <Compile Include="Models\KlantGegevens.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
@@ -150,6 +154,7 @@
     <Compile Include="Models\DetailWaarde.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Omzet.cs" />
+    <Compile Include="Models\OrderRegel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Query.cs" />
     <Compile Include="Models\Register.cs" />
@@ -323,6 +328,11 @@
     <Content Include="Views\Shared\BaseHead.cshtml" />
     <Content Include="Views\Admin\Customers.cshtml" />
     <Content Include="Views\Admin\Customer.cshtml" />
+    <Content Include="Views\Home\about.cshtml" />
+    <Content Include="Views\account.cshtml" />
+    <Content Include="Views\Klant\Index.cshtml" />
+    <Content Include="Views\Klant\Account.cshtml" />
+    <Content Include="Views\Klant\Bestellingen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

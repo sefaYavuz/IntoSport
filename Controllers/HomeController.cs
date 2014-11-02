@@ -22,5 +22,7 @@ namespace IntoSport.Controllers
         {
             return View();
         }
+
+    
     }
 }
