@@ -3,6 +3,7 @@ using IntoSport.Models;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using IntoSport.Helpers;
+using MySql.Data.MySqlClient;
 
 namespace IntoSport
 {
@@ -46,7 +47,7 @@ namespace IntoSport
 
             foreach (Dictionary<string, object> order in q.Execute())
             {
-                    maxOrder = (int)order["MAX(id)"] + 1;
+                    maxOrder = (int)order["MAX(id)"];
             }
 
 
@@ -54,8 +55,8 @@ namespace IntoSport
             string[] itemList = CartHelper.getItems(cart);
             for (int i = 0; i < CartHelper.getItems(cart).Length - 1; i++)
             {
-                string value = itemList[i];
-                Query q3 = new Query();
+                /*string value = itemList[i];
+                var q3 = new Query();
 
                 string[] product = value.Split(',');
 
@@ -64,7 +65,31 @@ namespace IntoSport
                 order_regel.Add("bestelling_id", maxOrder);
                 order_regel.Add("hoeveelheid", Int32.Parse(product[1]));
 
-                q3.Execute("order_regel", order_regel);
+                q3.Execute("order_regel", order_regel);*/
+
+                string value = itemList[i];
+
+                string[] product = value.Split(',');
+
+                string query = "INSERT INTO `intosport`.`order_regel`(`bestelling_id`,`product_id`,`hoeveelheid`)VALUES(" + maxOrder + "," + product[0] + "," + product[1] + ")";
+
+                try
+                {
+                    MySqlConnection conn = new MySqlConnection("Server=" + "127.0.0.1" + ";Database=" + "intosport" + ";Uid=" + "admin" + ";Pwd=" + "admin" + ";");
+
+                    conn.Open();
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                    cmd.ExecuteNonQuery();
+
+                    conn.Close();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
             }
 
 
