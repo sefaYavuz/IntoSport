@@ -78,6 +78,7 @@ namespace IntoSport.Controllers
                     break;
                 case "verstuurd":
                     order.isVerstuurd();
+                    new MailerHelper("U bestelling is verzonden", "IntoSport Status", IntoSport.Models.User.GetUser("",order.user_id));
                     break;
             }
 
@@ -87,6 +88,7 @@ namespace IntoSport.Controllers
             return View();
         }
 
+        
         /* ORDERS END */
 
         /* KLANT START */

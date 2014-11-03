@@ -17,21 +17,23 @@
                     {
 
                         <li>
-                            <div class="row">
-                            <div class="col-md-6">
-                                <img src="@product.afbeelding" class="img img-thumbnail"style="height:400px;width:100%" />
-                            </div>
-                            <div class="col-md-6">
-                                <h1 class="text-capitalize">@product.naam</h1>
-                                <div style="height:200px;">@product.beschrijving</div>
+                            <a href="/product/detail?id@product.id">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="@product.afbeelding" class="img" style="height:400px;width:100%" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h1 class="text-capitalize">@product.naam</h1>
+                                        <div style="height:200px;">@product.beschrijving</div>
 
-                                <a href="" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Winkelwagen </a><br/>
-                                &nbsp;<span class="text-capitalize text-info" style="font-size:40px;"> @product.korting% korting</span>
+                                        <a href="" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Winkelwagen </a><br />
+                                        &nbsp;<span class="text-capitalize text-info" style="font-size:40px;"> @product.korting% korting</span>
 
-                            </div>
+                                    </div>
                                 </div>
-                        </li>
-
+                            </a>
+</li>
+                 
                     }
 
                 }
