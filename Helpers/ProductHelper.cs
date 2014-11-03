@@ -26,6 +26,20 @@ namespace IntoSport.Helpers
 
         }
 
+        public List<Product> getKortingen()
+        {
+            List<Product> list = new List<Product>();
+            conn.Open();
+            string sql = "SELECT id FROM product WHERE korting > 0 ORDER BY id DESC";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                list.Add(new Product(reader.GetInt32("id")));
+            }
+            return list;
+        }
+
         public List<KeyValuePair<string,string>> getDetails(int product_id)
         {
          
