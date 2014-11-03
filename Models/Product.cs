@@ -38,14 +38,14 @@ namespace IntoSport.Models
         public Product(int productID)
         {
             Query query = new Query();
-            query.Select("*");
+            query.Select("product.id AS prod_id, product.naam, product.beschrijving, product.prijs, product.korting, product.voorraad, product.afbeelding, product.thumbnail, pc.categorie_id, dp.detail_waarde_id");
             query.From("product");
-            query.Join("INNER", "product_categorie AS pc ON product.id = pc.product_id");
+            query.Join("LEFT", "product_categorie AS pc ON product.id = pc.product_id LEFT JOIN detail_product AS dp ON product.id = dp.product_id");
             query.Where("product.id = " + productID);
 
             foreach(Dictionary<string, object> product in query.Execute())
             {
-                this.id = (int)product["id"];
+                this.id = (int)product["prod_id"];
                 this.naam = (string)product["naam"];
                 this.beschrijving = (string)product["beschrijving"];
                 this.prijs = (double)product["prijs"];
@@ -84,7 +84,21 @@ namespace IntoSport.Models
                     query.Execute("product_categorie", data);
                 }
             }
-           
+        }
+
+        public void InsertDetail(string[] details)
+        {
+            Query query = new Query();
+            if (details.Length > 0)
+            {
+                Dictionary<string, object> data;
+
+                foreach (string detail in details)
+                {
+                    data = new Dictionary<string, object> { { "product_id", GetLastProductID() }, { "detail_waarde_id", int.Parse(detail) } };
+                    query.Execute("detail_product", data);
+                }
+            }
         }
 
         public int Update()
@@ -123,6 +137,24 @@ namespace IntoSport.Models
                 {
                      data = new Dictionary<string, object> { { "product_id", this.id }, { "categorie_id", int.Parse(categorie) } };
                     q.Execute("product_categorie", data);
+                }
+            }
+        }
+
+        public void UpdateDetail(string[] details)
+        {
+            Query q = new Query();
+            q.Delete("detail_product");
+            q.Where("product_id = " + this.id);
+            q.Execute();
+
+            if (details.Length > 0)
+            {
+                Dictionary<string, object> data;
+                foreach (string detail in details)
+                {
+                    data = new Dictionary<string, object> { { "product_id", this.id }, { "detail_waarde_id", int.Parse(detail) } };
+                    q.Execute("detail_product", data);
                 }
             }
         }
@@ -175,6 +207,18 @@ namespace IntoSport.Models
             query.From("product_categorie");
             query.Where("product_id = " + product);
             query.Where("categorie_id = " + categorie);
+
+            return query.Execute().Count > 0;
+        }
+
+
+        public static bool isInDetail(int product, int detail)
+        {
+            Query query = new Query();
+            query.Select("*");
+            query.From("detail_product");
+            query.Where("product_id = " + product);
+            query.Where("detail_waarde_id = " + detail);
 
             return query.Execute().Count > 0;
         }

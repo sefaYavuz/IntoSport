@@ -28,6 +28,37 @@ namespace IntoSport.Models
         public virtual Role role { get; set; }
         public virtual bool goldmember { get; set; }
 
+        /*
+        public User(int userID, string role = "")
+        {
+            Query query = new Query();
+            query.Select("*");
+            query.From("user");
+
+            if(role.Length > 0)
+            {
+                query.Where("role like '%" + role + "%'");
+            }
+            if(userID > 0)
+            {
+                query.Where("id = " + userID);
+            }
+
+            foreach(Dictionary<string, object> user in query.Execute())
+            {
+                this.id = (int)user["id"];
+                this.voornaam = (string)user["voornaam"];
+                this.achternaam = (string)user["achternaam"];
+                this.adres = (string)user["adres"];
+                this.huisnr = (string)user["huisnr"];
+                this.postcode = (string)user["postcode"];
+                this.plaats = (string)user["plaats"];
+                this.tel = (string)user["tel"];
+                this.email = (string)user["email"];
+                this.wachtwoord = (string)user["wachtwoord"];
+            }
+        }*/
+
         public bool IsValid()
         {
             Query query = new Query();

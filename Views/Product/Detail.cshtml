@@ -11,7 +11,7 @@
         {
             foreach (IntoSport.Models.BreadCrumbs breadcrumbs in categorie)
             {
-                <a href="/product/?categorie=@breadcrumbs.id">@breadcrumbs.naam</a><span>&raquo;</span>
+                <a href="/product/?categorie=@breadcrumbs.id">@breadcrumbs.naam</a> <span>&raquo;</span>
 
             }
             @product.naam
@@ -30,12 +30,18 @@
         <ul>
            @if (details != null)
            {
-
+               string detailName = "";
 
                foreach (KeyValuePair<string, string> detail in details)
                {
+                   if(!detailName.Equals(detail.Key.ToString()))
+                   {
+                       detailName = @detail.Key.ToString();
 
-                <li>@detail.Key.ToString(): @detail.Value.ToString()</li>
+                       <h4>@detailName</h4>
+                   }
+                   
+                <li style="margin-left: 30px; ">@detail.Value.ToString()</li>
 
 
                }

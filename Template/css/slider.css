@@ -2,8 +2,13 @@
   position: relative;
   overflow: hidden;
   margin: 20px auto 0 auto;
- 
+  height: 500px!important;
+
 }
+
+#slider a { color: #55c254; }
+
+#slider h1 { font-size: 24px; }
 
 #slider ul {
   position: relative;
@@ -26,15 +31,16 @@
 
 a.control_prev, a.control_next {
   position: absolute;
-  top: 40%;
+  top: 83%;
+  padding: 10px;
   z-index: 999;
   display: block;
-
+  color: #55c254;
+  font-size: 50px;
   width: auto;
   height: auto;
   text-decoration: none;
   font-weight: 600;
-  font-size: 18px;
   opacity: 0.8;
   cursor: pointer;
 }

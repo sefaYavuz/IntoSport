@@ -1,7 +1,11 @@
-﻿@{Html.RenderPartial("BaseHead");}
+﻿@using IntoSport.Models;
+@{Html.RenderPartial("BaseHead");}
 
+@{
+    var total = 0.0;
+}
 <div class="cartWrapper">
-    <table>
+    <table class="products">
         <thead>
             <tr>
                 <td>Producten</td>
@@ -9,29 +13,34 @@
                 <td>Prijs</td>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Nike schoenen <br /><br /> 00001 <br /><br /> <a href="#">Verwijder</a></td>
-                <td><div>Prijs p/s:</div> &euro;40,00 <br /><br /> <div>Aantal:</div> 1</td>
-                <td>&euro;40,00</td>
-            </tr>
-            <tr>
-                <td>Nike schoenen <br /><br /> 00001 <br /><br /> <a href="#">Verwijder</a></td>
-                <td><div>Prijs p/s:</div> &euro;40,00 <br /><br /> <div>Aantal:</div> 1</td>
-                <td>&euro;40,00</td>
-            </tr>
-        </tbody>
+        @{if (Request.Cookies["cart"] != null) {
+              var productList = ViewData["productList"] as List<Product>;
+              var quantList = ViewData["quantList"] as List<int>;
+              for (int i = 0; i < productList.Count; i++)
+              {
+                  total += productList[i].prijs * quantList[i];
+                  var productTotal = productList[i].prijs * quantList[i];
+                <tbody>
+                    <tr>
+                        <td>@productList[i].naam <br /><br /> @productList[i].id <br /><br /> <a href="/cart/remove/@productList[i].id">Verwijder</a></td>
+                        <td><div>Prijs p/s:</div> &euro;@productList[i].prijs <br /><br /> <div>Aantal:</div> @quantList[i]</td>
+                        <td>&euro;@productTotal</td>
+                    </tr>
+                </tbody>
+              }
+        }
+        }
     </table>
 
     <table class="total">
         <tr>
-            <td><div>Totaal (incl. BTW):</div> &euro; 40,00</td>
+            <td><div>Totaal (incl. BTW):</div> &euro; @total</td>
         </tr>
     </table>
 
     <div class="cartButtons">
-        <a href="#">&laquo; Verder winkelen</a>
-        <a href="#">Bestellen &raquo;</a>
+        <a href="/">&laquo; Verder winkelen</a>
+        <a href="/Cart/bestel">Bestellen &raquo;</a>
     </div>
 </div>
 

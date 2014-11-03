@@ -21,9 +21,11 @@ namespace IntoSport.Models
         private Hashtable join;
         private List<string> group;
         private List<string> order;
+        private List<string> having;
 
         public Query()
         {
+            this.having = new List<string>();
             this.where = new List<string>();
             this.join = new Hashtable();
             this.group = new List<string>();
@@ -48,6 +50,11 @@ namespace IntoSport.Models
         public void Limit(string s)
         {
             this.limit = s;
+        }
+
+        public void Having(string s)
+        {
+            this.having.Add(s);
         }
 
         public void Where(string s)
@@ -109,6 +116,23 @@ namespace IntoSport.Models
                     }
                 }
             }
+
+            // HAVING
+            if (having.Count > 0)
+            {
+                foreach (string s in having)
+                {
+                    if (!queryString.Contains("HAVING"))
+                    {
+                        queryString += "HAVING " + @s + " ";
+                    }
+                    else
+                    {
+                        queryString += "AND " + @s + " ";
+                    }
+                }
+            }
+
             // GROUP
             if (group.Count > 0)
             {
