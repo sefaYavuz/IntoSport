@@ -143,6 +143,7 @@
     <Compile Include="Helpers\BestellingHelper.cs" />
     <Compile Include="Helpers\BreadCrumbsHelper.cs" />
     <Compile Include="Helpers\CartHelper.cs" />
+    <Compile Include="Helpers\KlantGegevensHelper.cs" />
     <Compile Include="Helpers\MailerHelper.cs" />
     <Compile Include="Helpers\OmzetHelper.cs" />
     <Compile Include="Helpers\OrderDBController.cs" />

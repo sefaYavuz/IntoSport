@@ -126,7 +126,7 @@ namespace IntoSport.Models
 
                 temp = null;
                 user[0].TryGetValue("tel", out temp);
-                obj.postcode = (string)temp;
+                obj.tel = (string)temp;
 
                 temp = null;
                 user[0].TryGetValue("email", out temp);

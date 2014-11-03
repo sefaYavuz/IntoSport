@@ -1,65 +1,92 @@
-﻿@model IntoSport.Models.User
+﻿
 
 @{Html.RenderPartial("BaseHead");}
+@{
+    
+    var user = ViewData["klant"] as IntoSport.Models.User;
+  
+}<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+<script>
+    var submit = true;
+    $(document).ready(function () {
+        $('input').blur(function () {
+           
+            if ($(this).val().length === 0) {
+                $(this).parent('div').addClass('has-error');
+                submit = false;
+            } else {
+                $(this).parent('div').removeClass('has-error');
+                submit = true;
+            }
+        });
+      
+       
+        $("form").submit(function (e) {
+            if (!submit) {
+                e.preventDefault();
+                $("#flash").prepend("<div class='alert alert-danger'>Alles invoeren alstublieft</div>");
+                $(".alert").delay(5000).fadeOut("fast");
+            }
 
+        });
+    });
+   
+    
+</script>
 
 <h2>Mijn gegevens</h2>
-@using (Html.BeginForm())
-{
+
+<div id="flash"></div>
+<form action="/klant/save" method="post" id="form">
+
+
     <div class="grid-container">
         <div class="grid-6">
             <div class="small">Voornaam:</div>
-            <div class="input">
-                @Html.TextBoxFor(model => model.voornaam, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.voornaam)
+            <div class="input form-group">
+                <input type="text" value="@user.voornaam" name="voornaam" class="form-control"/>
+               
             </div>
             <div class="small">Achternaam:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.achternaam, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.achternaam)
+                <input type="text" value="@user.achternaam" name="achternaam" class="form-control" />
             </div>
             <div class="small">Adres:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.adres, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.adres)
+                <input type="text" value="@user.adres" name="adres" class="form-control" />
             </div>
             <div class="small">Huisnummer + Toevoeging:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.huisnr, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.huisnr)
+                <input type="text" value="@user.huisnr" name="huisnr" class="form-control" />
             </div>
             <div class="small">Postcode:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.postcode, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.postcode)
+                <input type="text" value="@user.postcode" name="postcode" class="form-control" />
             </div>
             <div class="small">Stad:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.plaats, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.plaats)
+                <input type="text" value="@user.plaats" name="plaats" class="form-control" />
             </div>
-            <div class="small">Telefoonnummer:</div>
+           <div class="small">Telefoonnummer:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.tel, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.tel)
+                <input type="text" value="@user.tel" name="telefoon" class="form-control" />
             </div>
         </div>
         <div class="grid-6">
             <div class="small">Emailadres:</div>
             <div class="input">
-                @Html.TextBoxFor(model => model.email, new { autocomplete = "off", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.email)
+                <input type="email" value="@user.email" name="email" class="form-control" />
             </div>
             <div class="small">Wachtwoord:</div>
             <div class="input">
-                @Html.PasswordFor(model => model.wachtwoord, new { autocomplete = "off", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.wachtwoord)
+               <input type="password" value="@user.wachtwoord" name="wachtwoord" class="form-control"
             </div>
 
         </div>
     </div>
     <br />
     <input type="submit" class="btn btn-lg btn-default" value="opslaan">
-}
+</form>
+
 @{Html.RenderPartial("BaseFooter");}
