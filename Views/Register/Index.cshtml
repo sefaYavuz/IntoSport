@@ -47,6 +47,7 @@
         <div class="grid-6">
             <div class="small">Emailadres:</div>
             <div class="input">
+                @Html.ValidationMessage("emailError")
                 @Html.TextBoxFor(model => model.email, new { autocomplete = "off", @class="form-control"  }) 
                 @Html.ValidationMessageFor(model => model.email)
             </div>
@@ -59,6 +60,13 @@
         </div>
     </div>
     <br/>
-    <input type="submit" class="btn btn-lg btn-default" value="Registreer">
+    
+        
+<input type="submit" name="submit" value="Registreer" class="btn btn-lg btn-default" />
+ 
+
+
+
+
 }
 @{Html.RenderPartial("BaseFooter");}

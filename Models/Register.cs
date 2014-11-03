@@ -59,6 +59,21 @@ namespace IntoSport.Models
             return false;
         }
 
+        public bool exists()
+        {
+            Query query = new Query();
+            query.Select("*");
+            query.From("user");
+            query.Where("email = '" + this.email + "'");
+            var result = query.Execute();
+
+            if (result.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
 
     }
 }
