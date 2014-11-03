@@ -67,7 +67,8 @@ footer .wrapper div ul li a:hover { text-decoration: none; }
 /* PRODUCT DETAIL */
 
 .content .productDetailContainerTop { margin-top: 50px; min-height: 350px; }
-.content .productDetailContainerTop .productDetailImg { float: left; width: 400px; height: 350px; background-color: #42bd41; }
+.content .productDetailContainerTop .productDetailImg { float: left; width: 400px; height: 350px; }
+.content .productDetailContainerTop .productDetailImg img { height: 350px; }
 .content .productDetailContainerTop .productDetails { float: left; width: 510px; margin-left: 50px;}
 .content .productDetailContainerTop .productDetails h1 { text-transform: uppercase; text-align: center;  }
 .content .productDetailContainerTop .productDetails .divider { width: 100%; height: 3px;  margin: 0 auto; margin-top: 30px; }

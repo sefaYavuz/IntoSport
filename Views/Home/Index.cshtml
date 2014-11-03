@@ -10,9 +10,8 @@
             {
                 foreach (Product product in ViewData["kortingProducten"] as IEnumerable<IntoSport.Models.Product>)
                 {
-
                     <li>
-                        <a href="/product/detail?id@product.id">
+                        <a href="/product/detail?id=@product.id">
                             <div class="row">
                                 <div class="col-md-6">
                                     <img src="@product.afbeelding" class="img" style="height:400px;width:100%" />
