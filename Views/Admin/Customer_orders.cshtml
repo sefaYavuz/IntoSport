@@ -1,0 +1,55 @@
+﻿@using IntoSport.Models;
+
+@{Html.RenderPartial("ManagerHead");}
+@{Html.RenderPartial("ManagerMenu");}
+
+@model Order
+
+<h1>Bestellingsoverzicht</h1>
+<p>Hier krijgt u een overzicht te zien met alle bestellingen.</p>
+<br /><br />
+
+<form action="/admin/orders" method="post">
+
+    <!--<input type="text" name="search" placeholder="Zoek een bestelling..," value="ViewData["search"]" class="form-control" style="width: 300px; float: left; margin-right: 15px;" />
+    <input type="submit" value="Zoeken" class="btn btn-default" />
+        -->
+    <br /><br />
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <td>Ordernummer</td>
+                <td>Bedrag</td>
+                <td>Status</td>
+                <td>Datum</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (Dictionary<string, object> order in (List<Dictionary<string, object>>)ViewData["customerOrders"])
+                {
+                    <tr>
+                        <td>@order["ordernr"]</td>
+                        <td>&euro; @order["bedrag"]</td>
+                        <td>
+                            <form action="/admin/orders" method="post">
+                                <input type="hidden" name="id" value="@order["id"]" />
+                                <select name="status" class="form-control" style="width: 200px; float: left;">
+                                    <option @(order["status"].Equals("in_behandeling") ? "selected=selected" : "") value="in_behandeling">In behandeling</option>
+                                    <option @(order["status"].Equals("vervallen") ? "selected=selected" : "") value="vervallen">Vervallen</option>
+                                    <option @(order["status"].Equals("betaald") ? "selected=selected" : "") value="betaald">Betaald</option>
+                                    <option @(order["status"].Equals("verstuurd") ? "selected=selected" : "") value="verstuurd">Verstuurd</option>
+                                </select> &nbsp; &nbsp;
+                                <input type="submit" value="Wijzig" class="btn btn-default" />
+                            </form>
+
+                        </td>
+                        <td>@order["datum"]</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</form>
+@{Html.RenderPartial("ManagerFooter");}

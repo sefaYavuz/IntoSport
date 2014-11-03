@@ -79,7 +79,7 @@ namespace IntoSport.Models
             return (query.Execute("bestelling", data) > 0);
         }
 
-        public static List<Dictionary<string, object>> GetAllOrders(string search = "")
+        public static List<Dictionary<string, object>> GetAllOrders(string search = "", int whereCustomer = 0)
         {
             Query query = new Query();
             query.Select("bestelling.id, bestelling.datum, bestelling.status, bestelling.id AS ordernr, user.id AS klantnr, SUM(order_regel.hoeveelheid * product.prijs) AS bedrag");
@@ -90,7 +90,12 @@ namespace IntoSport.Models
             {
                 query.Where("datum '%" + search + "%'");
             }
+            if(whereCustomer > 0)
+            {
+                query.Where("user.id = " + whereCustomer);
+            }
 
+            query.Having("bedrag IS NOT NULL");
             query.Order("datum DESC");
 
             return query.Execute();

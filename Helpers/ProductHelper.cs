@@ -45,7 +45,7 @@ namespace IntoSport.Helpers
          
             List<KeyValuePair<string, string>> detailsList = new List<KeyValuePair<string, string>>();
             conn.Open();
-            string sql = " select naam,waarde from detail join detail_product on detail.id = detail_product.detail_id join detail_waarde on detail_waarde.detail_id = detail_product.detail_id where product_id =?id";
+            string sql = "SELECT naam, waarde FROM detail_product INNER JOIN detail_waarde ON detail_product.detail_waarde_id = detail_waarde.id INNER JOIN detail ON detail_waarde.detail_id = detail.id WHERE product_id = ?id";
             MySqlCommand command = new MySqlCommand(sql, conn);
             MySqlParameter id = new MySqlParameter("?id", MySqlDbType.Int32);
             command.Parameters.Add(id).Value = product_id;

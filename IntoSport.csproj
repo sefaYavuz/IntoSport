@@ -151,7 +151,6 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\DatabaseConnector.cs" />
     <Compile Include="Models\Detail.cs" />
-    <Compile Include="Models\DetailWaarde.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Omzet.cs" />
     <Compile Include="Models\OrderRegel.cs" />
@@ -333,6 +332,7 @@
     <Content Include="Views\Klant\Index.cshtml" />
     <Content Include="Views\Klant\Account.cshtml" />
     <Content Include="Views\Klant\Bestellingen.cshtml" />
+    <Content Include="Views\Admin\Customer_orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

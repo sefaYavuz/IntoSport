@@ -10,23 +10,13 @@ namespace IntoSport.Models
     {
         public int id { get; set; }
         public string naam { get; set; }
-        public List<DetailWaarde> waardes { get; set; }
-
-        public void Insert(FormCollection collection)
-        {
-            Dictionary<string, object> data = new Dictionary<string, object>();
-            data.Add("naam", collection["naam"]);
-
-            var query = new Query();
-            query.Execute("detail", data);
-        }
 
         public static List<Dictionary<string, object>> getAllDetails(string search = "")
         {
             Query query = new Query();
-            query.Select("*");
+            query.Select("detail.naam, detail_waarde.id AS dw_id, detail_waarde.detail_id as dwd_id, detail_waarde.waarde");
             query.From("detail");
-            
+            query.Join("INNER", "detail_waarde ON detail.id = detail_waarde.detail_id");
             if(search.Length > 0)
             {
                 query.Where("naam LIKE '%" + search + "%'");
@@ -34,5 +24,6 @@ namespace IntoSport.Models
 
             return query.Execute();
         }
+
     }
 }

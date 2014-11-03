@@ -109,20 +109,9 @@ namespace IntoSport.Controllers
         }
 
         [Authorize(Roles = "beheerder")]
-        public ActionResult Customer(int customerID)
+        public ActionResult Customer_orders(int customerID)
         {
-            ViewData.Add("customer", Models.User.GetUser("", customerID));
-            return View("Category");
-        }
-
-        [Authorize(Roles = "beheerder")]
-        [HttpPost]
-        public ActionResult Customer(FormCollection collection)
-        {
-            if (ViewData.ModelState.IsValid)
-            {
-
-            }
+            ViewData.Add("customerOrders", Models.Order.GetAllOrders("", customerID));
             return View();
         }
 
@@ -152,7 +141,7 @@ namespace IntoSport.Controllers
         {
             Product product = new Product(ProductID);
             ViewData.Add("product", product);
-
+            ViewData.Add("details", Models.Detail.getAllDetails());
             ViewData.Add("getCategories", Models.Category.getAllCategories());
             return View("Product");
         }
@@ -183,12 +172,16 @@ namespace IntoSport.Controllers
                     p.thumbnail = "Template/images/products/thumbnail/" + Models.Product.GetLastProductID() + ".png";
                 }
 
-
-
                 string[] categories = new string[0];
                 if (collection.AllKeys.Contains("subcat"))
                 {
                     categories = collection["subcat"].Split(',');
+                }
+
+                string[] details = new string[0];
+                if (collection.AllKeys.Contains("detail"))
+                {
+                    details = collection["detail"].Split(',');
                 }
 
                 p.id = int.Parse(collection["id"]);
@@ -211,12 +204,14 @@ namespace IntoSport.Controllers
                     p.Update();
 
                     p.UpdateCategorie(categories);
+                    p.UpdateDetail(details);
                 }
                 else 
                 {
                     p.id = p.Insert();
 
                     p.InsertCategorie(categories);
+                    p.InsertDetail(details);
                 }
 
 
@@ -225,12 +220,14 @@ namespace IntoSport.Controllers
                 Product p2 = new Product(p.id);
                 ViewData.Add("product", p2);
                 ViewData.Add("getCategories", Models.Category.getAllCategories());
+                ViewData.Add("details", Models.Detail.getAllDetails());
                 return View("Product");
 
             }
 
 
             ViewData.Add("product", p);
+            ViewData.Add("details", Models.Detail.getAllDetails());
             ViewData.Add("getCategories", Models.Category.getAllCategories());
 
             return View();
