@@ -9,6 +9,7 @@
 @{
     var categoriesList = Category.getCategoryList();
     Product product = (Product)ViewData["product"];
+    
 }
 
 <h1>Product</h1>
@@ -73,9 +74,9 @@
     <br />
 
     <label>Korting (%):</label> 
-    @Html.TextBoxFor(model => model.korting, new { Value = product.korting, @class = "form-control" })
+    @Html.TextBoxFor(model => model.korting, new { Value = product.korting, @class = "form-control" }) <small>Dit is ook de aanbieding. Verschijnt in de slider op de homepage.</small>
 
-    <br />
+    <br /><br />
 
     <label>Voorraad:</label> 
     @Html.TextBoxFor(model => model.voorraad, new { Value = product.voorraad, @class = "form-control" })  <small>0 = Out of stock</small>
@@ -91,6 +92,42 @@
     }
 
     <h3>Details</h3>
+
+
+    @{
+            string detailName = "";
+    }
+
+    @{
+        <table style="margin-left: 20px;">
+            <tr><td>Details selecteren</td></tr>
+            @foreach(Dictionary<string, object> sefa in (List<Dictionary<string, object>>)ViewData["details"])
+            {
+                if(!detailName.Equals(sefa["naam"]))
+                {
+                    detailName = (string)sefa["naam"];
+                    
+                    <tr><td>&nbsp;</td></tr>
+                    <tr style="float: left; margin-left: -20px;"><td>@detailName</td></tr>
+                    <tr><td>&nbsp;</td></tr>
+                }
+                <tr>
+                    <td>@sefa["waarde"]</td>
+
+                    @if (Product.isInDetail(product.id, (int)sefa["dw_id"]))
+                    {
+                        
+                        <td><input type="checkbox" name="detail" value="@sefa["dw_id"]" checked /></td>
+                    }
+                    else
+                    {
+                        
+                        <td><input type="checkbox" name="detail" value="@sefa["dw_id"]"/></td>
+                    }
+                </tr>
+            }
+        </table>
+    }
 
     <br /><br />
 
