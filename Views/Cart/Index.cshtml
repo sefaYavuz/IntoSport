@@ -22,7 +22,7 @@
                   var productTotal = productList[i].prijs * quantList[i];
                 <tbody>
                     <tr>
-                        <td>@productList[i].naam <br /><br /> @productList[i].id <br /><br /> <a href="/product/@productList[i].id">Verwijder</a></td>
+                        <td>@productList[i].naam <br /><br /> @productList[i].id <br /><br /> <a href="/cart/remove/@productList[i].id">Verwijder</a></td>
                         <td><div>Prijs p/s:</div> &euro;@productList[i].prijs <br /><br /> <div>Aantal:</div> @quantList[i]</td>
                         <td>&euro;@productTotal</td>
                     </tr>

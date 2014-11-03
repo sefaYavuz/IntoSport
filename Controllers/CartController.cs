@@ -71,7 +71,7 @@ namespace IntoSport.Controllers
                 HttpCookie myCookie = new HttpCookie("cart");
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 ODBC.makeOrder(id, Request.Cookies["cart"].Value);
-                //Response.Cookies.Add(myCookie);
+                Response.Cookies.Add(myCookie);
                 return RedirectToAction("Success");
 
             }
