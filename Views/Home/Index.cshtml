@@ -1,12 +1,58 @@
 ﻿@using IntoSport.Models;
 
 @{Html.RenderPartial("BaseHead");}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="~/Template/js/slider.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Template/css/slider.css" />
 
-<div class="featured">
+<div class="">
+    <div id="slider">
+        <a  class="control_next"><span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+        <a  class="control_prev"><span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+        <ul>
+            @{
+                if (ViewData["kortingProducten"] != null)
+                {
+                    foreach (Product product in ViewData["kortingProducten"] as IEnumerable<IntoSport.Models.Product>)
+                    {
 
+                        <li>
+                            <div class="row">
+                            <div class="col-md-6">
+                                <img src="@product.afbeelding" class="img img-thumbnail"style="height:400px;width:100%" />
+                            </div>
+                            <div class="col-md-6">
+                                <h1 class="text-capitalize">@product.naam</h1>
+                                <div style="height:200px;">@product.beschrijving</div>
+
+                                <a href="" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Winkelwagen </a><br/>
+                                &nbsp;<span class="text-capitalize text-info" style="font-size:40px;"> @product.korting% korting</span>
+
+                            </div>
+                                </div>
+                        </li>
+
+                    }
+
+                }
+            }
+
+
+        </ul>
+    </div>
+
+    <div class="slider_option" >
+        <input type="checkbox" id="checkbox" >
+        <label for="checkbox">Autoplay Slider</label>
+    </div> 
+        
+          
 </div>
-<div class="divider"></div>
+<div class="divider">
+     
+</div>
 <div class="featuredProducts">
+
     <div class="productsContainer">
     @{  var limit = 0;
         foreach (Dictionary<string, object> product in (List<Dictionary<string, object>>)ViewData["getAllProducts"])
