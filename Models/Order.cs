@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using IntoSport.Models;
+using IntoSport.Helpers;
 
 namespace IntoSport.Models
 {
@@ -60,6 +62,48 @@ namespace IntoSport.Models
                         this.status = Status.vervallen;
                         break;
                     case "betaald":
+                        /*Query q = new Query();
+                        q.Select("email");
+                        q.From("user");
+                        q.Where("id = " + @id);
+                        string email = "";
+
+                        foreach (Dictionary<string, object> dic in q.Execute())
+                        {
+                            email = dic["email"].ToString();
+                        }
+
+                        Query q2 = new Query();
+                        q2.Select("product_id, hoeveelheid");
+                        q2.From("order_regel");
+                        q2.Where("bestelling_id =" + @id);
+                        List<Product> prodList = new List<Product>();
+                        List<int> quantList = new List<int>();
+
+                        foreach (Dictionary<string, object> dic in q2.Execute())
+                        {
+                            //prodList.Add(dic[")
+                        }
+                        User u = new User;
+                        u.id=user_id;
+                        List<Bestelling> bList = new BestellingHelper().getMyBestellingen(u);
+                        List<Bestelling> bListJaar =  new List<Bestelling>();
+                        int totalYearPrice = 0;
+
+                        foreach(Bestelling bestelling in bList){
+                            DateTime dt = Convert.ToDateTime(bestelling.datum);
+                            if (dt.CompareTo(DateTime.Now.AddYears(-1)) >= 0){
+                                bListJaar.Add(bestelling);
+                            }
+                        }
+
+                        foreach(Bestelling bestelling in bListJaar){
+                            Query q = new Query();
+                            q.Select("product_id, hoeveelheid");
+                            q.From("order_regel");
+                            q.Where("order_id =" @bestelling.)
+                        }*/
+                        
                         this.status = Status.betaald;
                         break;
                     default:
