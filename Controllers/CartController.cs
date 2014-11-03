@@ -16,7 +16,7 @@ namespace IntoSport.Controllers
 
         public ActionResult Index()
         {
-            if (Request.Cookies["cart"].Value != null)
+            if (Request.Cookies["cart"] != null)
             {
                 /*String[] cart = CartHelper.getItems(Request.Cookies["cart"].Value);
                 List<Dictionary<string,Product>> IDlist = new List<Dictionary<string,Product>>();
@@ -93,7 +93,7 @@ namespace IntoSport.Controllers
             }
             else
             {
-                Response.Cookies["cart"].Value = CartHelper.add(ID, Quantity);
+                Response.Cookies["cart"].Value = CartHelper.add(Request.Cookies["cart"].Value, ID, Quantity);
                 Response.Cookies["cart"].Expires = DateTime.Now.AddDays(1);
                 return RedirectToAction("Index");
             }
