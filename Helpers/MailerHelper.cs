@@ -15,8 +15,10 @@ namespace IntoSport.Helpers
             SmtpClient client = new SmtpClient();
             client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
+     
             client.UseDefaultCredentials = false;
             client.Credentials = new System.Net.NetworkCredential("IntoSport@hotmail.com", "Werkgroep6C");
+            client.EnableSsl = true;
             client.Host = "smtp.live.com";
             mail.Subject = subject;
             mail.Body = body;
