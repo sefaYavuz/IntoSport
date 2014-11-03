@@ -30,9 +30,15 @@ namespace IntoSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                u.createAccount();
-
-                return Redirect("register/Succes");
+                if (!u.exists())
+                {
+                    u.createAccount();
+                    return Redirect("register/Succes");
+                }
+                else
+                {
+                    ModelState.AddModelError("emailError", "Email is al in gebruik");
+                }
                 
 
             }
