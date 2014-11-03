@@ -12,6 +12,7 @@ namespace IntoSport.Controllers
     public class ProductController : Controller
     {
         ProductHelper productHelper = new ProductHelper();
+        BreadCrumbsHelper breadCrumbsHelper = new BreadCrumbsHelper();
 
         public ActionResult Index(int categorie)
         {
@@ -25,6 +26,7 @@ namespace IntoSport.Controllers
         {
             ViewData.Add("product", new Product(id));
             ViewData.Add("details", productHelper.getDetails(id));
+            ViewData.Add("categorie", breadCrumbsHelper.getBreadCrumbs(new Product(id)));
             return View();
         }
 

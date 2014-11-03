@@ -2,9 +2,24 @@
 @{
     var product = ViewData["product"] as IntoSport.Models.Product;
     var details = ViewData["details"] as List<KeyValuePair<string, string>>;
+    var categorie = ViewData["categorie"] as List<IntoSport.Models.BreadCrumbs>;
     
 }
-    <h1>Categroie 1 &raquo; Sub-categorie 2 &raquo; @product.naam</h1>
+    <h1>
+    @{
+        if (categorie != null)
+        {
+            foreach (IntoSport.Models.BreadCrumbs breadcrumbs in categorie)
+            {
+                <a href="/product/?categorie=@breadcrumbs.id">@breadcrumbs.naam</a><span>&raquo;</span>
+
+            }
+            @product.naam
+        }
+
+    }
+</h1>
+
 <div class="productDetailContainerTop">
     <div class="productDetailImg">
         <img src="@product.afbeelding" style="width:100%" />
