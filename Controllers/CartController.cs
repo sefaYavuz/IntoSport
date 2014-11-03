@@ -16,9 +16,9 @@ namespace IntoSport.Controllers
 
         public ActionResult Index()
         {
-            if (Request.Cookies["cart"] != null)
+            if (Request.Cookies["cart"].Value != null)
             {
-                String[] cart = CartHelper.getItems(Request.Cookies["cart"].Value);
+                /*String[] cart = CartHelper.getItems(Request.Cookies["cart"].Value);
                 List<Dictionary<string,Product>> IDlist = new List<Dictionary<string,Product>>();
                 List<Dictionary<string,int>> QAList = new List<Dictionary<string,int>>();
                 for (int i = 0; i < CartHelper.getItems(Request.Cookies["cart"].Value).Length-1; i++)
@@ -31,7 +31,7 @@ namespace IntoSport.Controllers
                     int quantity = Int32.Parse(CartHelper.getItems(Request.Cookies["cart"].Value)[i].Split(',')[1]);
                     data.Add("quantity", quantity);
                     list.Add(data);
-                     * */
+                     * 
 
                     Dictionary<string, Product> productData = new Dictionary<string, Product>();
                     string productID = CartHelper.getItems(Request.Cookies["cart"].Value)[i].Split(',')[0];
@@ -43,19 +43,20 @@ namespace IntoSport.Controllers
                     Dictionary<string, int> quantityData = new Dictionary<string, int>();
                     int quantity = Int32.Parse(CartHelper.getItems(Request.Cookies["cart"].Value)[i].Split(',')[1]);
                     quantityData.Add("id", quantity);
-                    QAList.Add(quantityData);
-                    
+                    QAList.Add(quantityData); */
+
+                List<Product> productList = new List<Product>();
+                List<int>  quantList = new List<int>();
+                string[] productArray = CartHelper.getItems(Request.Cookies["cart"].Value);
+                for(int i = 0; i<productArray.Length-1 ; i++){
+                    Product product = new Product(Int32.Parse(productArray[i].Split(',')[0]));
+                    productList.Add(product);
+                    quantList.Add(Int32.Parse(productArray[i].Split(',')[1]));
                 }
-                ViewData["Productlist"] = IDlist;
-                ViewData["QAList"] = QAList;
-
-                return View();
+                ViewData["productList"] = productList;
+                ViewData["quantList"] = quantList;
             }
-            else
-            {
-                return View();
-
-            }
+            return View();
         }
 
         
@@ -67,9 +68,10 @@ namespace IntoSport.Controllers
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 string id = authTicket.Name;
                 OrderDBController ODBC = new OrderDBController();
-                HttpCookie myCookie = new HttpCookie("UserSettings");
+                HttpCookie myCookie = new HttpCookie("cart");
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(myCookie);
+                ODBC.makeOrder(id, Request.Cookies["cart"].Value);
+                //Response.Cookies.Add(myCookie);
                 return RedirectToAction("Success");
 
             }
@@ -84,14 +86,14 @@ namespace IntoSport.Controllers
             if (Request.Cookies["cart"] == null)
             {
                 HttpCookie cart = new HttpCookie("cart");
-                cart.Value = CartHelper.addItem(ID, Quantity);
+                cart.Value = CartHelper.add(ID, Quantity);
                 Response.Cookies.Add(cart);
                 return RedirectToAction("Index");
 
             }
             else
             {
-                Response.Cookies["cart"].Value = CartHelper.addItem(Request.Cookies["cart"].Value, ID, Quantity);
+                Response.Cookies["cart"].Value = CartHelper.add(ID, Quantity);
                 Response.Cookies["cart"].Expires = DateTime.Now.AddDays(1);
                 return RedirectToAction("Index");
             }
@@ -105,6 +107,12 @@ namespace IntoSport.Controllers
         public ActionResult Success()
         {
             return View();
+        }
+
+        public ActionResult Remove(int ID)
+        {
+            Response.Cookies["cart"].Value = CartHelper.remove(Request.Cookies["cart"].Value, ID);
+            return Redirect("/cart");
         }
     }
 }

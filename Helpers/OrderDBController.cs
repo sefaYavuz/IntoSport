@@ -13,23 +13,25 @@ namespace IntoSport
 
         }
 
-        public void makeOrder(string id, string cart)
+        public void makeOrder(string email, string cart)
 		{
-			Query q = new Query();
-			q.Select("MAX(id)");
-			q.From("Bestelling");
-			q.Limit ("1");
-			int maxOrderPlus = 0;
 
-			foreach (Dictionary<string, object> order in q.Execute()) {
+            Query userQuery = new Query();
+            userQuery.Select("id");
+            userQuery.From("user");
+            userQuery.Where("email = " + "\"" +@email + "\"");
+            int id = 0;
 
-				if ((int)order ["id"]==0) {
-					maxOrderPlus = 0;
-				} else {
-					maxOrderPlus = (int)order ["id"]+1;
-				}
+            foreach (Dictionary<string, object> user in userQuery.Execute())
+            {
+                    id = (int)user["id"];    
+            }
 
-			}
+            Query q = new Query();
+            q.Select("MAX(id)");
+            q.From("bestelling");
+            q.Limit("1");
+			int maxOrder = 0;
 
 			Query q2 = new Query();
 			DateTime saveNow = DateTime.Now;
@@ -39,25 +41,31 @@ namespace IntoSport
 			bestelling.Add ("status", "in_behandeling");
 			bestelling.Add ("datum", saveNow.ToString ());
 			bestelling.Add ("korting", 0);
-
+           
 			q2.Execute("bestelling", bestelling);
 
-
-			foreach(string value in CartHelper.getItems(cart)){
-
-				Query q3 = new Query ();
-
-				string[] product = value.Split (',');
-
-				Dictionary<string, object> order_regel = new Dictionary<string,object> ();
-				order_regel.Add ("product_id", product [0]);
-                order_regel.Add("bestelling_id", maxOrderPlus.ToString());
-				order_regel.Add("hoeveelheid", product[1]);
-
-				q3.Execute("order_regel", order_regel);
+            foreach (Dictionary<string, object> order in q.Execute())
+            {
+                    maxOrder = (int)order["MAX(id)"] + 1;
+            }
 
 
-			}
+
+            string[] itemList = CartHelper.getItems(cart);
+            for (int i = 0; i < CartHelper.getItems(cart).Length - 1; i++)
+            {
+                string value = itemList[i];
+                Query q3 = new Query();
+
+                string[] product = value.Split(',');
+
+                Dictionary<string, object> order_regel = new Dictionary<string, object>();
+                order_regel.Add("product_id", Int32.Parse(product[0]));
+                order_regel.Add("bestelling_id", maxOrder);
+                order_regel.Add("hoeveelheid", Int32.Parse(product[1]));
+
+                q3.Execute("order_regel", order_regel);
+            }
 
 
 
