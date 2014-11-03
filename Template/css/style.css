@@ -98,6 +98,7 @@ footer .wrapper div ul li a:hover { text-decoration: none; }
 .content .cartWrapper table tbody tr td a { color: #42bd41; }
 .content .cartWrapper table tbody tr td a:hover { text-decoration: none; }
 
+.content .cartWrapper .products { width:100%; }
 .content .cartWrapper .total { float: right; margin-top: 25px;}
 .content .cartWrapper .total tr td div { text-align: left; }
 
