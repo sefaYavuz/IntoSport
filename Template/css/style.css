@@ -87,7 +87,6 @@ footer .wrapper div ul li a:hover { text-decoration: none; }
 
 /* WINKELWAGEN */
 
-.content .cartWrapper { margin:0 auto; width: 768px; }
 .content .cartWrapper table { table-layout: fixed; }
 .content .cartWrapper table thead { background-color: #42bd41; color: #FFF; }
 .content .cartWrapper table thead tr td { padding: 10px; width: 250px; }
