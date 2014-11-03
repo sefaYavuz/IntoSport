@@ -30,10 +30,10 @@ namespace IntoSport.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (u.createAccount())
-                {
-                    return View("succes", u);
-                }
+                u.createAccount();
+
+                return Redirect("register/Succes");
+                
 
             }
             return View("index", u);
