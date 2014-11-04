@@ -55,7 +55,7 @@
                             if((int)categorie["parent"] == 0)
                             {
                                 <li>
-                                    <a href="/product/?categorie=@categorie["id"]">@categorie["naam"]</a>
+                                    <span style="color: #FFF;">@categorie["naam"]</span>
                                         @{
                                             foreach (Dictionary<string, object> subcat in (List<Dictionary<string, object>>)ViewData["categories"])
                                             {
