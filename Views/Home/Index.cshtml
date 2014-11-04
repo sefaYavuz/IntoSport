@@ -20,7 +20,7 @@
                                     <h2 class="text-uppercase" style="margin: 0;">@product.naam</h2>
                                     <div style="height:200px;">@product.beschrijving</div>
 
-                                    <a href="" class="btn btn-lg btn-success" style="color: #FFF; margin-top: 75px;"><span class="glyphicon glyphicon-shopping-cart"></span> Winkelwagen </a><br />
+                                    <a href="/cart/addToCart?ID=@product.id&Quantity=1" class="btn btn-lg btn-success" style="color: #FFF; margin-top: 75px;"><span class="glyphicon glyphicon-shopping-cart"></span> Winkelwagen </a><br />
                                     &nbsp;<span class="text-capitalize text-info" style="font-size: 26px; text-transform: uppercase; float: left; padding-top: 15px; color:#000;"> @product.korting% korting</span>
 
                                 </div>

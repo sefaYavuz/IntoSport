@@ -51,12 +51,15 @@
             
                 <p class="price">Prijs: <span >&euro;@product.prijs</span><p>
                 <p></p>
-                <i class="fa-3x"> -@((product.prijs/100)*product.korting)&euro;</i>
+            <br/>
+                <i class="fa-2x"> @(product.korting) %</i>
             
 
     <div class="rightContainer">
-        <form action="/cart" method="post">
-            <label>Aantal: <input type="text" name="amount" value="1" min="0"></label>
+        <form action="/cart/addToCart" method="get">
+            <input type="hidden" name="id" value="@product.id" />
+            <label>Aantal: <input type="text" name="Quantity" value="1" min="0"></label>
+
             <input type="submit" value="Plaats in winkelwagen" name="submit" class="submit">
         </form>
     </div>
