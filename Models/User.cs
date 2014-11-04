@@ -158,7 +158,7 @@ namespace IntoSport.Models
             data.Add("postcode", this.postcode);
             data.Add("plaats", this.plaats);
             data.Add("tel", this.tel);
-            data.Add("role", this.role.ToString());
+            data.Add("role", "klant");
             if (id == 0)
             {
                 data.Add("email", this.email);
