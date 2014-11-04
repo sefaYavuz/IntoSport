@@ -9,7 +9,10 @@
 <p>Hier krijgt u een overzicht te zien met alle bestellingen.</p>
 <br /><br />
 
-<form action="/admin/orders" method="post">
+    @if(ViewData["msg"] != null)
+    {
+        <p class="alert alert-success">@ViewData["msg"]</p>
+    }
 
     <!--<input type="text" name="search" placeholder="Zoek een bestelling..," value="ViewData["search"]" class="form-control" style="width: 300px; float: left; margin-right: 15px;" />
     <input type="submit" value="Zoeken" class="btn btn-default" />
@@ -33,7 +36,7 @@
                         <td>@order["ordernr"]</td>
                         <td>&euro; @order["bedrag"]</td>
                         <td>
-                            <form action="/admin/orders" method="post">
+                            <form action="@Request.RawUrl" method="post">
                                 <input type="hidden" name="id" value="@order["id"]" />
                                 <select name="status" class="form-control" style="width: 200px; float: left;">
                                     <option @(order["status"].Equals("in_behandeling") ? "selected=selected" : "") value="in_behandeling">In behandeling</option>
@@ -51,5 +54,4 @@
             }
         </tbody>
     </table>
-</form>
 @{Html.RenderPartial("ManagerFooter");}

@@ -28,9 +28,9 @@
                         {
                             <a href="/admin">Ga naar de back-end &raquo;</a>
                         }
-                        else if(User.IsInRole("klant"))
+                        else if (User.IsInRole("klant"))
                         {
-                               <a href="/Klant"> mijn account</a>          
+                            <a href="/login/logout">Uitloggen</a> <span>/</span> <a href="/Klant">Mijn account</a>           
                         }
                         else
                         {
@@ -49,17 +49,29 @@
                     @{
                         foreach (Dictionary<string, object> categorie in (List<Dictionary<string, object>>)ViewData["categories"])
                         {
-                            <li>
-                                <a href="/product/?categorie=@categorie["id"]">@categorie["naam"]</a>
-                                @{
-                                    if((int)categorie["parent"] != 0)
-                                    {
-                                        <ul>
-                                            <li><a href="/product/?categorie=@categorie["parent"]">@categorie["parentname"]</a></li>
-                                        </ul>
-                                    }
-                                }
-                            </li>
+                            string subMenu = "<ul>";
+                            
+
+                            if((int)categorie["parent"] == 0)
+                            {
+                                <li>
+                                    <a href="/product/?categorie=@categorie["id"]">@categorie["naam"]</a>
+                                        @{
+                                            foreach (Dictionary<string, object> subcat in (List<Dictionary<string, object>>)ViewData["categories"])
+                                            {
+                                                if((int)subcat["parent"] == (int)categorie["id"])
+                                                {
+                                                    subMenu += "<li><a href=\"/product/?categorie=" + @subcat["id"] + "\">" + @subcat["naam"] + "</a></li>";
+                            
+                                                }
+                                            }
+
+                                            subMenu += "</ul>";           
+                                        }
+                                    
+                                        @Html.Raw(subMenu)                       
+                                </li>
+                            }
                         }
                     }
                 </ul>

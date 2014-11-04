@@ -73,6 +73,8 @@ namespace IntoSport
 
                 string query = "INSERT INTO `intosport`.`order_regel`(`bestelling_id`,`product_id`,`hoeveelheid`)VALUES(" + maxOrder + "," + product[0] + "," + product[1] + ")";
 
+                Models.Order.UpdateStock(int.Parse(product[0]), int.Parse(product[1]));
+
                 try
                 {
                     MySqlConnection conn = new MySqlConnection("Server=" + "127.0.0.1" + ";Database=" + "intosport" + ";Uid=" + "admin" + ";Pwd=" + "admin" + ";");

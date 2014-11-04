@@ -118,6 +118,39 @@ namespace IntoSport.Controllers
             return View();
         }
 
+        [Authorize(Roles = "beheerder")]
+        [HttpPost]
+        public ActionResult Customer_orders(FormCollection collection, int customerID)
+        {
+
+            int id = int.Parse(collection["id"]);
+            string status = collection["status"];
+
+            Order order = new Order(id);
+            switch (status)
+            {
+                case "in_behandeling":
+                    order.inBehandeling();
+                    break;
+                case "betaald":
+                    order.isBetaald();
+                    break;
+                case "vervallen":
+                    order.isVervallen();
+                    break;
+                case "verstuurd":
+                    order.isVerstuurd();
+                    new MailerHelper("U bestelling is verzonden", "IntoSport Status", IntoSport.Models.User.GetUser("", order.user_id));
+                    break;
+            }
+
+            order.UpdateStatus();
+
+            ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
+            ViewData.Add("customerOrders", Models.Order.GetAllOrders("", customerID));
+            return View();
+        }
+
         /* KLANT END */
 
         /* PRODUCTEN START*/

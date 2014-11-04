@@ -117,22 +117,6 @@ namespace IntoSport.Models
                 }
             }
 
-            // HAVING
-            if (having.Count > 0)
-            {
-                foreach (string s in having)
-                {
-                    if (!queryString.Contains("HAVING"))
-                    {
-                        queryString += "HAVING " + @s + " ";
-                    }
-                    else
-                    {
-                        queryString += "AND " + @s + " ";
-                    }
-                }
-            }
-
             // GROUP
             if (group.Count > 0)
             {
@@ -145,6 +129,22 @@ namespace IntoSport.Models
                     else
                     {
                         queryString += ", " + @s + " ";
+                    }
+                }
+            }
+
+            // HAVING
+            if (having.Count > 0)
+            {
+                foreach (string s in having)
+                {
+                    if (!queryString.Contains("HAVING"))
+                    {
+                        queryString += "HAVING " + @s + " ";
+                    }
+                    else
+                    {
+                        queryString += "AND " + @s + " ";
                     }
                 }
             }

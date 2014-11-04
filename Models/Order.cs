@@ -139,10 +139,34 @@ namespace IntoSport.Models
                 query.Where("user.id = " + whereCustomer);
             }
 
+            query.Group("bestelling.id");
             query.Having("bedrag IS NOT NULL");
             query.Order("datum DESC");
-
             return query.Execute();
+        }
+
+        public static bool UpdateStock(int product, int amount)
+        {
+            int stock = 0;
+
+            Query q = new Query();
+            q.Select("voorraad");
+            q.From("product");
+            q.Where("id = " + product);
+
+            foreach(Dictionary<string, object> products in q.Execute())
+            {
+                stock = (int)products["voorraad"];
+            }
+
+            int newStock = stock - amount;
+
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data.Add("id", product);
+            data.Add("voorraad", newStock);
+
+            return q.Execute("product", data) > 0;
+
         }
 
     }

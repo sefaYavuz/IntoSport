@@ -159,7 +159,7 @@ namespace IntoSport.Models
             }
         }
 
-        public static List<Dictionary<string, object>> getAllProducts(string search = "", string limit = "", string joinType = "", string join = "")
+        public static List<Dictionary<string, object>> getAllProducts(string search = "", string limit = "", string joinType = "", string join = "", string where = "")
         {
             Query query = new Query();
             query.Select("*");
@@ -176,6 +176,10 @@ namespace IntoSport.Models
             if (limit.Length > 0)
             {
                 query.Limit(limit);
+            }
+            if(where.Length > 0)
+            {
+                query.Where(where);
             }
 
             query.Order("id DESC");
