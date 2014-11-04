@@ -5,6 +5,23 @@
 @model Register
 
 <h2>Meld je nu aan!</h2>
+
+@if (!ViewData.ModelState.IsValid)
+    {
+        <p class="alert alert-danger">
+            De volgende velden zijn verplicht:<br /> <strong>
+                @Html.ValidationMessageFor(model => model.voornaam) <br />
+                @Html.ValidationMessageFor(model => model.achternaam) <br />
+                @Html.ValidationMessageFor(model => model.adres) <br />
+                @Html.ValidationMessageFor(model => model.huisnr) <br />
+                @Html.ValidationMessageFor(model => model.postcode) <br />
+                @Html.ValidationMessageFor(model => model.plaats) <br />
+                @Html.ValidationMessageFor(model => model.tel) <br />
+                @Html.ValidationMessageFor(model => model.email) <br />
+                @Html.ValidationMessageFor(model => model.wachtwoord) <br />
+            </strong>
+        </p>
+}
 @using (Html.BeginForm())
 {
     <div class="grid-container">
@@ -12,36 +29,30 @@
             <div class="small">Voornaam:</div>
             <div class="input">
                 @Html.TextBoxFor(model => model.voornaam, new { @class = "form-control"})
-                @Html.ValidationMessageFor(model => model.voornaam)
             </div>
-            <div class="small">Achternaam:</div>
+            <div class="small">Tussenvoegsel + Achternaam:</div>
             <div class="input">
                 @Html.TextBoxFor(model => model.achternaam, new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.achternaam)
             </div>
             <div class="small">Adres:</div>
             <div class="input">
                 @Html.TextBoxFor(model => model.adres, new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.adres)
             </div>
             <div class="small">Huisnummer + Toevoeging:</div>
             <div class="input">
                 @Html.TextBoxFor(model => model.huisnr, new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.huisnr)
             </div>
             <div class="small">Postcode:</div>
             <div class="input">
                 @Html.TextBoxFor(model => model.postcode, new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.postcode)
             </div>
             <div class="small">Stad:</div>
             <div class="input">
                 @Html.TextBoxFor(model => model.plaats, new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.plaats)</div>
+            </div>
             <div class="small">Telefoonnummer:</div>
             <div class="input">
                 @Html.TextBoxFor(model => model.tel, new { @class = "form-control" }) 
-                @Html.ValidationMessageFor(model => model.tel)
             </div>
         </div>
         <div class="grid-6">
@@ -49,20 +60,18 @@
             <div class="input">
                 @Html.ValidationMessage("emailError")
                 @Html.TextBoxFor(model => model.email, new { autocomplete = "off", @class="form-control"  }) 
-                @Html.ValidationMessageFor(model => model.email)
             </div>
             <div class="small">Wachtwoord:</div>
             <div class="input">
                 @Html.PasswordFor(model => model.wachtwoord, new { autocomplete = "off", @class= "form-control" }) 
-                @Html.ValidationMessageFor(model => model.wachtwoord)
             </div>
                   
         </div>
     </div>
     <br/>
     
-<h2> Door te registeren gaat u overeen met  de <a href="/voorwaarden"> Algemene voorwaarden</a></h2>        
-<input type="submit" name="submit" value="Registreer" class="btn btn-lg btn-default" />
+<p>Door te registeren gaat u overeen met  de <a href="/home/voorwaarden"> Algemene voorwaarden</a></p>        
+<input type="submit" name="submit" value="Registreer" class="btn btn-default" />
  
 
 

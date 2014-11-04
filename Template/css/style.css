@@ -55,6 +55,9 @@ footer .wrapper div ul li a:hover { text-decoration: none; }
 .content .featuredProducts .productsContainer .products .productDetails a:hover { text-decoration: underline; }
 .content .featuredProducts .productsContainer .products:nth-child(4) { margin-right: 0px; }
 
+.input { margin-bottom: 15px; }
+.input input { width: 300px; }
+
 /* PRODUCTEN OVERZICHT */
 
 .content h1 { color: #000; font-weight: 300; font-size: 16px; }

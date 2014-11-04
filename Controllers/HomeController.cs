@@ -26,6 +26,10 @@ namespace IntoSport.Controllers
             return View();
         }
 
+        public ActionResult Voorwaarden()
+        {
+            return View();
+        }
     
     }
 }
