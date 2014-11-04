@@ -49,30 +49,37 @@
                     @{
                         foreach (Dictionary<string, object> categorie in (List<Dictionary<string, object>>)ViewData["categories"])
                         {
-                            string subMenu = "<ul>";
+                            string subMenu = "";
+                            string endSubMenu = "";
                             
-
                             if((int)categorie["parent"] == 0)
                             {
                                 <li>
                                     <span style="color: #FFF;">@categorie["naam"]</span>
                                         @{
-                                            foreach (Dictionary<string, object> subcat in (List<Dictionary<string, object>>)ViewData["categories"])
+                                            
+                                            foreach(Dictionary<string, object> subcat in (List<Dictionary<string, object>>)ViewData["categories"])
                                             {
                                                 if((int)subcat["parent"] == (int)categorie["id"])
                                                 {
+                                                    if(subMenu.Length == 0)
+                                                    {
+                                                        subMenu = "<ul>";
+                                                    }
+                                                    
                                                     subMenu += "<li><a href=\"/product/?categorie=" + @subcat["id"] + "\">" + @subcat["naam"] + "</a></li>";
-                            
+                                                    
+                                                    endSubMenu += (endSubMenu.Length == 0 ? endSubMenu = "</ul>" : "");
+                                                    
                                                 }
                                             }
 
-                                            subMenu += "</ul>";           
+                                            @Html.Raw(subMenu + endSubMenu);
                                         }
-                                    
-                                        @Html.Raw(subMenu)                       
                                 </li>
                             }
                         }
+                        
                     }
                 </ul>
             </nav>
