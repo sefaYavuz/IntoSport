@@ -12,26 +12,26 @@ namespace IntoSport.Models
 {
     public class Register : User
     {
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Voornaam")]
         public override string voornaam { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Achternaam")]
         public override string achternaam { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Adres")]
         public override string adres { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Huisnummer")]
 
         public override string huisnr { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Postcode")]
         public override string postcode { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Plaats")]
         public override string plaats { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Telefoonnummer")]
         public override string tel { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "E-mailadres")]
         [Remote("IsEmailAvailable", "Register", HttpMethod = "POST", ErrorMessage = "Het e-mail adres is al reeds in gebruik!")]
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Voer een geldige e-mail adres in!")]
         public override string email { get; set; }
-        [Required(ErrorMessage = "Dit is een verplicht veld")]
+        [Required(ErrorMessage = "Wachtwoord")]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "Het wachtwoord moet minimaal 6 characters lang zijn")]
         public override string wachtwoord { get; set; }
 
