@@ -84,6 +84,7 @@ namespace IntoSport.Controllers
 
             order.UpdateStatus();
 
+            ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
             ViewData.Add("orders", Models.Order.GetAllOrders());           
             return View();
         }
@@ -215,7 +216,6 @@ namespace IntoSport.Controllers
                     p.InsertCategorie(categories);
                     p.InsertDetail(details);
                 }
-
 
                 ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
 
