@@ -53,12 +53,46 @@ namespace IntoSport.Controllers
           
             return View();
         }
-       [Authorize(Roles ="klant")]
+        [Authorize(Roles ="klant")]
         public ActionResult Bestellingen()
         {
-            User user = Models.User.GetUser(HttpUtility.HtmlEncode(User.Identity.Name));
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];//.ASPXAUTH
+            FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            string email = authTicket.Name;
+            Query userQuery = new Query();
+            userQuery.Select("id");
+            userQuery.From("user");
+            userQuery.Where("email = " + "\"" + @email + "\"");
+            int id = 0;
 
-            return View(new BestellingHelper().getMyBestellingen(user));
+            foreach (Dictionary<string, object> user in userQuery.Execute())
+            {
+                id = (int)user["id"];
+            }
+
+            ViewData.Add("orders", Models.Order.GetAllOrders("", id));
+
+            return View();
+
+           
         }
+
+
+        [Authorize(Roles="klant")]
+        [HttpPost]
+        public ActionResult Bestellingen(FormCollection collection)
+        {
+            int ID = Int32.Parse(collection["orderID"]);
+            Query q = new Query();
+            Order order = new Order(ID);
+            order.isVervallen();
+            order.UpdateStatus();
+
+            return RedirectToAction("bestellingen");
+        }
+
+        
     }
+
+    
 }
