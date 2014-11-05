@@ -72,7 +72,7 @@ namespace IntoSport.Controllers
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 ODBC.makeOrder(id, Request.Cookies["cart"].Value);
                 Response.Cookies.Add(myCookie);
-               // new IntoSport.Helpers.MailerHelper("Bedankt voor uw bestelling bij intosport. Het wordt zo spoeding mogelijk verwerkt.", "Bestelling", IntoSport.Models.User.GetUser(id));
+                new IntoSport.Helpers.MailerHelper("Bedankt voor uw bestelling bij intosport. Het wordt zo spoeding mogelijk verwerkt.", "Bestelling", IntoSport.Models.User.GetUser(id));
                 return RedirectToAction("Success");
 
             }
