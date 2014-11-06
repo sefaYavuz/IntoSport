@@ -34,7 +34,12 @@ namespace IntoSport.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(login.email, true);
 
-                    return RedirectToAction("Index", "Admin");
+                    if (base.User.IsInRole("beheerder, manager"))
+                    {
+                        return Redirect("admin");
+                    }
+
+                    return Redirect("home");
                 }
                 else
                 {

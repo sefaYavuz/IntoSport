@@ -48,21 +48,27 @@
            }
         </ul>
         <div class="bottomContainer">
-            
-                <p class="price">Prijs: <span >&euro;@product.prijs</span><p>
-                <p></p>
-            <br/>
-                <i class="fa-2x"> @(product.korting) %</i>
-            
 
-    <div class="rightContainer">
-        <form action="/cart/addToCart" method="get">
-            <input type="hidden" name="id" value="@product.id" />
-            <label>Aantal: <input type="text" name="Quantity" value="1" min="0"></label>
+                <p class="price">Prijs: <span>&euro; @product.prijs</span><p>
+                @{
 
-            <input type="submit" value="Plaats in winkelwagen" name="submit" class="submit">
-        </form>
-    </div>
+                    if (product.korting != 0)
+                    {
+                        <br />
+                        <br />
+                        <i class="fa-2x">@product.korting<span>%</span></i>
+                    }
+                }
+
+
+                <div class="rightContainer">
+                    <form action="/cart/addToCart" method="get">
+                        <input type="hidden" name="id" value="@product.id" />
+                        <label>Aantal: <input type="text" name="Quantity" value="1" min="0"></label>
+
+                        <input type="submit" value="Plaats in winkelwagen" name="submit" class="submit">
+                    </form>
+                </div>
 </div>
     </div>
 </div>
