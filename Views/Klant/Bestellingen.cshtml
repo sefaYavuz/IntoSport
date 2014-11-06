@@ -1,8 +1,11 @@
-﻿@{Html.RenderPartial("baseHead");}
+﻿@using IntoSport.Models
+@using System.Web.Mvc.Html;
+
+@{Html.RenderPartial("baseHead");}
 @{
     ViewBag.Title = "Bestellingen";
 }
-@model List<IntoSport.Models.Bestelling>
+@model List<IntoSport.Models.Order>
 
 
 <h2>Bestellingen</h2>
@@ -15,13 +18,21 @@
         </thead>
         <tbody>
        @{
-           if(Model !=  null)
-           {
-               foreach (IntoSport.Models.Bestelling besteling in Model)
+           if (ViewData["orders"] != null) { 
+               foreach (Dictionary<string, object> order in (List<Dictionary<string, object>>)ViewData["orders"])
                {
-                <tr><td>@besteling.datum</td><td>@besteling.Aantal_producten</td><td>@besteling.status</td></tr>   
+                <tr>
+                    <td>@order["datum"]</td>
+                    <td></td>
+                    <td>@order["status"] <form action="/klant/Bestellingen" method="post">
+                    <input type="hidden" name="orderID" value="@order["id"]" />
+                    <input type="submit" value="Annuleren" />       
+                    </form></td>
+                    
+                </tr>   
                }
            }
+           
        }
             </tbody>
     </table>

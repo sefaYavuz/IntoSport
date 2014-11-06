@@ -23,8 +23,9 @@ namespace IntoSport.Helpers
             MySqlDataReader reader = command.ExecuteReader();
             while(reader.Read())
             {
+                DateTime dt = Convert.ToDateTime(reader.GetString("datum"));
                 Bestelling  bestelling = new Bestelling();
-                bestelling.datum = reader.GetDateTime("datum");
+                bestelling.datum = dt;
                 bestelling.Aantal_producten =reader.GetInt16("aantal");
                 bestelling.status = reader.GetString("status");
                 list.Add(bestelling);

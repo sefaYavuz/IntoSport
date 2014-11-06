@@ -29,6 +29,7 @@
                 <td>Plaats</td>
                 <td>Tel.</td>
                 <td>E-mailadres</td>
+                <td>Goldmember?</td>
                 <td></td>
             </tr>
         </thead>
@@ -45,6 +46,7 @@
                         <td>@customer["plaats"]</td>
                         <td>@customer["tel"]</td>
                         <td>@customer["email"]</td>
+                        <td>@(customer["goldmember"].Equals("1") ? "Ja" : "Nee")</td>
                         <td><a href="/admin/customer_orders?customerID=@customer["id"]">Bestellingen</a></td>
                     </tr>
                 }
