@@ -154,6 +154,7 @@
     <Compile Include="Helpers\ProductHelper.cs" />
     <Compile Include="Models\Bestelling.cs" />
     <Compile Include="Models\BreadCrumbs.cs" />
+    <Compile Include="Models\DetailWaarde.cs" />
     <Compile Include="Models\KlantGegevens.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -225,9 +226,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -244,6 +245,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Template\css\admin_style.css" />
+    <Content Include="Template\css\bootstrap-tagsinput.css" />
     <Content Include="Template\css\bootstrap.css" />
     <Content Include="Template\css\bootstrap.min.css" />
     <Content Include="Template\css\sb-admin.css" />
@@ -253,6 +255,7 @@
     <Content Include="Template\font-awesome-4.1.0\css\font-awesome.min.css" />
     <Content Include="Template\font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Template\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Template\js\bootstrap-tagsinput.min.js" />
     <Content Include="Template\js\bootstrap.js" />
     <Content Include="Template\js\bootstrap.min.js" />
     <Content Include="Template\js\jquery-1.11.0.js" />
@@ -348,6 +351,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
     <Folder Include="Template\images\products\thumbnail\" />
   </ItemGroup>
   <ItemGroup>

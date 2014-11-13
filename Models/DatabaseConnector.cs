@@ -9,7 +9,7 @@ namespace IntoSport.Models
     public class DatabaseConnector
     {
         private static DatabaseConnector databaseConnector;
-        protected MySqlConnection conn;
+        public MySqlConnection conn;
 
         private string server = "localhost";
         private string db = "intosport";

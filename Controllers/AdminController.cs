@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using IntoSport.Models;
 using System.IO;
 using IntoSport.Helpers;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace IntoSport.Controllers
 {
@@ -214,10 +216,21 @@ namespace IntoSport.Controllers
                     categories = collection["subcat"].Split(',');
                 }
 
-                string[] details = new string[0];
-                if (collection.AllKeys.Contains("detail"))
+
+                JObject jsonobject = JObject.Parse(collection["detailsJSON"]);
+
+               
+                foreach (var d in  jsonobject)
                 {
-                    details = collection["detail"].Split(',');
+                    Detail detail = new Detail();
+                    detail.naam = d.Key;
+                    foreach(string waarde in d.Value.ToString().Split(','))
+                    {
+                        DetailWaarde dw = new DetailWaarde();
+                        dw.waarde = waarde;
+                        detail.waardes.Add(dw);
+                    }
+                    detail.Save();
                 }
 
                 p.id = int.Parse(collection["id"]);
@@ -235,20 +248,20 @@ namespace IntoSport.Controllers
                     p.afbeelding = "";
                 }
 
-                if(p.id != 0)
-                {
-                    p.Update();
+                //if(p.id != 0)
+                //{
+                //    p.Update();
 
-                    p.UpdateCategorie(categories);
-                    p.UpdateDetail(details);
-                }
-                else 
-                {
-                    p.id = p.Insert();
+                //    p.UpdateCategorie(categories);
+                //    p.UpdateDetail(details);
+                //}
+                //else 
+                //{
+                //    p.id = p.Insert();
 
-                    p.InsertCategorie(categories);
-                    p.InsertDetail(details);
-                }
+                //    p.InsertCategorie(categories);
+                //    p.InsertDetail(details);
+                //}
 
                 ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
 

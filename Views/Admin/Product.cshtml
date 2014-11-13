@@ -12,10 +12,73 @@
     
 }
 
-<h1>Product</h1>
+<script src="~/Template/js/bootstrap-tagsinput.min.js"> </script>
+<link type="text/css" rel="stylesheet" href="~/Template/css/bootstrap-tagsinput.css"/>
+<script>
+    $(document).ready(function () {
+        var json_object = {};
 
-<br />
-<br />
+        $("#saveDetail").click(function()
+        {
+            
+          
+            var detail_naam = $("#detail_naam").val();
+            var detail_waarde = Array($("#detail_waarde").val());
+            json_object[detail_naam] = detail_waarde;
+       
+
+            console.log(JSON.stringify(json_object));
+            $("#inputDetails").val(JSON.stringify(json_object));
+            showDetails();
+
+        });
+
+
+        function showDetails()
+        {
+            $("#details").html("");
+            for (var key in json_object) {
+                if (json_object.hasOwnProperty(key)) {
+                
+                    $("#details").append("<strong>" + key + " </strong>: " + json_object[key] + "<br/>");
+                    $(".modal").modal("hide");
+                    $("#detail_name").empty();
+                    $("#detail_waarde").empty();
+                }
+            }
+           // json_object = {};
+        }
+
+      
+    
+        
+
+    });
+    
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Product Details</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" name="" id="detail_naam" placeholder="Naam"/>
+                <br/>
+                <input type="text" class="form-control"  id="detail_waarde" placeholder="Mogelijke waardes" data-role="tagsinput" />
+                <input type="hidden" value="@product.id"/>
+            </div>
+            <div class="modal-footer">
+               
+                <button type="button" class="btn btn-primary" id="saveDetail">Opslaan</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @{
     if (ViewData["msg"] != null)
@@ -39,8 +102,39 @@
 
 <form action="@Request.RawUrl" method="post" enctype="multipart/form-data">
     @Html.HiddenFor(model => model.id, new { Value = product.id })
+<div class="row">
+    <div class="col-md-3">
+        @{
+            if (!product.thumbnail.IsEmpty())
+            {
+                <img src="@product.thumbnail" width="150" class="img-thumbnail" />
+                
+            }
+            else
+            {
+                <span class="fa fa-image fa-5x"></span>
+            }
+            
+        }
+        <br/>
+        <label>Thumbnail:</label>
+        <input type="file" name="thumbnail" class="btn btn-default btn-sm" />
 
-    <label>(De)selecteer een categorie:</label><br />
+        <br />
+
+        <label>Afbeelding:</label>
+        <input type="file" name="afbeelding" class="btn btn-default btn-sm" />
+        <br/><br/>
+        <label>Details</label><!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm btn-lg pull-right" data-toggle="modal" data-target="#myModal">
+    Details Tevoegen
+</button>
+        
+        <div id="details"></div>
+        <hr />
+
+    <label>(De)selecteer een categorie:</label><br/>
+        <hr/>
     @{
         foreach(Category cat in categoriesList)
         {
@@ -56,7 +150,10 @@
         }
 }
 
-    <br /><br />
+
+        </div>
+  <div class="col-md-6">
+
 
     <label>Naam:</label> 
     @Html.TextBoxFor(model => model.naam, new { Value = product.naam, @class = "form-control" }) 
@@ -80,21 +177,8 @@
 
     <label>Voorraad:</label> 
     @Html.TextBoxFor(model => model.voorraad, new { Value = product.voorraad, @class = "form-control" })  <small>0 = Out of stock</small>
-
-    <br /><br />
-    
-    @{
-        if (!product.thumbnail.IsEmpty())
-        {
-            <img src="@product.thumbnail" width="150" />
-            <br /> <br />
-        }
-    }
-
-    <h3>Details</h3>
-
-
-    @{
+   
+    @*@{
             string detailName = "";
     }
 
@@ -127,21 +211,15 @@
                 </tr>
             }
         </table>
-    }
+    }*@
 
-    <br /><br />
-
-    <label>Thumbnail:</label>
-    <input type="file" name="thumbnail" class="form-control" />
+         
+    <br />
+    <input type="submit" name="submit" value="Opslaan" class="btn btn-primary" />
+    <input type="hidden" id="inputDetails" name="detailsJSON" value="" />
     
-    <br />
-
-    <label>Afbeelding:</label> 
-    <input type="file" name="afbeelding" class="form-control" />
-       
-    <br />
-    <input type="submit" name="submit" value="Opslaan" class="btn btn-default" />
 </form>
+</div></div>
 
 @{Html.RenderPartial("ManagerFooter");}
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -86,17 +88,23 @@ namespace IntoSport.Models
             }
         }
 
-        public void InsertDetail(string[] details)
+        public void InsertDetail(JObject details)
         {
-            Query query = new Query();
-            if (details.Length > 0)
+          
+            if (details.Count > 0)
             {
-                Dictionary<string, object> data;
+               
 
-                foreach (string detail in details)
+                foreach (var detail in details)
                 {
-                    data = new Dictionary<string, object> { { "product_id", GetLastProductID() }, { "detail_waarde_id", int.Parse(detail) } };
-                    query.Execute("detail_product", data);
+                    string detail_naam =  detail.Key;
+                    string waardes  =  detail.Value.ToString();
+                   
+                   foreach(string waarde in waardes.Split(','))
+                   {
+                      
+                   }
+                    
                 }
             }
         }
@@ -141,7 +149,7 @@ namespace IntoSport.Models
             }
         }
 
-        public void UpdateDetail(string[] details)
+        public void UpdateDetail(JObject details)
         {
             Query q = new Query();
             q.Delete("detail_product");
