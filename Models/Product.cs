@@ -151,20 +151,20 @@ namespace IntoSport.Models
 
         public void UpdateDetail(JObject details)
         {
-            Query q = new Query();
-            q.Delete("detail_product");
-            q.Where("product_id = " + this.id);
-            q.Execute();
+            //Query q = new Query();
+            //q.Delete("detail_product");
+            //q.Where("product_id = " + this.id);
+            //q.Execute();
 
-            if (details.Length > 0)
-            {
-                Dictionary<string, object> data;
-                foreach (string detail in details)
-                {
-                    data = new Dictionary<string, object> { { "product_id", this.id }, { "detail_waarde_id", int.Parse(detail) } };
-                    q.Execute("detail_product", data);
-                }
-            }
+            //if (details.Length > 0)
+            //{
+            //    Dictionary<string, object> data;
+            //    foreach (string detail in details)
+            //    {
+            //        data = new Dictionary<string, object> { { "product_id", this.id }, { "detail_waarde_id", int.Parse(detail) } };
+            //        q.Execute("detail_product", data);
+            //    }
+            //}
         }
 
         public static List<Dictionary<string, object>> getAllProducts(string search = "", string limit = "", string joinType = "", string join = "", string where = "")

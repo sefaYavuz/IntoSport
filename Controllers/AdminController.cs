@@ -8,6 +8,8 @@ using System.IO;
 using IntoSport.Helpers;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
+
 
 namespace IntoSport.Controllers
 {
@@ -15,31 +17,32 @@ namespace IntoSport.Controllers
     {
         ProductController productController = new ProductController();
         OmzetHelper omzetHelper = new OmzetHelper();
-      
+
         //
         // GET: /Admin/
         [Authorize(Roles = "beheerder, manager")]
         public ActionResult Index()
-        {   
+        {
             return View();
         }
-        
+
         [Authorize(Roles = "manager")]
         //GET admin/omzet
         public ActionResult Omzet(String type)
         {
-            if(type == "meest verkochte")
+            if (type == "meest verkochte")
             {
                 List<Omzet> Omzet = omzetHelper.MeestVerkochteProducten();
 
-             return View(Omzet);
+                return View(Omzet);
             }
             else if (type == "minst verkochte")
             {
                 List<Omzet> Omzet = omzetHelper.MinstVerkochteProducten();
                 return View(Omzet);
             }
-            else{
+            else
+            {
 
                 return View();
             }
@@ -56,19 +59,19 @@ namespace IntoSport.Controllers
             ViewData.Add("search", "");
             return View();
         }
-     
+
 
         [Authorize(Roles = "beheerder")]
         [HttpPost]
         public ActionResult Orders(FormCollection collection)
         {
 
-           int id = int.Parse(collection["id"]);
-           string status = collection["status"];
+            int id = int.Parse(collection["id"]);
+            string status = collection["status"];
 
-           Order order = new Order(id);
-           switch(status)
-           {
+            Order order = new Order(id);
+            switch (status)
+            {
                 case "in_behandeling":
                     order.inBehandeling();
                     break;
@@ -80,18 +83,18 @@ namespace IntoSport.Controllers
                     break;
                 case "verstuurd":
                     order.isVerstuurd();
-                    new MailerHelper("U bestelling is verzonden", "IntoSport Status", IntoSport.Models.User.GetUser("",order.user_id));
+                    new MailerHelper("U bestelling is verzonden", "IntoSport Status", IntoSport.Models.User.GetUser("", order.user_id));
                     break;
             }
 
             order.UpdateStatus();
 
             ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
-            ViewData.Add("orders", Models.Order.GetAllOrders());           
+            ViewData.Add("orders", Models.Order.GetAllOrders());
             return View();
         }
 
-        
+
         /* ORDERS END */
 
         /* KLANT START */
@@ -216,22 +219,10 @@ namespace IntoSport.Controllers
                     categories = collection["subcat"].Split(',');
                 }
 
-
-                JObject jsonobject = JObject.Parse(collection["detailsJSON"]);
+             
+                
 
                
-                foreach (var d in  jsonobject)
-                {
-                    Detail detail = new Detail();
-                    detail.naam = d.Key;
-                    foreach(string waarde in d.Value.ToString().Split(','))
-                    {
-                        DetailWaarde dw = new DetailWaarde();
-                        dw.waarde = waarde;
-                        detail.waardes.Add(dw);
-                    }
-                    detail.Save();
-                }
 
                 p.id = int.Parse(collection["id"]);
                 p.naam = collection["naam"];
@@ -248,21 +239,42 @@ namespace IntoSport.Controllers
                     p.afbeelding = "";
                 }
 
-                //if(p.id != 0)
-                //{
-                //    p.Update();
+                if (p.id != 0)
+                {
+                    p.Update();
 
-                //    p.UpdateCategorie(categories);
-                //    p.UpdateDetail(details);
-                //}
-                //else 
-                //{
-                //    p.id = p.Insert();
+                    p.UpdateCategorie(categories);
+             
+                }
+                else
+                {
+                    p.id = p.Insert();
 
-                //    p.InsertCategorie(categories);
-                //    p.InsertDetail(details);
-                //}
+                    p.InsertCategorie(categories);
+                   
+                }
 
+                JObject jsonobject = JObject.Parse(collection["detailsJSON"]);
+
+             
+
+                foreach (var d in jsonobject)
+                {
+                    Detail detail = new Detail();
+                    detail.naam = d.Key;
+                    foreach (string waarde in d.Value.ToString().Split(','))
+                    {
+                        DetailWaarde detailwaarde = new DetailWaarde();
+
+
+
+                        detailwaarde.waarde = Regex.Replace(waarde, @"[\[\]""]+", "");
+                       
+                        detail.waardes.Add(detailwaarde);
+                    }
+                    detail.Save(p);
+                }
+               
                 ViewData.Add("msg", "De wijzigingen zijn succesvol opgeslagen.");
 
                 Product p2 = new Product(p.id);

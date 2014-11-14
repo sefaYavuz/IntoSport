@@ -27,7 +27,9 @@
     <div class="productDetails">
         <h1>@product.naam</h1>
         <div class="divider"></div>
-        <ul>
+        
+        <div style="height:300px;overflow-y:scroll">
+         
            @if (details != null)
            {
                string detailName = "";
@@ -40,13 +42,14 @@
 
                        <h4>@detailName</h4>
                    }
-                   
-                <li style="margin-left: 30px; ">@detail.Value.ToString()</li>
+
+                <input type="radio" name="@detailName" value="@detail.Value.ToString()" class=" ">@detail.Value.ToString()<br/>
 
 
                }
            }
-        </ul>
+       
+        </div>
         <div class="bottomContainer">
 
                 <p class="price">Prijs: <span>&euro; @product.prijs</span><p>

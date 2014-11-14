@@ -12,23 +12,27 @@ namespace IntoSport.Models
         public int id { get; set; }
         public string naam { get; set; }
         public List<DetailWaarde> waardes { get; set; }
-        
-        public void Save()
+        public Detail()
+        {
+            waardes = new List<DetailWaarde>();
+        }
+        public void Save(Product product)
         {
             DatabaseConnector databaseconnector = new DatabaseConnector();
             databaseconnector.conn.Open();
          
-            string sql = " insert into  detail(naam) OUTPUT INSERTED.ID values(?naam)";
+            string sql = " insert into  detail(naam)  values(?naam)";
             MySqlCommand command = new MySqlCommand(sql,databaseconnector.conn);
             MySqlParameter naam = new MySqlParameter("?naam", MySqlDbType.String);
          
             naam.Value = this.naam;
             command.Parameters.Add(naam);
-            this.id = (Int32)command.ExecuteScalar();
+            command.ExecuteNonQuery();
+            this.id = (int)command.LastInsertedId;
             
             foreach(DetailWaarde waarde in waardes)
             {
-                string detail_waarde_sql = "insert into detail_waarde(detail_id,waarde) INSERTED.ID values(?detail_id,?waarde)";
+                string detail_waarde_sql = "insert into detail_waarde(detail_id,waarde)values(?detail_id,?waarde)";
                 MySqlCommand detail_command = new MySqlCommand(detail_waarde_sql, databaseconnector.conn);
                 MySqlParameter detail_id = new MySqlParameter("?detail_id", MySqlDbType.Int32);
                 MySqlParameter detail_waarde = new MySqlParameter("?waarde", MySqlDbType.String);
@@ -37,7 +41,18 @@ namespace IntoSport.Models
 
                 detail_command.Parameters.Add(detail_id);
                 detail_command.Parameters.Add(detail_waarde);
-                int detail_waarde_id = (Int32)detail_command.ExecuteScalar();
+                detail_command.ExecuteNonQuery();
+                int detail_waarde_id = (int)detail_command.LastInsertedId;
+
+                MySqlCommand detail_product_command = new MySqlCommand("insert into detail_product(product_id,detail_waarde_id)values(?product_id,?detail_id)",databaseconnector.conn);
+                MySqlParameter product_parameter = new MySqlParameter("?product_id", MySqlDbType.Int16);
+                MySqlParameter detail_parameter = new MySqlParameter("?detail_id", MySqlDbType.Int16);
+                product_parameter.Value = product.id;
+                detail_parameter.Value = detail_waarde_id;
+                detail_product_command.Parameters.Add(detail_parameter);
+                detail_product_command.Parameters.Add(product_parameter);
+                detail_product_command.ExecuteNonQuery();
+               
 
             }
         }
