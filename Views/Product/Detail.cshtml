@@ -3,13 +3,16 @@
     var product = ViewData["product"] as IntoSport.Models.Product;
     var details = ViewData["details"] as List<KeyValuePair<string, string>>;
     var categorie = ViewData["categorie"] as List<IntoSport.Models.BreadCrumbs>;
+
     
 }
+@using IntoSport.Models
+@model CartProduct
     <h1>
     @{
         if (categorie != null)
         {
-            foreach (IntoSport.Models.BreadCrumbs breadcrumbs in categorie)
+            foreach (BreadCrumbs breadcrumbs in categorie)
             {
                 <a href="/product/?categorie=@breadcrumbs.id">@breadcrumbs.naam</a> <span>&raquo;</span>
 
@@ -27,54 +30,68 @@
     <div class="productDetails">
         <h1>@product.naam</h1>
         <div class="divider"></div>
-        
-        <div style="height:300px;overflow-y:scroll">
-         
-           @if (details != null)
-           {
-               string detailName = "";
+        @*<form action="/cart/addToCart" method="get">*@
+          @using (Html.BeginForm("addToCart", "cart", FormMethod.Get))
+          {
 
-               foreach (KeyValuePair<string, string> detail in details)
-               {
-                   if(!detailName.Equals(detail.Key.ToString()))
-                   {
-                       detailName = @detail.Key.ToString();
+            <div style="height:300px;overflow-y:scroll">
 
-                       <h4>@detailName</h4>
-                   }
+                @if (details != null)
+                {
+                    string detailName = "";
 
-                <input type="radio" name="@detailName" value="@detail.Value.ToString()" class=" ">@detail.Value.ToString()<br/>
-
-
-               }
-           }
-       
-        </div>
-        <div class="bottomContainer">
-
-                <p class="price">Prijs: <span>&euro; @product.prijs</span><p>
-                @{
-
-                    if (product.korting != 0)
+                    foreach (KeyValuePair<string, string> detail in details)
                     {
-                        <br />
-                        <br />
-                        <i class="fa-2x">@product.korting<span>%</span></i>
+                        if (!detailName.Equals(detail.Key.ToString()))
+                        {
+                            detailName = @detail.Key.ToString();
+
+                            <h4>@detailName</h4>
+                            <input type="hidden" value="@detailName" name="@detailName" />
+                        }
+                        @Html.RadioButtonFor(model => model.DetailWaardeList, @detail.Value.ToString())@detail.Value.ToString()<br/>
+                        //   <input type="radio" name="@detail.Value.ToString()" value="@detail.Value.ToString()" class=" ">@detail.Value.ToString()<br />
+
+
                     }
                 }
 
 
-                <div class="rightContainer">
-                    <form action="/cart/addToCart" method="get">
-                        <input type="hidden" name="id" value="@product.id" />
-                        <label>Aantal: <input type="text" name="Quantity" value="1" min="0"></label>
+            </div>
+       
+            
+        
+            <div class="bottomContainer">
 
-                        <input type="submit" value="Plaats in winkelwagen" name="submit" class="submit">
-                    </form>
+                <p class="price">Prijs: <span>&euro; @product.prijs</span><p>
+                    @{
+
+                        if (product.korting != 0)
+                        {
+                            <br />
+                            <br />
+                            <i class="fa-2x">@product.korting<span>%</span></i>
+                        }
+                    }
+
+
+                    <div class="rightContainer">
+
+                        <input type="hidden" name="id" value="@product.id" />
+                        <script>
+
+                        </script>
+                        <label>Aantal: @Html.EditorFor(model => model.Quantity, new { @type = "text", @Min = "0" })</label>
+
+                       
+                        <input type="submit" value="Plaats in winkelwagen" name="submit" class="btn btn-huge btn-primary">
+                        
                 </div>
 </div>
+          }
     </div>
 </div>
+         
 <div class="productDetailContainerBottom">
     Beschrijving
     <hr/>
